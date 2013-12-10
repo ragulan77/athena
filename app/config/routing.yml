@@ -1,0 +1,4 @@
+ath_user:
+    resource: "@AthUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
