@@ -79,19 +79,12 @@ class User extends BaseUser
    */
   private $country;
 
-  /**
-   * @ORM\Column(name="roles", type="array")
-   */
-  private $roles;
-
-
   public function __construct()
   {
     parent::__construct();
 
     $suscribeDate = new \Datetime();
     $birthdate = new \Datetime();
-    $thid->roles = array();
   }
 
   /**
@@ -275,17 +268,5 @@ class User extends BaseUser
   public function getCountry()
   {
       return $this->country;
-  }
-
-
-  public function setRoles(array $roles)
-  {
-    $this->roles = $roles;
-    return $this;
-  }
-
-  public function getRoles()
-  {
-    return $this->roles;
   }
 }
