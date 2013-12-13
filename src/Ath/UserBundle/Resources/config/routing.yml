@@ -6,3 +6,6 @@ student_registration:
     pattern:  /register/student
     defaults: { _controller: AthUserBundle:RegistrationStudent:register }
 
+profesor_registration:
+    pattern:  /register/profesor
+    defaults: { _controller: AthUserBundle:RegistrationProfesor:register }
