@@ -21,5 +21,46 @@ class Profesor extends MyBaseUser
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  protected  $id;
+
+  /**
+   * @ORM\ManyToMany(targetEntity="Ath\UserBundle\Entity\Classe", cascade={"persist"})
+   */
+  private $classes;
+
+  public function __construct()
+  {
+    parent::__construct();
+    $this->classes = new \Doctrine\Common\Collections\ArrayCollection();
+  }
+
+  /**
+   * Get classes
+   *
+   * @return Doctrine\Common\Collections\Collection
+   */
+  public function getClasses()
+  {
+    return $this->classes;
+  }
+
+  /**
+    * Add classes
+    *
+    * @param Ath\UserBundle\Entity\Classe $classes
+    */
+  public function addClasse(\Sdz\BlogBundle\Entity\Classe $classe)
+  {
+    $this->classes[] = $classe;
+  }
+
+  /**
+    * Remove classes
+    *
+    * @param Ath\UserBundle\Entity\Classe $classe
+    */
+  public function removeClasse(Ath\UserBundle\Entity\Classe $classe)
+  {
+    $this->categories->removeElement($classe);
+  }
 }
