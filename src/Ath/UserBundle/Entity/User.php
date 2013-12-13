@@ -6,12 +6,14 @@ use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* Ath\UserBundle\Entity\User
-*
-* @ORM\Table()
-* @ORM\Entity(repositoryClass="Ath\UserBundle\Entity\UserRepository")
-*/
-class User extends BaseUser
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"student" = "Student"})
+ *
+ */
+abstract class User extends BaseUser
 {
   /**
    * @var integer $id

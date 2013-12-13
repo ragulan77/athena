@@ -1,3 +1,8 @@
 ath_user_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: AthUserBundle:Default:index }
+
+student_registration:
+    pattern:  /register/student
+    defaults: { _controller: AthUserBundle:RegistrationStudent:register }
+

@@ -65,7 +65,28 @@ swiftmailer:
     password:  %mailer_password%
     spool:     { type: memory }
 
+
+# Ath/UserBundle/Resources/config/config.yml
 fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Ath\UserBundle\Entity\User
+    service:
+        user_manager: pugx_user_manager
+
+pugx_multi_user:
+    users:
+        student:
+            entity:
+                class: Ath\UserBundle\Entity\Student
+            registration:
+                form:
+                    type: Ath\UserBundle\Form\Type\RegistrationStudentFormType
+                    name: fos_user_registration_form
+                    validation_groups:  [Registration, Default]
+                template: AthUserBundle:Registration:student.form.html.twig
+            profile:
+                form:
+                    type: Ath\UserBundle\Form\Type\ProfileUserOneFormType
+                    name: fos_user_profile_form
+                    validation_groups:  [Profile, Default]
