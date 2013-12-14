@@ -1,0 +1,3 @@
+ath_page_homepage:
+    pattern:  /
+    defaults: { _controller: AthPageBundle:Page:index }

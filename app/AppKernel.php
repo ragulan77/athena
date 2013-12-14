@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new PUGX\MultiUserBundle\PUGXMultiUserBundle(),
             new Ath\UserBundle\AthUserBundle(),
+            new Ath\PageBundle\AthPageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

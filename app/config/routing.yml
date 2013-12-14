@@ -1,3 +1,7 @@
+ath_page:
+    resource: "@AthPageBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ath_user:
     resource: "@AthUserBundle/Resources/config/routing.yml"
     prefix:   /
