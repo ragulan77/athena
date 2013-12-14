@@ -49,7 +49,7 @@ class Profesor extends MyBaseUser
     *
     * @param Ath\UserBundle\Entity\Classe $classes
     */
-  public function addClasse(\Sdz\BlogBundle\Entity\Classe $classe)
+  public function addClasse(Ath\UserBundle\Entity\Classe $classe)
   {
     $this->classes[] = $classe;
   }
