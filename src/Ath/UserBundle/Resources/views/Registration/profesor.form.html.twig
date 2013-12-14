@@ -1,6 +1,8 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "::base.html.twig" %}
 
-{% block fos_user_content %}
+{% block title %}register profesor{% endblock title%}
+
+{% block content %}
     {% trans_default_domain 'FOSUserBundle' %}
 
     <form action="{{ path('profesor_registration') }}" {{ form_enctype(form) }} method="POST">
@@ -9,4 +11,11 @@
             <input type="submit" value="{{ 'registration.submit'|trans }}" />
         </div>
     </form>
-{% endblock fos_user_content %}
+{% endblock content %}
+
+
+  {% block nav_right_links %}
+    <a href="#" class="list-group-item">Link</a>
+    <a href="#" class="list-group-item">Link</a>
+  {% endblock nav_right_links %}
+
