@@ -15,6 +15,11 @@ class RegistrationFormType extends BaseType
         $builder->add('username');
         $builder->add('firstname');
         $builder->add('lastname');
+        $builder->add('birthdate');
+        $builder->add('address');
+        $builder->add('zipcode');
+        $builder->add('city');
+        $builder->add('phone');
     }
 
     public function getName()
