@@ -5,7 +5,7 @@ namespace Ath\UserBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use Ath\UserBundle\Form\Type\RegistrationFormType as BaseType;
 
-class RegistrationProfesorFormType extends BaseType
+class RegistrationAdministratorFormType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -17,6 +17,6 @@ class RegistrationProfesorFormType extends BaseType
 
     public function getName()
     {
-        return 'ath_profesor_registration';
+        return 'ath_administrator_registration';
     }
 }

@@ -98,11 +98,26 @@ pugx_multi_user:
             registration:
                 form:
                     type: Ath\UserBundle\Form\Type\RegistrationProfesorFormType
-                    name: fos_user_registration_form
+                    name: fos_profesor_registration_form
                     validation_groups:  [Registration, Default]
                 template: AthUserBundle:Registration:profesor.form.html.twig
             profile:
                 form:
                     type: Ath\UserBundle\Form\Type\ProfileProfesorFormType
                     name: fos_profesor_profile_form
+                    validation_groups:  [Profile, Default]
+
+        administrator:
+            entity:
+                class: Ath\UserBundle\Entity\Administrator
+            registration:
+                form:
+                    type: Ath\UserBundle\Form\Type\RegistrationAdministratorFormType
+                    name: fos_administrator_registration_form
+                    validation_groups:  [Registration, Default]
+                template: AthUserBundle:Registration:administrator.form.html.twig
+            profile:
+                form:
+                    type: Ath\UserBundle\Form\Type\ProfileAdministratorFormType
+                    name: fos_administrator_profile_form
                     validation_groups:  [Profile, Default]
