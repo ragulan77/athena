@@ -1,0 +1,7 @@
+parameters:
+#    ath_cours.example.class: Ath\CoursBundle\Example
+
+services:
+#    ath_cours.example:
+#        class: %ath_cours.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

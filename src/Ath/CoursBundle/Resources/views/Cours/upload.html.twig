@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{% block title %}Site e-learning{% endblock %}</title>
+ 		{% block stylesheets %}
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<!-- Bootstrap -->
+			<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+			<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+			<!--[if lt IE 9]>
+				<script src="../../assets/js/html5shiv.js"></script>
+				<script src="../../assets/js/respond.min.js"></script>
+			<![endif]-->
+			<style></style>
+		{% endblock %}
+	</head>
+	<body>
+		<div class="row">
+			<div class="span4">
+				<div class="well">
+					<form action="{{ path('ath_cours_add') }}" method="post" {{ form_enctype(form) }}>
+						{# Les erreurs générales du formulaire. #}
+						{{ form_errors(form) }}
+						<div>
+							{{ form_label(form.name, "Nom du cours") }}
+							{{ form_errors(form.name) }}
+							{{ form_widget(form.name) }}
+						</div>
+						<div>
+							{{ form_label(form.file, "Fichier") }}
+							{{ form_errors(form.file) }}
+							{{ form_widget(form.file) }}
+						</div>
+						{{ form_rest(form) }}
+		    			<input type="submit" class="btn btn-primary" />
+		  			</form>
+				</div>
+				
+				{% for flashMessage in app.session.flashbag.get('notice') %}
+    				<div class="flash-notice">
+        				{{ flashMessage }}
+    				</div>
+				{% endfor %}
+			</div>
+			<div class="span8">
+				<h1>Cours</h1>
+				<ul>
+    				{% for cours in listeCours %}
+        			<li><a href="{{ asset(cours.path) }}">{{ cours.name }}</a></li>
+    				{% endfor %}
+				</ul>
+			</div>
+		</div>
+		
+		<!-- Javascript -->    
+		{% block javascripts %}
+		{# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalit�s du bootstrap Twitter #}
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+		{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,3 @@
+ath_cours_add:
+    pattern:  /ajouter
+    defaults: { _controller: AthCoursBundle:Course:ajouter }

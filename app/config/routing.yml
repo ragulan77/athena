@@ -1,0 +1,5 @@
+ath_cours:
+    resource: "@AthCoursBundle/Resources/config/routing.yml"
+    prefix:   /cours
+
+
