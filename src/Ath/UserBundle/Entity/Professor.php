@@ -32,6 +32,7 @@ class Professor extends MyBaseUser
   {
     parent::__construct();
     $this->classes = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->roles = array('ROLE_PROFESSOR');
   }
 
   /**

@@ -30,6 +30,12 @@ class Student extends MyBaseUser
    */
   private $classe;
 
+  public function __construct()
+  {
+    parent::__construct();
+    $this->roles = array('ROLE_STUDENT');
+  }
+
   /**
    * Get classe
    *
