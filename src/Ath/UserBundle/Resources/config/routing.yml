@@ -9,3 +9,7 @@ student_registration:
 professor_registration:
     pattern:  /register/professor
     defaults: { _controller: AthUserBundle:RegistrationProfessor:register }
+
+administrator_registration:
+    pattern:  /register/administrator
+    defaults: { _controller: AthUserBundle:RegistrationAdministrator:register }
