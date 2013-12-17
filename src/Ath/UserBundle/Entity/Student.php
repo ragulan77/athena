@@ -26,7 +26,7 @@ class Student extends MyBaseUser
 
   /**
    * @ORM\ManyToOne(targetEntity="Ath\UserBundle\Entity\Classe")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
   private $classe;
 
