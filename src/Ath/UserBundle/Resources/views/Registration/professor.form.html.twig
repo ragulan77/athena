@@ -13,13 +13,10 @@
     </div>
   {% endfor %}
 
-
-
-    <form method="post" {{ form_enctype(form) }}>
+  <form action="{{ path('professor_registration') }}" {{ form_enctype(form) }} method="POST">
     {{ form_widget(form) }}
     <input type="submit" class="btn btn-primary" />
   </form>
-
 
 {% endblock content %}
 

@@ -9,11 +9,11 @@ use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="profesor")
+ * @ORM\Table(name="professor")
  * @UniqueEntity(fields = "username", targetClass = "Ath\UserBundle\Entity\User", message="fos_user.username.already_used")
  * @UniqueEntity(fields = "email", targetClass = "Ath\UserBundle\Entity\User", message="fos_user.email.already_used")
  */
-class Profesor extends MyBaseUser
+class Professor extends MyBaseUser
 {
 
   /**
@@ -32,6 +32,7 @@ class Profesor extends MyBaseUser
   {
     parent::__construct();
     $this->classes = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->roles = array('ROLE_PROFESSOR');
   }
 
   /**
@@ -61,6 +62,6 @@ class Profesor extends MyBaseUser
     */
   public function removeClasse(Ath\UserBundle\Entity\Classe $classe)
   {
-    $this->categories->removeElement($classe);
+    $this->classes->removeElement($classe);
   }
 }

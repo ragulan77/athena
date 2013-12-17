@@ -26,9 +26,15 @@ class Student extends MyBaseUser
 
   /**
    * @ORM\ManyToOne(targetEntity="Ath\UserBundle\Entity\Classe")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
   private $classe;
+
+  public function __construct()
+  {
+    parent::__construct();
+    $this->roles = array('ROLE_STUDENT');
+  }
 
   /**
    * Get classe
