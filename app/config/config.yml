@@ -86,7 +86,7 @@ pugx_multi_user:
             profile:
                 form:
                     type: Ath\UserBundle\Form\Type\ProfileStudentFormType
-                    name: fos_user_profile_form
+                    name: fos_student_profile_form
                     validation_groups:  [Profile, Default]
 
         professor:
@@ -102,21 +102,6 @@ pugx_multi_user:
                 form:
                     type: Ath\UserBundle\Form\Type\ProfileProfessorFormType
                     name: fos_professor_profile_form
-                    validation_groups:  [Profile, Default]
-
-        administrator:
-            entity:
-                class: Ath\UserBundle\Entity\Administrator
-            registration:
-                form:
-                    type: Ath\UserBundle\Form\Type\RegistrationAdministratorFormType
-                    name: fos_administrator_registration_form
-                    validation_groups:  [Registration, Default]
-                template: AthUserBundle:Registration:administrator.form.html.twig
-            profile:
-                form:
-                    type: Ath\UserBundle\Form\Type\ProfileAdministratorFormType
-                    name: fos_administrator_profile_form
                     validation_groups:  [Profile, Default]
 
         administrator:
