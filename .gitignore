@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Bootstrap
 app/bootstrap*
 
@@ -17,5 +16,6 @@ app/config/parameters.yml
 /build/
 /bin/
 /composer.phar
-/vendor
 .vagrant/
+.DS_Store
+/vendor

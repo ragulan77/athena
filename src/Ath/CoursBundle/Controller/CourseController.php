@@ -46,4 +46,21 @@ class CourseController extends Controller
     	
     	return $this->render('AthCoursBundle:Cours:upload.html.twig',array('listeCours' =>$listeCours, 'form' => $form->createView()));
     }
+    
+    public function supprimerAction($id)
+    {
+    	$em = $this->getDoctrine()->getManager();
+    	 
+    	//get course by id pour supprimer
+    	$course = $em->getRepository('AthCoursBundle:Course')->findOneById($id);
+    	$em->remove($course);
+    	$em->flush();
+    	
+    	$this->get('session')->getFlashBag()->add(
+    			'notice',
+    			'Suppression du cours réalisé avec succès !'
+    	);
+    	 
+    	return $this->redirect($this->generateUrl('ath_cours_add'));
+    }
 }

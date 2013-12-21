@@ -7,6 +7,7 @@
 	<buildpathentry kind="src" path="vendor/doctrine/orm/lib"/>
 	<buildpathentry kind="src" path="vendor/composer"/>
 	<buildpathentry kind="src" path="vendor/symfony/monolog-bundle"/>
+	<buildpathentry kind="src" path="vendor/friendsofsymfony/user-bundle"/>
 	<buildpathentry kind="src" path="vendor/doctrine/annotations/lib"/>
 	<buildpathentry kind="src" path="vendor/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs"/>
 	<buildpathentry kind="src" path="vendor/doctrine/dbal/lib"/>
@@ -23,6 +24,7 @@
 	<buildpathentry kind="src" path="vendor/doctrine/cache/lib"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 	<buildpathentry kind="src" path="vendor/kriswallsmith/assetic/src"/>
+	<buildpathentry kind="src" path="vendor/pugx/multi-user-bundle"/>
 	<buildpathentry excluding="Symfony/Component/HttpFoundation/Resources/stubs/|Symfony/Component/Intl/Resources/stubs/" kind="src" path="vendor/symfony/symfony/src"/>
 	<buildpathentry kind="src" path="vendor/swiftmailer/swiftmailer/lib"/>
 	<buildpathentry kind="src" path="vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Resources/stubs"/>

@@ -47,7 +47,12 @@
 				<h1>Cours</h1>
 				<ul>
     				{% for cours in listeCours %}
-        			<li><a href="{{ asset(cours.path) }}">{{ cours.name }}</a></li>
+        			<li>
+        				<a href="{{ asset(cours.path) }}">{{ cours.name }}</a> 
+        				<a href="{{ path('ath_cours_del',{id: cours.id}) }}">
+        					<i class="icon icon-trash"></i>
+        				</a>
+        			</li>
     				{% endfor %}
 				</ul>
 			</div>
