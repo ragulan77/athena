@@ -1,0 +1,9 @@
+ath_cours_add:
+    pattern:  /ajouter
+    defaults: { _controller: AthCoursBundle:Course:ajouter }
+ 
+ath_cours_del:
+    pattern: /supprimer/{id}
+    defaults: { _controller: AthCoursBundle:Course:supprimer }
+    requirements:
+       id: \d+

@@ -18,8 +18,10 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new PUGX\MultiUserBundle\PUGXMultiUserBundle(),
+
             new Ath\UserBundle\AthUserBundle(),
             new Ath\PageBundle\AthPageBundle(),
+        	new Ath\CoursBundle\AthCoursBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
         );
 

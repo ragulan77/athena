@@ -1,7 +1,3 @@
-ath_user_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: AthUserBundle:Default:index }
-
 student_registration:
     pattern:  /register/student
     defaults: { _controller: AthUserBundle:RegistrationStudent:register }
@@ -13,3 +9,27 @@ professor_registration:
 administrator_registration:
     pattern:  /register/administrator
     defaults: { _controller: AthUserBundle:RegistrationAdministrator:register }
+    
+ath_classe_add:
+    pattern:  /register/classe
+    defaults: { _controller: AthUserBundle:RegistrationClasse:register }
+    
+ath_classe_edit:
+    pattern:  /admin/edit/classe/{id}
+    defaults: { _controller: AthUserBundle:RegistrationClasse:edit }
+    requirements:
+      id: \d+
+
+ath_classe_del:
+    pattern:  /admin/delete/classe/{id}
+    defaults: { _controller: AthUserBundle:RegistrationClasse:deleteClasse }
+    requirements:
+      id: \d+
+      
+ath_student_del:
+    pattern:  /admin/delete/student
+    defaults: { _controller: AthUserBundle:ManageStudent:delete }
+
+ath_discipline_del:
+    pattern:  /admin/delete/discipline
+    defaults: { _controller: AthUserBundle:ManageDiscipline:delete }
