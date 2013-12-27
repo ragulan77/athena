@@ -29,8 +29,16 @@ class Discipline
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
-
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Ath\UserBundle\Entity\Classe", cascade={"persist"})
+     */
+    private $classes;
+    
+    public function __construct(){
+    	$this->classes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -63,5 +71,43 @@ class Discipline
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add classes
+     *
+     * @param \Ath\UserBundle\Entity\Classe $classes
+     * @return Discipline
+     */
+    public function addClasse(\Ath\UserBundle\Entity\Classe $classes)
+    {
+        $this->classes[] = $classes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove classes
+     *
+     * @param \Ath\UserBundle\Entity\Classe $classes
+     */
+    public function removeClasse(\Ath\UserBundle\Entity\Classe $classes)
+    {
+        $this->classes->removeElement($classes);
+    }
+
+    /**
+     * Get classes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getClasses()
+    {
+        return $this->classes;
+    }
+    
+    public function __toString()
+    {
+    	return $this->getName();
     }
 }

@@ -1,3 +1,4 @@
+
 {% extends "::base.html.twig" %}
 
 {% block title %}Création étudiant{% endblock title%}
@@ -12,13 +13,18 @@
       {{ message|trans({}, 'FOSUserBundle') }}
     </div>
   {% endfor %}
-
-  <form action="{{ path('student_registration') }}" {{ form_enctype(form) }} method="POST">
-    {{ form_widget(form) }}
-    <div>
-      <input type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
-  </form>
+<div class="row">
+			<div class="span4">
+				<div class="well">
+  					<form action="{{ path('student_registration') }}" {{ form_enctype(form) }} method="POST">
+    					{{ form_widget(form) }}
+    					<div>
+      						<input type="submit" value="{{ 'registration.submit'|trans }}" />
+    					</div>
+  					</form>
+  				</div>
+  			</div>
+  </div>
 
 {% endblock content %}
 

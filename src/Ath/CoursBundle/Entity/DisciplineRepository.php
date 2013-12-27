@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class DisciplineRepository extends EntityRepository
 {
+	public function getDisciplinesByClasseId($id)
+	{
+		$qb = $this->createQueryBuilder('d')
+		->join('d.classes', 'c','WITH','c.id = :id')
+		->setParameter('id',$id);
+	
+		return $qb->getQuery()
+		->getResult();
+	}
 }

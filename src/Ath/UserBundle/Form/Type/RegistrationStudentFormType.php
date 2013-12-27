@@ -12,7 +12,7 @@ class RegistrationStudentFormType extends BaseType
         parent::buildForm($builder, $options);
 
         // add your custom field
-        //$builder->add('username');
+        $builder->add('classe');
     }
 
     public function getName()

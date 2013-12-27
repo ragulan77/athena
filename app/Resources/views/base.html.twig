@@ -16,7 +16,10 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('bootstrap/css/offcanvas.css') }}" rel="stylesheet">
-
+	
+	<!-- Custom CSS for the 'Heroic Features' Template -->
+    <link href="{{ asset('bootstrap/css/heroic-features.css')}}" rel="stylesheet">
+    
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -44,40 +47,32 @@
             <li class="active"><a href="{{ path('ath_page_homepage') }}">Accueil</a></li>
             <li><a href="#about">A propos</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li>
-              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                Connecté en tant que {{ app.user.username }} - <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-              {% else %}
-                <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-              {% endif %}
-            </li>
+           </ul>
+           <ul class="nav navbar-nav pull-right">
+            
+            	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+           			<li><a href="#">Connecté en tant que {{ app.user.username }}</a></li>
+              	{% else %}				
+      				<li><a type="submit" class="btn btn-info" href="{{ path('fos_user_security_login') }}">Signin</a></li>
+            	{% endif %}
+            
+           
+            	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                	<li><button class="btn btn-danger" href="{{ path('fos_user_security_logout') }}">Déconnexion</button></li>
+              	{% else %}
+      				<a type="submit" class="btn btn-success" href="#">Signup</a>
+    			{% endif %}
+    		
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->
     </div><!-- /.navbar -->
 
     <div class="container">
-
-      <div class="row row-offcanvas row-offcanvas-right">
-
-        <div class="col-xs-12 col-sm-9">
-          {% block content %}
-          {% endblock content %}
-        </div>
-
-
-        <!-- side bar -->
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-          {% block nav_right %}
-          <div class="list-group">
-            {% block nav_right_links %}
-            {% endblock nav_right_links %}
-          </div>
-          {% endblock nav_right %}
-        </div><!--/span-->
-
-      </div><!--/row-->
-
+	{% block content %}
+	 {% endblock content %}    
+	{% block nav_right_links %}
+	{% endblock nav_right_links %}
       <hr>
 
       <footer>
