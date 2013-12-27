@@ -27,7 +27,7 @@ class Student extends MyBaseUser
 
   /**
    * @ORM\ManyToOne(targetEntity="Ath\UserBundle\Entity\Classe")
-   * @ORM\JoinColumn(nullable=false)
+   * @ORM\JoinColumn(nullable=true)
    */
   private $classe;
   
@@ -38,6 +38,12 @@ class Student extends MyBaseUser
 	// TODO: Auto-generated method stub
 	parent::__construct();
 	$this->addRole('ROLE_STUDENT');
+  }
+
+  public function __construct()
+  {
+    parent::__construct();
+    $this->roles = array('ROLE_STUDENT');
   }
 
   /**

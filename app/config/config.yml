@@ -29,16 +29,13 @@ twig:
 
 # Assetic Configuration
 assetic:
-    debug:          %kernel.debug%
-    use_controller: false
-    bundles:        [ ]
-    #java: /usr/bin/java
     filters:
+        lessphp:
+             file: %kernel.root_dir%/../vendor/leafo/lessphp/lessc.inc.php
+             apply_to: "\.less$"
         cssrewrite: ~
-        #closure:
-        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
-        #yui_css:
-        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+braincrafted_bootstrap:
+    less_filter: lessphp
 
 # Doctrine Configuration
 doctrine:
@@ -95,20 +92,35 @@ pugx_multi_user:
             profile:
                 form:
                     type: Ath\UserBundle\Form\Type\ProfileStudentFormType
-                    name: fos_user_profile_form
+                    name: fos_student_profile_form
                     validation_groups:  [Profile, Default]
 
-        profesor:
+        professor:
             entity:
-                class: Ath\UserBundle\Entity\Profesor
+                class: Ath\UserBundle\Entity\Professor
             registration:
                 form:
-                    type: Ath\UserBundle\Form\Type\RegistrationProfesorFormType
-                    name: fos_user_registration_form
+                    type: Ath\UserBundle\Form\Type\RegistrationProfessorFormType
+                    name: fos_professor_registration_form
                     validation_groups:  [Registration, Default]
-                template: AthUserBundle:Registration:profesor.form.html.twig
+                template: AthUserBundle:Registration:professor.form.html.twig
             profile:
                 form:
-                    type: Ath\UserBundle\Form\Type\ProfileProfesorFormType
-                    name: fos_profesor_profile_form
+                    type: Ath\UserBundle\Form\Type\ProfileProfessorFormType
+                    name: fos_professor_profile_form
+                    validation_groups:  [Profile, Default]
+
+        administrator:
+            entity:
+                class: Ath\UserBundle\Entity\Administrator
+            registration:
+                form:
+                    type: Ath\UserBundle\Form\Type\RegistrationAdministratorFormType
+                    name: fos_administrator_registration_form
+                    validation_groups:  [Registration, Default]
+                template: AthUserBundle:Registration:administrator.form.html.twig
+            profile:
+                form:
+                    type: Ath\UserBundle\Form\Type\ProfileAdministratorFormType
+                    name: fos_administrator_profile_form
                     validation_groups:  [Profile, Default]
