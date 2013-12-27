@@ -30,15 +30,6 @@ class Student extends MyBaseUser
    * @ORM\JoinColumn(nullable=true)
    */
   private $classe;
-  
-	/* (non-PHPdoc)
-	 * @see \Ath\UserBundle\Entity\Utilisateur::__construct()
-	 */
-  public function __construct() {
-	// TODO: Auto-generated method stub
-	parent::__construct();
-	$this->addRole('ROLE_STUDENT');
-  }
 
   public function __construct()
   {
