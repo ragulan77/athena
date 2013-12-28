@@ -16,10 +16,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('bootstrap/css/offcanvas.css') }}" rel="stylesheet">
-	
-	<!-- Custom CSS for the 'Heroic Features' Template -->
-    <link href="{{ asset('bootstrap/css/heroic-features.css')}}" rel="stylesheet">
-    
+
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -68,10 +65,27 @@
     </div><!-- /.navbar -->
 
     <div class="container">
-	{% block content %}
-	 {% endblock content %}    
-	{% block nav_right_links %}
-	{% endblock nav_right_links %}
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+          {% block content %}
+          {% endblock content %}
+        </div>
+
+
+        <!-- side bar -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          {% block nav_right %}
+          <div class="list-group">
+            {% block nav_right_links %}
+            {% endblock nav_right_links %}
+          </div>
+          {% endblock nav_right %}
+        </div><!--/span-->
+
+      </div><!--/row-->
+
       <hr>
 
       <footer>
