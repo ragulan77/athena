@@ -1,0 +1,3 @@
+ath_exercise_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: AthExerciseBundle:Default:index }

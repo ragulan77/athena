@@ -1,0 +1,9 @@
+parameters:
+#    ath_exercise.example.class: Ath\ExerciseBundle\Example
+
+services:
+    ath_exercise.qcm:
+        class: Ath\ExerciseBundle\Exercises\AthQcm
+
+    ath_exercise.manager:
+        class: Ath\ExerciseBundle\Exercises\AthExerciseManager
