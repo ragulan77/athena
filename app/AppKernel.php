@@ -24,6 +24,7 @@ class AppKernel extends Kernel
         	new Ath\CoursBundle\AthCoursBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Ath\ExerciseBundle\AthExerciseBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

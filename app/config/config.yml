@@ -69,7 +69,7 @@ services:
       argument: %fos_user.model.user.class%
       tags:
          -  { name: form.type }
-         
+
 # Ath/UserBundle/Resources/config/config.yml
 fos_user:
     db_driver: orm
@@ -124,3 +124,7 @@ pugx_multi_user:
                     type: Ath\UserBundle\Form\Type\ProfileAdministratorFormType
                     name: fos_administrator_profile_form
                     validation_groups:  [Profile, Default]
+
+
+fos_js_routing:
+    routes_to_expose: [ath_exercise_homepage]
