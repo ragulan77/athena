@@ -127,4 +127,4 @@ pugx_multi_user:
 
 
 fos_js_routing:
-    routes_to_expose: [ath_exercise_homepage]
+    routes_to_expose: []
