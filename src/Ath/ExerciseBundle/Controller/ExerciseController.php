@@ -16,13 +16,20 @@ class ExerciseController extends Controller
       $exercise = $repository->find(1);
 
       $exerciseServiceManager = $this->get('ath_exercise.manager');
-      $exerciseService = $exerciseServiceManager->getRightExerciseService($exercise->getType());
+      $exerciseService = $exerciseServiceManager->getRightExerciseService($exercise);
 
       $exerciseService = $this->get($exerciseService);
       $subject = $exerciseService->getSubject($exercise);
       $answers = array(0);
-      $test = $exerciseService->areRightAnswers($exercise, $answers);
+      $test = $this->getSubjectAction($exercise);
       var_dump($test);
       return $this->render('AthExerciseBundle:Default:index.html.twig');
+    }
+
+    public function getSubjectAction(ExerciseFile $exercise)
+    {
+      $exerciseServiceManager = $this->get('ath_exercise.manager');
+      $templatePath = $exerciseServiceManager->getSubjectTemplate($exercise);
+      return $this->render($templatePath);
     }
 }
