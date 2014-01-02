@@ -14,7 +14,8 @@ class ExerciseController extends Controller
                    ->getRepository('AthExerciseBundle:ExerciseFile');
 
       $exercise = $repository->find(1);
-
+      $serializer = $this->get('serializer');
+      var_dump($serializer->serialize($exercise, "json"));
       $exerciseServiceManager = $this->get('ath_exercise.manager');
       $exerciseService = $exerciseServiceManager->getRightExerciseService($exercise);
 
@@ -22,7 +23,7 @@ class ExerciseController extends Controller
       $subject = $exerciseService->getSubject($exercise);
       $answers = array(0);
       $test = $this->getSubjectAction($exercise);
-      var_dump($test);
+
       return $this->render('AthExerciseBundle:Default:index.html.twig');
     }
 
