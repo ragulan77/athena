@@ -2,34 +2,42 @@
 
 namespace Ath\ExerciseBundle\Exercises;
 
-class AthExerciseManager implements exercise
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Ath\ExerciseBundle\Entity\ExerciseInterface;
+
+class AthExerciseManager
 {
 
-  public function getRightExerciseService();
-  public function getTemplateUrl();
+  /**
+   *
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface
+   */
+  protected $container;
 
 
-  /*
-    les fonctions du l'interface exercise
-  */
+  public function __construct(ContainerInterface $container)
+  {
+    $this->container = $container;
+  }
 
+  public function getRightExerciseService($serviceName)
+  {
+    return $this->container->getParameter('exercise_services_list')[$serviceName]['service_name'];
+  }
 
-  /* affiche l'énoncé */
-  public function getSubject(ExerciseFile $exerciseFile);
+  public function getSubjectTemplate($serviceName)
+  {
+    return $container->getParameter('exercise_services_list')[$serviceName]['subject_template'];
+  }
 
-  /* retourne un tableau de bonnes réponses */
-  public function getListOfRightAnswers(ExerciseFile $exerciseFile);
+  public function getCreateTemplate($serviceName)
+  {
+    return $container->getParameter('exercise_services_list')[$serviceName]['create_template'];
+  }
 
-  /* retourne un tableau de réponses possibles */
-  public function getListOfAnswers(ExerciseFile $exerciseFile);
-
-  /* vérifie si la ou les réponses données sont valides ou non */
-  public function areRightAnswers(ExerciseFile $exerciseFile, $answers);
-
-  /* initialise l'énoncé */
-  public function setContent(ExerciseFile $exerciseFile, Form $form);
-
-  /* récupérer le contenu sous forme d'un tableau */
-  public function getContent(ExerciseFile $exerciseFile);
-
+  /* retourne un tableau de chaine de caractères */
+  public function getListOfServices()
+  {
+    $container->getParameter('exercise_services_list');
+  }
 }
