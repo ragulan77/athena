@@ -4,6 +4,7 @@ namespace Ath\ExerciseBundle\Exercises;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Ath\ExerciseBundle\Entity\ExerciseInterface;
+use Ath\ExerciseBundle\Entity\ExerciseFile;
 
 class AthExerciseManager
 {
@@ -20,19 +21,22 @@ class AthExerciseManager
     $this->container = $container;
   }
 
-  public function getRightExerciseService($serviceName)
+  public function getRightExerciseService(ExerciseFile $exercise)
   {
+    $serviceName = $exercise->getType();
     return $this->container->getParameter('exercise_services_list')[$serviceName]['service_name'];
   }
 
-  public function getSubjectTemplate($serviceName)
+  public function getSubjectTemplate(ExerciseFile $exercise)
   {
-    return $container->getParameter('exercise_services_list')[$serviceName]['subject_template'];
+    $serviceName = $exercise->getType();
+    return $this->container->getParameter('exercise_services_list')[$serviceName]['subject_template'];
   }
 
-  public function getCreateTemplate($serviceName)
+  public function getCreateTemplate(ExerciseFile $exercise)
   {
-    return $container->getParameter('exercise_services_list')[$serviceName]['create_template'];
+    $serviceName = $exercise->getType();
+    return $this->container->getParameter('exercise_services_list')[$serviceName]['create_template'];
   }
 
   /* retourne un tableau de chaine de caractères */
