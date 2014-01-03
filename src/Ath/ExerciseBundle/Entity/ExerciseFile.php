@@ -42,11 +42,23 @@ class ExerciseFile
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Ath\ExerciseBundle\Entity\Level")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $level;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ath\ExerciseBundle\Entity\Chapter")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $chapter;
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -62,14 +74,14 @@ class ExerciseFile
     public function setType($type)
     {
         $this->type = $type;
-    
+
         return $this;
     }
 
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -85,14 +97,14 @@ class ExerciseFile
     public function setContent($content)
     {
         $this->content = $content;
-    
+
         return $this;
     }
 
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -108,17 +120,63 @@ class ExerciseFile
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set level
+     *
+     * @param \Ath\ExerciseBundle\Entity\Level $level
+     * @return ExerciseFile
+     */
+    public function setLevel(\Ath\ExerciseBundle\Entity\Level $level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * Get level
+     *
+     * @return \Ath\ExerciseBundle\Entity\Level
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * Set chapter
+     *
+     * @param \Ath\ExerciseBundle\Entity\Chapter $chapter
+     * @return ExerciseFile
+     */
+    public function setChapter(\Ath\ExerciseBundle\Entity\Chapter $chapter)
+    {
+        $this->chapter = $chapter;
+    
+        return $this;
+    }
+
+    /**
+     * Get chapter
+     *
+     * @return \Ath\ExerciseBundle\Entity\Chapter 
+     */
+    public function getChapter()
+    {
+        return $this->chapter;
     }
 }
