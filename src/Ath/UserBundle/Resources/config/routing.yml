@@ -9,11 +9,11 @@ professor_registration:
 administrator_registration:
     pattern:  /register/administrator
     defaults: { _controller: AthUserBundle:RegistrationAdministrator:register }
-    
+
 ath_classe_add:
     pattern:  /register/classe
     defaults: { _controller: AthUserBundle:RegistrationClasse:register }
-    
+
 ath_classe_edit:
     pattern:  /admin/edit/classe/{id}
     defaults: { _controller: AthUserBundle:RegistrationClasse:edit }
@@ -25,7 +25,7 @@ ath_classe_del:
     defaults: { _controller: AthUserBundle:RegistrationClasse:deleteClasse }
     requirements:
       id: \d+
-      
+
 ath_student_del:
     pattern:  /admin/delete/student
     defaults: { _controller: AthUserBundle:ManageStudent:delete }
@@ -33,3 +33,11 @@ ath_student_del:
 ath_discipline_del:
     pattern:  /admin/delete/discipline
     defaults: { _controller: AthUserBundle:ManageDiscipline:delete }
+
+ath_administration_index:
+    pattern: /administration
+    defaults: { _controller: AthUserBundle:Administration:index }
+
+ath_administration_users:
+    pattern: /administration/users
+    defaults: { _controller: AthUserBundle:Administration:users }
