@@ -1,0 +1,9 @@
+<div>
+  <select ng-model="levelChoice">
+    <option ng-repeat="level in levels" value="{[{level.id}]}">
+      {[{level.name}]}
+    </option>
+  </select>
+
+  <p>{[{'test' + levelChoice}]}</p>
+</div>
