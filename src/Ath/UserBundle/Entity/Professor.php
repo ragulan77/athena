@@ -51,20 +51,20 @@ class Professor extends MyBaseUser
     *
     * @param Ath\UserBundle\Entity\Classe $classes
     */
-  public function addClasse(Ath\UserBundle\Entity\Classe $classe)
+  public function addClasse(Classe $classe)
   {
     $this->classes[] = $classe;
   }
 
-  /**
-    * Remove classes
-    *
-    * @param Ath\UserBundle\Entity\Classe $classe
-    */
-  public function removeClasse(Ath\UserBundle\Entity\Classe $classe)
-  {
-    $this->classes->removeElement($classe);
-  }
+  	/**
+     * Remove classes
+     *
+     * @param Ath\UserBundle\Entity\Classe $classe
+     */
+  	public function removeClasse(Classe $classe)
+  	{
+    	$this->classes->removeElement($classe);
+  	}
 
     /**
      * Get id
