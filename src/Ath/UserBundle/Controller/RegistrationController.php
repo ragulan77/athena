@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Controller managing the registration
@@ -69,7 +70,8 @@ class RegistrationController extends ContainerAware
 
                 //$dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
-                return $response;
+                return new Response('Success');
+                //return $response;
             }
         }
 

@@ -1,5 +1,10 @@
 {% extends "::base.html.twig" %}
 
+{% block javascripts %}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock javascripts %}
+
 {% block title %}Détail classe{% endblock title%}
 
 {% block content %}
@@ -7,21 +12,24 @@
 <!-- Modal ajout d'étudiant -->
 <div class="row">
 	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutEtudiant">
-		<form action="{{ path('student_registration') }}" method="post" {{ form_enctype(formStudent) }}>
-    		<div class="modal-header">
-    			<button type="button" class="close" data-dismiss="modal">×</button>
-    			<h3>Ajout d'étudiant</h3>
-    		</div>
-    		<div class="modal-body">
-{#     			{{ form_row(formStudent.classe, { 'attr':{'disabled':'disabled'} }) }}#}
-    			{{ form_widget(formStudent) }}
-    			{{ form_rest(formStudent) }}
-    		</div>
-    		<div class="modal-footer">
-    			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
-    			<button type="submit" class="btn btn-primary">Ajouter</button>
-    		</div>
-		</form>
+
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Ajout d'étudiant</h3>
+		</div>
+		<div class="modal-body">
+
+            <form action="{{ path('student_registration') }}" {{ form_enctype(formStudent) }} method="POST" role="form" class="form-horizontal">
+                {{ form_widget(formStudent) }}
+                <div>
+                  <input type="submit" value="{{ 'registration.submit'|trans }}" />
+                </div>
+              </form>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
+			<button type="submit" class="btn btn-primary">Ajouter</button>
+		</div>
 	</div>
 </div>
 
@@ -72,12 +80,12 @@
     			<form action="{{ path('ath_student_del') }}" method="post">
     				<select id="listEtudiant" name="listEtudiant" class="form-control" multiple="multiple" rows=2>
     					{% for etudiant in listeEtudiants %}
-        					<option value={{ etudiant.id }} 
+        					<option value={{ etudiant.id }}
         					{% if loop.first %}
         						selected="selected"
         					{% endif %}
         					>{{ etudiant}}</option>
-						{% endfor %}    
+						{% endfor %}
     				</select>
     				<br/>
      				<div class="btn-group">
@@ -96,14 +104,14 @@
 		<div class="well">
     		<h3>Matières</h3>
     		<form action="{{ path('ath_discipline_del') }}" method="post">
-    			<select id="listMatiere" class="form-control" multiple="multiple" rows=2> 
+    			<select id="listMatiere" class="form-control" multiple="multiple" rows=2>
     				{% for matiere in listeMatieres %}
-        				<option value={{ matiere.id }} 
+        				<option value={{ matiere.id }}
         				{% if loop.first %}
         					selected="selected"
         				{% endif %}
         				>{{ matiere }}</option>
-					{% endfor %}       
+					{% endfor %}
     			</select>
     			<br/>
     			<div class="btn-group">
@@ -122,10 +130,10 @@
 		<div class="well">
     		<h3>Professeurs</h3>
     		<form action="{{ path('ath_professor_del') }}" method="post">
-    			<select id="listMatiere" class="form-control" multiple="multiple" rows=2> 
+    			<select id="listMatiere" class="form-control" multiple="multiple" rows=2>
     				{% for professeur in listeProfesseurs %}
         				<option value={{ professeur.id }} selected="selected">{{ professeur }}</option>
-					{% endfor %}       
+					{% endfor %}
     			</select>
     			<br/>
     			<div class="btn-group">
@@ -142,6 +150,34 @@
 	</div>
 </div><!-- row -->
 
+<script type="text/javascript">
+    $('#addStudentForm').submit(function(e) {
+        var generatedUrl = Routing.generate('student_registration');
+        $.ajax({
+            type: "POST",
+            url: generatedUrl,
+            data: $(this).serialize(),
+            cache: false,
+            dataType : 'html',
+            success: function(data){
+                var response=$(data);
+                //$('#addStudentForm .modal-footer > a.btn').trigger('click');
+                alert(response);
+            },
+            beforeSend: function(){
+                    //$('#projectForm p').show();
+                    //$('#projectForm div').hide();
+            },
+            complete: function(){
+                    //$('#projectForm p').hide();
+                    //$('#projectForm div').show();
+                    //$('#projectForm .modal-footer > button.btn').trigger('click');
+            }
+        });
+        return false;
+    });
+
+</script>
 {% endblock content %}
 
 

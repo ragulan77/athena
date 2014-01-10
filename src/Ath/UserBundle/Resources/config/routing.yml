@@ -1,6 +1,8 @@
 student_registration:
     pattern:  /register/student
     defaults: { _controller: AthUserBundle:RegistrationStudent:register }
+    options:
+        expose: true
 
 ath_student_del:
     pattern:  /admin/delete/student
