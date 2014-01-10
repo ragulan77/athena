@@ -41,10 +41,24 @@ class CourseController extends Controller
     				'Ajout du cours réalisé avec succès !'
     		);
     		 
-    		return $this->redirect($this->generateUrl('ath_cours_add',array('listeCours' =>$listeCours, 'form' => $form->createView())));
+    		return $this->redirect(
+    				$this->generateUrl(
+    						'ath_cours_add',
+    						array(
+    								'listeCours' =>$listeCours, 
+    								'form' => $form->createView()
+    						)
+    				)
+    		);
     	}
-    	
-    	return $this->render('AthCoursBundle:Cours:upload.html.twig',array('listeCours' =>$listeCours, 'form' => $form->createView()));
+
+    	return $this->render(
+    			'AthCoursBundle:Cours:upload.html.twig',
+    			array(
+    					'listeCours' =>$listeCours, 
+    					'form' => $form->createView()
+    			)
+    	);
     }
     
     public function supprimerAction($id)

@@ -1,9 +1,17 @@
 ath_cours_add:
-    pattern:  /ajouter
+    pattern: /cours/ajouter
     defaults: { _controller: AthCoursBundle:Course:ajouter }
  
 ath_cours_del:
-    pattern: /supprimer/{id}
+    pattern: /cours/supprimer/{id}
     defaults: { _controller: AthCoursBundle:Course:supprimer }
     requirements:
        id: \d+
+
+ath_discipline_add:
+    pattern: /admin/ajouter/discipline
+    defaults: { _controller: AthCoursBundle:ManageDiscipline:add }
+
+ath_discipline_del:
+    pattern: /admin/supprimer/discipline
+    defaults: { _controller: AthCoursBundle:ManageDiscipline:delete }
