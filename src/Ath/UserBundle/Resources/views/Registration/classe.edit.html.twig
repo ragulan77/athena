@@ -12,24 +12,22 @@
 <!-- Modal ajout d'étudiant -->
 <div class="row">
 	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutEtudiant">
-
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">×</button>
-			<h3>Ajout d'étudiant</h3>
-		</div>
-		<div class="modal-body">
-
-            <form action="{{ path('student_registration') }}" {{ form_enctype(formStudent) }} method="POST" role="form" class="form-horizontal">
+        <form action="{{ path('student_registration') }}" method="post" {{ form_enctype(formStudent) }} id="addStudentForm">
+            <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>Ajout d'étudiant</h3>
+            </div>
+            <div class="modal-body">
+{#              {{ form_row(formStudent.classe, { 'attr':{'disabled':'disabled'} }) }}#}
                 {{ form_widget(formStudent) }}
-                <div>
-                  <input type="submit" value="{{ 'registration.submit'|trans }}" />
-                </div>
-              </form>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
-			<button type="submit" class="btn btn-primary">Ajouter</button>
-		</div>
+                {{ form_rest(formStudent) }}
+            </div>
+            <div class="modal-footer">
+                <button href="#" class="btn" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+
 	</div>
 </div>
 
@@ -161,8 +159,8 @@
             dataType : 'html',
             success: function(data){
                 var response=$(data);
-                //$('#addStudentForm .modal-footer > a.btn').trigger('click');
-                alert(response);
+                alert(data);
+                $('#addStudentForm .modal-footer > button.btn').trigger('click');
             },
             beforeSend: function(){
                     //$('#projectForm p').show();
