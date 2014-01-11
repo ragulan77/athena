@@ -3,9 +3,24 @@
 {% block title %}Création classe{% endblock title%}
 
 {% block content %}
-
+<!-- Modal ajout de matière -->
+<div class="row">
+	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutClasse">
+		<form action="{{ path('ath_classe_add') }}" method="post" {{ form_enctype(form) }}>
+			{# Les erreurs générales du formulaire. #}
+			{{ form_errors(form) }}
+			<div>
+				{{ form_label(form.name, "Nom de la classe") }}
+				{{ form_errors(form.name) }}
+				{{ form_widget(form.name) }}
+			</div>
+			{{ form_rest(form) }}
+		    <input type="submit" class="btn btn-primary" />
+		</form>		
+	</div>
+</div>
   <div class="row">
-			<div class="span4">
+			<div class="col-lg-6">
 				<div class="well">
 					<form action="{{ path('ath_classe_add') }}" method="post" {{ form_enctype(form) }}>
 						{# Les erreurs générales du formulaire. #}

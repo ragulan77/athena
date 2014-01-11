@@ -3,23 +3,21 @@
 namespace Ath\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Ath\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use Symfony\Component\Form\AbstractType as BaseType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-
-class RegistrationStudentFormType extends BaseType
+class DisciplineFormType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-
         // add your custom field
-        $builder->add('classe');
+        $builder->add('name');
+        $builder->add('classes');
     }
 
-    
     public function getName()
     {
-        return 'ath_student_registration';
+        return 'ath_discipline_registration';
     }
 }
