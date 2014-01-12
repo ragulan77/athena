@@ -15,7 +15,9 @@
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
   </ul>
-  <div ng-view></div>
+
+  <div ng-view>
+  </div>
 
   <div>Angular seed app: v<span app-version></span></div>
 
@@ -34,6 +36,7 @@
   {% javascripts
     '@AthExerciseBundle/Resources/angularjs/lib/angular/angular.js'
     '@AthExerciseBundle/Resources/angularjs/lib/angular/angular-route.js'
+    '@AthExerciseBundle/Resources/angularjs/lib/angular/angular-resource.js'
     '@AthExerciseBundle/Resources/angularjs/js/*' %}
     <script src="{{ asset_url }}"></script>
   {% endjavascripts %}
