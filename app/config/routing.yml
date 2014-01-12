@@ -1,6 +1,6 @@
 ath_exercise:
     resource: "@AthExerciseBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /exercises
 
 ath_cours:
     resource: "@AthCoursBundle/Resources/config/routing.yml"
