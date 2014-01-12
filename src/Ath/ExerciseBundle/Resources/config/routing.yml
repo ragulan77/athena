@@ -1,3 +1,15 @@
-ath_exercise_homepage:
-    pattern:  /hello
+ath_exercise_index:
+    pattern:  /
     defaults: { _controller: AthExerciseBundle:Exercise:index }
+
+ath_exercise_init:
+    pattern:  /init
+    defaults: { _controller: AthExerciseBundle:Exercise:init }
+
+ath_exercise_get_all:
+    pattern:  /exercises
+    defaults: { _controller: AthExerciseBundle:Exercise:exercises }
+
+ath_exercise_levels:
+    pattern: /levels
+    defaults: { _controller: AthExerciseBundle:Level:getLevels }
