@@ -9,8 +9,12 @@ angular.module('myApp', [
   'myApp.directives',
   'myApp.controllers'
 ]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {templateUrl: Routing.generate('ath_exercise_test'), controller: 'MyCtrl1'});
-  $routeProvider.when('/view2', {template: '<p>test 2 </p>', controller: 'MyCtrl2'});
-  $routeProvider.otherwise({redirectTo: '/view1'});
+config(['$routeProvider', '$interpolateProvider', function($routeProvider, $interpolateProvider) {
+  $routeProvider.when('/init', {templateUrl: Routing.generate('ath_exercise_init'), controller: 'InitCtrl'});
+  $routeProvider.when('/view2', {template: '<p>test 2 </p>', controller: 'TestCtrl'});
+  $routeProvider.otherwise({redirectTo: '/init'});
+
+  $interpolateProvider.startSymbol('{[{');
+  $interpolateProvider.endSymbol('}]}');
 }]);
+
