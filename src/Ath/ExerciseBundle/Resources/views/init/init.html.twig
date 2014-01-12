@@ -4,6 +4,6 @@
       {[{level.name}]}
     </option>
   </select>
-
-  <p>{[{'test' + levelChoice}]}</p>
+  <button ng-click="generateExercises()">generate</button>
+  <button ng-disabled="!exercisesGenerated">passer à l'exo</button>
 </div>
