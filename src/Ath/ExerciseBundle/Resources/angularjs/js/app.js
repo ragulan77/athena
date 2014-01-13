@@ -11,7 +11,7 @@ angular.module('myApp', [
 ]).
 config(['$routeProvider', '$interpolateProvider', function($routeProvider, $interpolateProvider) {
   $routeProvider.when('/init', {templateUrl: Routing.generate('ath_exercise_init'), controller: 'InitCtrl'});
-  $routeProvider.when('/view2', {template: '<p>test 2 </p>', controller: 'TestCtrl'});
+  $routeProvider.when('/exercise/:exerciseId', {templateUrl: Routing.generate('ath_exercise_blank_view'), controller: 'ExerciseCtrl'});
   $routeProvider.otherwise({redirectTo: '/init'});
 
   $interpolateProvider.startSymbol('{[{');

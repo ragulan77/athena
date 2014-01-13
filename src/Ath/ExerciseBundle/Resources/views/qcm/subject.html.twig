@@ -1,1 +1,11 @@
-<p>test</p>
+<div>
+  <h1>Question</h1>
+  {[{exerciseData.subject}]}
+</div>
+<div>
+  <form>
+    <p ng-repeat="answer in exerciseData.answers">
+      <input type="radio" name="answer" value="{[{answer}]}"/> {[{answer}]}
+    </p>
+  </form>
+</div>

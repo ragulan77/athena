@@ -19,7 +19,7 @@ class AthQcm implements ExerciseInterface
   public function getListOfRightAnswers(ExerciseFile $exerciseFile)
   {
     $content = $this->getContent($exerciseFile);
-    return array(end($content));
+    return end($content);
   }
 
   /* retourne un tableau de réponses possibles */

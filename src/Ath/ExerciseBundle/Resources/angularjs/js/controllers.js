@@ -24,7 +24,15 @@ var myAppCtrls = angular.module('myApp.controllers', []);
   }]);
 
 
-  myAppCtrls.controller('TestCtrl', ['$scope', 'Level', function($scope, Level) {
-    //$scope.exercises = Exercise.query();
-    $scope.levels = Level.query();
+  myAppCtrls.controller('ExerciseCtrl', ['$scope', '$http', '$route', '$routeParams', '$compile', function($scope, $http, $route, $routeParams, $compile) {
+    $scope.exerciseData = null;
+    $http.get(Routing.generate('ath_exercise_get_data', {id: $routeParams.exerciseId})).success(function(data){
+        $scope.exerciseData = data;
+      });
+
+    $scope.templateUrl = Routing.generate('ath_exercise_get_subject_view', {id: $routeParams.exerciseId});
+
   }]);
+
+
+
