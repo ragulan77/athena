@@ -25,7 +25,7 @@ myAppServices.factory('Level', ['$resource',
 myAppServices.service('sharedProperties', function () {
         var exercises = null;
         var nbExercises = null;
-        var currentExercise = null;
+        var currentExercise = null; // démarre à 0
         return {
             getExercises: function () {
                 return exercises;
@@ -36,6 +36,9 @@ myAppServices.service('sharedProperties', function () {
             getCurrentExercise: function(){
                 return currentExercise;
             },
+            getNextExerciseId: function(){
+              return exercises[currentExercise+1].id;
+            },
             setExercises: function(value) {
                 exercises = value;
             },
@@ -43,7 +46,9 @@ myAppServices.service('sharedProperties', function () {
               nbExercises = value;
             },
             setCurrentExercise: function(value){
-              currentExercise = value;
+              if (value < nbExercises){ //si invalide on ne maj pas
+                currentExercise = value;
+              }
             }
         };
     });

@@ -10,6 +10,7 @@ var myAppCtrls = angular.module('myApp.controllers', []);
     $scope.levelChoice="test";
     $scope.exercisesGenerated = sharedProperties.getNbExercises() != null &&
                                 sharedProperties.getNbExercises() > 0;
+    $scope.nextExerciseUrl = "";
 
     $scope.generateExercises = function(){
       $http.get(Routing.generate('ath_exercise_get_all')).success(function(data){
@@ -18,16 +19,23 @@ var myAppCtrls = angular.module('myApp.controllers', []);
         sharedProperties.setCurrentExercise(0);
         $scope.exercisesGenerated = sharedProperties.getNbExercises() != null &&
                                     sharedProperties.getNbExercises() > 0;
+        $scope.nextExerciseUrl =  "#/exercise/"+data[0].id;
       });
     };
 
   }]);
 
 
-  myAppCtrls.controller('ExerciseCtrl', ['$scope', '$http', '$route', '$routeParams', '$compile', function($scope, $http, $route, $routeParams, $compile) {
+  myAppCtrls.controller('ExerciseCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
     $scope.exerciseData = null;
     $scope.answers = [];
     $scope.isRightAnswer = false;
+    // on récupère l'url du prochain exo
+    $scope.nextExerciseUrl = '#/exercise/'+sharedProperties.getNextExerciseId();
+    // on maj le compteur pour la fois suivante
+    sharedProperties.setCurrentExercise($scope.nextExercise+1);
+
+
     $http.get(Routing.generate('ath_exercise_get_data', {id: $routeParams.exerciseId})).success(function(data){
         $scope.exerciseData = data;
       });
