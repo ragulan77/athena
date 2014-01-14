@@ -33,9 +33,9 @@ class AthExerciseManager
     return $this->container->getParameter('exercise_services_list')[$serviceName]['subject_template'];
   }
 
-  public function getCreateTemplate(ExerciseFile $exercise)
+  public function getCreateTemplate($type)
   {
-    $serviceName = $exercise->getType();
+    $serviceName = $type;
     return $this->container->getParameter('exercise_services_list')[$serviceName]['create_template'];
   }
 
