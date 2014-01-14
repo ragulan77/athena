@@ -25,7 +25,9 @@ var myAppCtrls = angular.module('myApp.controllers', []);
 
   }]);
 
-
+  /*
+    retourne la bonne vue pour faire des exercises
+  */
   myAppCtrls.controller('ExerciseCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
     $scope.isRightAnswer = false;
     $scope.exerciseData = null;
@@ -36,6 +38,13 @@ var myAppCtrls = angular.module('myApp.controllers', []);
 
     $scope.templateUrl = Routing.generate('ath_exercise_get_subject_view', {id: $routeParams.exerciseId});
 
+  }]);
+
+  /*
+    retourne la bonne vue pour créer des exercises
+  */
+  myAppCtrls.controller('ExerciseCreateCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
+    $scope.templateUrl = Routing.generate('ath_exercise_get_create_view', {type: $routeParams.typeExo});
   }]);
 
 
@@ -68,5 +77,33 @@ var myAppCtrls = angular.module('myApp.controllers', []);
         }
       });
     };
+
+  }]);
+
+  myAppCtrls.controller('QcmCreateCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
+      var exercise = $scope.exercise = {
+        name: '',
+        question: '',
+        rightAnswer: 0,
+        answers: [{value: ''}]
+      };
+
+      $scope.addAnswer = function() {
+        exercise.answers.push({value:''});
+      };
+
+      $scope.removeAnswer = function(answer) {
+        if(exercise.answers.length > 1){
+          for (var i = 0, len = exercise.answers.length; i < len; i++) {
+            if (answer === exercise.answers[i]) {
+              $scope.exercise.answers.splice(i, 1);
+            }
+          }
+        }
+      };
+
+      $scope.rightAnswer = function(index){
+        exercise.rightAnswer = index;
+      };
 
   }]);

@@ -1,1 +1,16 @@
-<p>test create view</p>
+<div ng-controller="QcmCreateCtrl">
+  Nom : <input ng-model="exercise.name"/><br/>
+  Question : <input ng-model="exercise.question"/><br/>
+  Réponses :<br/>
+  <form>
+    <ul ng-repeat="answer in exercise.answers">
+      <li>
+        <input type="radio" ng-click="rightAnswer($index)"/>
+        <input type="text" name="answers" value="{[{answer.value}]}" />
+        [ <a href="" ng-click="removeAnswer(answer)">X</a> ]
+      </li>
+    </ul>
+  </form>
+  [ <a href="" ng-click="addAnswer()">add</a> ]
+  <input type="hidden" value="{[{exercise.rightAnswer}]}" name="rightAnswer"/>
+</div>
