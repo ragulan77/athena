@@ -5,7 +5,12 @@
 <div>
   <form>
     <p ng-repeat="answer in exerciseData.answers">
-      <input type="radio" name="answer" value="{[{answer}]}"/> {[{answer}]}
+      <input type="radio" name="answer" ng-click="oneAnswer($index)"/> {[{answer}]}
     </p>
+  </form>
+  <p>{[{answerValue}]}</p>
+  <button ng-click="checkAnswers(answers)">vérifier</button>
+  <form action="http://google.com">
+    <input ng-disabled="!isRightAnswer" type="submit" value="Go to Google">
   </form>
 </div>
