@@ -50,6 +50,17 @@ class ExerciseController extends Controller
     }
 
     /*
+      retourne la vue correspondant à la création
+      d'un exercice
+    */
+    public function getCreateViewAction($type)
+    {
+      $exerciseServiceManager = $this->get('ath_exercise.manager');
+      $templatePath = $exerciseServiceManager->getCreateTemplate($type);
+      return $this->render($templatePath);
+    }
+
+    /*
       retourne la page qui incluera une vue twig en fonction du type d'exercice
     */
     public function getBlankViewAction()

@@ -22,6 +22,10 @@ ath_exercise_get_subject_view:
     requirements:
         id: \d+
 
+ath_exercise_get_create_view:
+    pattern: /exercise/create-view/{type}
+    defaults: { _controller: AthExerciseBundle:Exercise:getCreateView }
+
 ath_exercise_check_answers:
     pattern: /exercise/{id}/check
     defaults: { _controller: AthExerciseBundle:Exercise:checkAnswers }
