@@ -27,14 +27,8 @@ var myAppCtrls = angular.module('myApp.controllers', []);
 
 
   myAppCtrls.controller('ExerciseCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
-    $scope.exerciseData = null;
-    $scope.answers = [];
     $scope.isRightAnswer = false;
-    // on récupère l'url du prochain exo
-    $scope.nextExerciseUrl = '#/exercise/'+sharedProperties.getNextExerciseId();
-    // on maj le compteur pour la fois suivante
-    sharedProperties.setCurrentExercise($scope.nextExercise+1);
-
+    $scope.exerciseData = null;
 
     $http.get(Routing.generate('ath_exercise_get_data', {id: $routeParams.exerciseId})).success(function(data){
         $scope.exerciseData = data;
@@ -42,10 +36,21 @@ var myAppCtrls = angular.module('myApp.controllers', []);
 
     $scope.templateUrl = Routing.generate('ath_exercise_get_subject_view', {id: $routeParams.exerciseId});
 
+  }]);
+
+
+  myAppCtrls.controller('QcmCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
+    $scope.answers = [];
+    // on récupère l'url du prochain exo
+    $scope.nextExerciseUrl = '#/exercise/'+sharedProperties.getNextExerciseId();
+    // on maj le compteur pour la fois suivante
+    sharedProperties.setCurrentExercise($scope.nextExercise+1);
+
     $scope.oneAnswer = function(answer){
       $scope.answers = [answer];
     };
 
+    // vérifier la réponse de l'utilisateur
     $scope.checkAnswers = function(user_answers){
       var data = {answers: JSON.stringify(user_answers)};
 
@@ -65,6 +70,3 @@ var myAppCtrls = angular.module('myApp.controllers', []);
     };
 
   }]);
-
-
-
