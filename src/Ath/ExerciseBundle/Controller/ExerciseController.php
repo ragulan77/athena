@@ -89,4 +89,26 @@ class ExerciseController extends Controller
       $serializer = $this->get('serializer');
       return new Response($serializer->serialize($data, "json"));
     }
+
+    public function checkAnswersAction(ExerciseFile $exercise)
+    {
+      $request = $this->get('request');
+      if ($request->getMethod() == 'POST') {
+        $exerciseServiceManager = $this->get('ath_exercise.manager');
+        $exerciseService = $exerciseServiceManager->getRightExerciseService($exercise);
+        $exerciseService = $this->get($exerciseService);
+
+        $answers_json  = $request->getContent();
+        $serializer = $this->get('serializer');
+        $answers = $serializer->deserialize($answers_json, 'array', 'json');
+        $answers = json_decode($answers['answers'], true);
+
+        if($exerciseService->areRightAnswers($exercise, $answers))
+          return new Response("true");
+        else
+          return new Response("false");
+      }
+
+      return new Response("false");
+    }
 }
