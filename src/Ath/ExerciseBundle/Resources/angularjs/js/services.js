@@ -37,7 +37,10 @@ myAppServices.service('sharedProperties', function () {
                 return currentExercise;
             },
             getNextExerciseId: function(){
-              return exercises[currentExercise+1].id;
+              if (currentExercise < nbExercises-1)
+                return exercises[currentExercise+1].id;
+              else
+                return exercises[currentExercise].id;
             },
             setExercises: function(value) {
                 exercises = value;
