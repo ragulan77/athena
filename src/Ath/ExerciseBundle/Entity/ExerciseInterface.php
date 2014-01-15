@@ -3,7 +3,7 @@
 namespace Ath\ExerciseBundle\Entity;
 
 use Ath\ExerciseBundle\Entity\ExerciseFile as ExerciseFile;
-use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
 
 interface ExerciseInterface
 {
@@ -23,7 +23,7 @@ interface ExerciseInterface
   public function areRightAnswers(ExerciseFile $exerciseFile, array $answers);
 
   /* initialise l'énoncé */
-  public function setContent(ExerciseFile $exerciseFile, Form $form);
+  public function setContent(ExerciseFile $exerciseFile, Request $request);
 
   /* récupérer le contenu sous forme d'un tableau */
   public function getContent(ExerciseFile $exerciseFile);

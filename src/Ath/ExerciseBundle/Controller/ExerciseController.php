@@ -122,4 +122,14 @@ class ExerciseController extends Controller
 
       return new Response("false");
     }
+
+    public function setExerciseAction($type)
+    {
+      $exerciseServiceManager = $this->get('ath_exercise.manager');
+      $exerciseService = $exerciseServiceManager->getRightExerciseService($type);
+      $exerciseService = $this->get($exerciseService);
+
+      $exercise = new ExerciseFile();
+      $exerciseService->setContent($exercise, $this->get('request'));
+    }
 }

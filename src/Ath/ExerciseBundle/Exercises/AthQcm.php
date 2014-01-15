@@ -3,7 +3,7 @@ namespace Ath\ExerciseBundle\Exercises;
 
 use Ath\ExerciseBundle\Entity\exercise as exercise;
 use Ath\ExerciseBundle\Entity\ExerciseFile as ExerciseFile;
-use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
 use Ath\ExerciseBundle\Entity\ExerciseInterface;
 
 class AthQcm implements ExerciseInterface
@@ -42,9 +42,13 @@ class AthQcm implements ExerciseInterface
   }
 
   /* initialise l'énoncé */
-  public function setContent(ExerciseFile $exerciseFile, Form $form)
+  public function setContent(ExerciseFile $exerciseFile, Request $request)
   {
-
+    if($request->getMethod() == "POST")
+    {
+      $content = $request->getContent();
+      print_r($content);
+    }
   }
 
   /* retourne le contenu sous forme d'un tableau */
