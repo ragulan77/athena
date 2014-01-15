@@ -1,0 +1,9 @@
+<div>
+  <select ng-model="levelChoice">
+    <option ng-repeat="level in levels" value="{[{level.id}]}">
+      {[{level.name}]}
+    </option>
+  </select>
+  <button ng-click="generateExercises()">generate</button>
+  <a href="{[{nextExerciseUrl}]}"><button ng-disabled="!exercisesGenerated">passer à l'exo</button></a>
+</div>

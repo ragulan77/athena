@@ -1,0 +1,42 @@
+ath_exercise_index:
+    pattern:  /
+    defaults: { _controller: AthExerciseBundle:Exercise:index }
+
+ath_exercise_init:
+    pattern:  /init
+    defaults: { _controller: AthExerciseBundle:Exercise:init }
+
+ath_exercise_get_all:
+    pattern:  /exercises
+    defaults: { _controller: AthExerciseBundle:Exercise:getExercises }
+
+ath_exercise_get_data:
+    pattern:  /exercise/{id}/data
+    defaults: { _controller: AthExerciseBundle:Exercise:getExerciseData }
+    requirements:
+        id: \d+
+
+ath_exercise_get_subject_view:
+    pattern: /exercise/{id}/view
+    defaults: { _controller: AthExerciseBundle:Exercise:getSubjectView }
+    requirements:
+        id: \d+
+
+ath_exercise_get_create_view:
+    pattern: /exercise/create-view/{type}
+    defaults: { _controller: AthExerciseBundle:Exercise:getCreateView }
+
+ath_exercise_check_answers:
+    pattern: /exercise/{id}/check
+    defaults: { _controller: AthExerciseBundle:Exercise:checkAnswers }
+    requirements:
+        id: \d+
+        _method: POST
+
+ath_exercise_levels:
+    pattern: /levels
+    defaults: { _controller: AthExerciseBundle:Level:getLevels }
+
+ath_exercise_blank_view:
+    pattern: /exercise/blankview
+    defaults: { _controller: AthExerciseBundle:Exercise:getBlankView }

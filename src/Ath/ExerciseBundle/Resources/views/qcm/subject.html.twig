@@ -1,0 +1,17 @@
+<div ng-controller="QcmCtrl">
+  <div>
+    <h1>Question</h1>
+    {[{exerciseData.subject}]}
+  </div>
+  <div>
+    <form>
+      <p ng-repeat="answer in exerciseData.answers">
+        <input type="radio" name="answer" ng-click="oneAnswer($index)"/> {[{answer}]}
+      </p>
+    </form>
+    <p>{[{answerValue}]}</p>
+    <button ng-disabled="isRightAnswer" ng-click="checkAnswers(answers)">vérifier</button>
+
+    <a href="{[{nextExerciseUrl}]}"><button ng-disabled="!isRightAnswer">Suivant</button></a>
+  </div>
+</div>

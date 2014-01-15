@@ -37,7 +37,9 @@
         "braincrafted/bootstrap-bundle": "~2.0@alpha",
         "twbs/bootstrap": "3.0.*",
         "jquery/jquery":  "1.10.*",
-        "leafo/lessphp": "0.4.0"
+        "leafo/lessphp": "0.4.0",
+        "friendsofsymfony/jsrouting-bundle": "@stable",
+        "jms/serializer-bundle": "0.9.*"
     },
     "scripts": {
         "post-install-cmd": [
