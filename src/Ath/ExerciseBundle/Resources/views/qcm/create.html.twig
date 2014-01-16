@@ -1,19 +1,24 @@
 <div ng-controller="QcmCreateCtrl">
   <form action="{[{formActionUrl}]}" method="POST">
-    Nom : <input required ng-model="exercise.name" name="name"/><br/>
-    Question : <input required ng-model="exercise.question" name="question"/><br/>
+    Nom : <input required ng-model="exercise.name" name="name" class="form-control"/><br/>
+    Question : <input required ng-model="exercise.question" name="question" class="form-control"/><br/>
     Réponses :<br/>
-
-      <ul ng-repeat="answer in exercise.answers">
-        <li>
-          <input required type="radio" name="selectAnswer" ng-click="rightAnswer($index)"/>
-          <input required type="text" name="answers[]" value="{[{answer.value}]}" />
-          [ <a href="" ng-click="removeAnswer(answer)">X</a> ]
-        </li>
-      </ul>
-
-    [ <a href="" ng-click="addAnswer()">add</a> ]
-    <input type="hidden" value="{[{exercise.rightAnswer}]}" name="rightAnswer"/>
-    <input type="submit"/>
+    <div class="row">
+      <div class="col-lg-6">
+          <div class="input-group" ng-repeat="answer in exercise.answers">
+            <span class="input-group-addon">
+                <input required type="radio" name="selectAnswer" ng-click="rightAnswer($index)"/>
+            </span>
+            <span class="input-group-addon">[ <a href="" ng-click="removeAnswer(answer)">X</a> ]</span>
+            <input required type="text" name="answers[]" value="{[{answer.value}]}" class="form-control"/>
+          </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      [ <a href="" ng-click="addAnswer()">add</a> ]
+      <input type="hidden" value="{[{exercise.rightAnswer}]}" name="rightAnswer"/>
+      <input type="submit" class="btn btn-primary"/>
+    </div>
   </form>
 </div>

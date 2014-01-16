@@ -1,45 +1,26 @@
-<!doctype html>
-<html lang="en" ng-app="myApp">
-<head>
-  <meta charset="utf-8">
-  <title>My AngularJS App</title>
-  <!-- <link rel="stylesheet" href="css/app.css"/> -->
-  {% stylesheets '@AthExerciseBundle/Resources/angularjs/css/app.css' filter='cssrewrite' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
-  {% endstylesheets %}
+{% extends "::base.html.twig" %}
+
+{% block title %}Exercices{% endblock title%}
+
+{% block javascripts %}
   <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
   <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-</head>
-<body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
+{% endblock javascripts %}
 
-  <div id="views" ng-view>
+{% block content %}
+  <div ng-app="myApp">
+    <div id="views" ng-view>
+    </div>
   </div>
+{% endblock content %}
 
-  <div>Angular seed app: v<span app-version></span></div>
-
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  -->
-
-  <!--<script src="lib/angular/angular.js"></script>
-  <script src="lib/angular/angular-route.js"></script>
-
-  <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>  -->
+{% block footer_js %}
   {% javascripts
     '@AthExerciseBundle/Resources/angularjs/lib/angular/angular.js'
     '@AthExerciseBundle/Resources/angularjs/lib/angular/angular-route.js'
     '@AthExerciseBundle/Resources/angularjs/lib/angular/angular-resource.js'
     '@AthExerciseBundle/Resources/angularjs/js/*' %}
     <script src="{{ asset_url }}"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   {% endjavascripts %}
-</body>
-</html>
+{% endblock footer_js %}
+
