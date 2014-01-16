@@ -56,6 +56,6 @@ class AthExerciseManager
   /* retourne un tableau de chaine de caractères */
   public function getListOfServices()
   {
-    $container->getParameter('exercise_services_list');
+    return $container->getParameter('exercise_services_list');
   }
 }
