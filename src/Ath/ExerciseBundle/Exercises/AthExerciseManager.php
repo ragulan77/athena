@@ -27,9 +27,9 @@ class AthExerciseManager
     return $this->container->getParameter('exercise_services_list')[$serviceName]['service_name'];
   }
 
-  public function getRightExerciseService($type)
+  public function getRightExerciseServiceByType($type)
   {
-    $serviceName = $exercise->getType();
+    $serviceName = $type;
     return $this->container->getParameter('exercise_services_list')[$serviceName]['service_name'];
   }
 

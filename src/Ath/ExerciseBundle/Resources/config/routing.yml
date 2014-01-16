@@ -26,6 +26,10 @@ ath_exercise_get_create_view:
     pattern: /exercise/create-view/{type}
     defaults: { _controller: AthExerciseBundle:Exercise:getCreateView }
 
+ath_exercise_set_exercise:
+    pattern: /exercise/create/{type}
+    defaults: { _controller: AthExerciseBundle:Exercise:setExercise }
+
 ath_exercise_check_answers:
     pattern: /exercise/{id}/check
     defaults: { _controller: AthExerciseBundle:Exercise:checkAnswers }

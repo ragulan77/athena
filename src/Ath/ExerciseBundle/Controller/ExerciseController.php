@@ -126,10 +126,22 @@ class ExerciseController extends Controller
     public function setExerciseAction($type)
     {
       $exerciseServiceManager = $this->get('ath_exercise.manager');
-      $exerciseService = $exerciseServiceManager->getRightExerciseService($type);
+      $exerciseService = $exerciseServiceManager->getRightExerciseServiceByType($type);
       $exerciseService = $this->get($exerciseService);
 
       $exercise = new ExerciseFile();
       $exerciseService->setContent($exercise, $this->get('request'));
+
+      $em = $this->getDoctrine()->getManager();
+      $chapter = $em->getRepository('AthExerciseBundle:Chapter')->find(1);
+      $level = $em->getRepository('AthExerciseBundle:Level')->find(1);
+
+      $exercise->setChapter($chapter);
+      $exercise->setLevel($level);
+
+      $em->persist($exercise);
+      $em->flush();
+
+      return $this->render('AthExerciseBundle:Default:created.html.twig');
     }
 }

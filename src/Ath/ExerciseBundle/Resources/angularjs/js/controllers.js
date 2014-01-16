@@ -81,6 +81,9 @@ var myAppCtrls = angular.module('myApp.controllers', []);
   }]);
 
   myAppCtrls.controller('QcmCreateCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
+
+      $scope.formActionUrl = Routing.generate('ath_exercise_set_exercise', {type: 'qcm'});
+
       var exercise = $scope.exercise = {
         name: '',
         question: '',

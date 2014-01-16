@@ -46,8 +46,23 @@ class AthQcm implements ExerciseInterface
   {
     if($request->getMethod() == "POST")
     {
-      $content = $request->getContent();
-      print_r($content);
+      $name = $request->request->get('name');
+      $question = $request->request->get('question');
+      $answers = $request->request->get('answers');
+
+      $nbAnswers = count($answers);
+      $rightAnswer = $request->request->get('rightAnswer');
+
+      $answersIntoString = "";
+      foreach($answers as $answer)
+        $answersIntoString .= $answer . "\n";
+
+      $exerciseFile->setName($name);
+      $exerciseFile->setType("qcm");
+      $exerciseFile->setContent($question . "\n" .
+                                $nbAnswers . "\n" .
+                                $answersIntoString .
+                                $rightAnswer);
     }
   }
 
