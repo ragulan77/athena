@@ -2,6 +2,10 @@ ath_exercise_index:
     pattern:  /
     defaults: { _controller: AthExerciseBundle:Exercise:index }
 
+ath_exercise_admin:
+    pattern:  /admin
+    defaults: { _controller: AthExerciseBundle:Exercise:admin }
+
 ath_exercise_init:
     pattern:  /init
     defaults: { _controller: AthExerciseBundle:Exercise:init }

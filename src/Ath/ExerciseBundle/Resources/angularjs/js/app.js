@@ -13,6 +13,7 @@ config(['$routeProvider', '$interpolateProvider', function($routeProvider, $inte
   $routeProvider.when('/init', {templateUrl: Routing.generate('ath_exercise_init'), controller: 'InitCtrl'});
   $routeProvider.when('/exercise/:exerciseId', {templateUrl: Routing.generate('ath_exercise_blank_view'), controller: 'ExerciseCtrl'});
   $routeProvider.when('/exercise/create/:typeExo', {templateUrl: Routing.generate('ath_exercise_blank_view'), controller: 'ExerciseCreateCtrl'});
+  $routeProvider.when('/admin', {templateUrl: Routing.generate('ath_exercise_blank_view'), controller: 'AdminCtrl'});
   $routeProvider.otherwise({redirectTo: '/init'});
 
   $interpolateProvider.startSymbol('{[{');

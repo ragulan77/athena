@@ -110,3 +110,8 @@ var myAppCtrls = angular.module('myApp.controllers', []);
       };
 
   }]);
+
+  myAppCtrls.controller('AdminCtrl', ['$scope', '$http', '$route', '$routeParams', function($scope, $http, $route, $routeParams, sharedProperties) {
+
+      $scope.templateUrl = Routing.generate('ath_exercise_admin');
+  }]);

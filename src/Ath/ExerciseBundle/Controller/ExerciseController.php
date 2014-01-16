@@ -25,6 +25,20 @@ class ExerciseController extends Controller
     }
 
     /*
+      affiche la page admin pour gérer les exo
+    */
+    public function adminAction()
+    {
+      $services = $this->get('ath_exercise.manager')->getListOfServices();
+      $service_name = array();
+      foreach ($services as $key => $value) {
+        array_push($service_name, $key);
+      }
+
+      return $this->render('AthExerciseBundle:Default:admin.html.twig', array('services' => $service_name));
+    }
+
+    /*
       retourne la vue correspondant à l'exercice
     */
     public function getSubjectViewAction(ExerciseFile $exercise)
