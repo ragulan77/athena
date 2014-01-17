@@ -22,6 +22,20 @@ myAppServices.factory('Level', ['$resource',
     });
   }]);
 
+myAppServices.factory('Discipline', ['$resource',
+  function($resource){
+    return $resource(Routing.generate('ath_cours_disciplines'), {}, {
+      query: {method:'GET', params:{disciplineId:'disciplines'}, isArray:true}
+    });
+  }]);
+
+myAppServices.factory('Chapter', ['$resource',
+  function($resource){
+    return $resource(Routing.generate('ath_exercise_chapters'), {}, {
+      query: {method:'GET', params:{chapterId:'chapters'}, isArray:true}
+    });
+  }]);
+
 myAppServices.service('sharedProperties', function () {
         var exercises = null;
         var nbExercises = null;

@@ -45,6 +45,10 @@ ath_exercise_levels:
     pattern: /levels
     defaults: { _controller: AthExerciseBundle:Level:getLevels }
 
+ath_exercise_chapters:
+    pattern: /chapters
+    defaults: { _controller: AthExerciseBundle:Chapter:getChapters }
+
 ath_exercise_blank_view:
     pattern: /exercise/blankview
     defaults: { _controller: AthExerciseBundle:Exercise:getBlankView }

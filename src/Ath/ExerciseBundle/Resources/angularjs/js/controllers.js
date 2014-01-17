@@ -80,7 +80,11 @@ var myAppCtrls = angular.module('myApp.controllers', []);
 
   }]);
 
-  myAppCtrls.controller('QcmCreateCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
+  myAppCtrls.controller('QcmCreateCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', 'Level', 'Chapter', 'Discipline', function($scope, $http, $route, $routeParams, sharedProperties, Level, Chapter, Discipline) {
+
+      $scope.chapters = Chapter.query();
+      $scope.levels = Level.query();
+      $scope.disciplines = Discipline.query();
 
       $scope.formActionUrl = Routing.generate('ath_exercise_set_exercise', {type: 'qcm'});
 
