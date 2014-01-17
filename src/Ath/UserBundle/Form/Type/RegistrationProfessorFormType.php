@@ -13,10 +13,11 @@ class RegistrationProfessorFormType extends BaseType
 
         // add your custom field
         $builder->add('classes');
+        $builder->add('matieres');
     }
 
     public function getName()
     {
-        return 'ath_professor_registration';
+        return 'fos_professor_registration_form';
     }
 }

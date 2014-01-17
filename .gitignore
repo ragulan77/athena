@@ -19,3 +19,7 @@ app/config/parameters.yml
 .vagrant/
 .DS_Store
 /vendor
+
+
+# log files
+*.log

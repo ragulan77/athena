@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %}
+
+{% block mainContainer %}
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+	<li><a href="#cours" data-toggle="tab">Cours</a></li>
+	<li><a href="#exercices" data-toggle="tab">Exercices</a></li>
+</ul>
+								
+<!-- Tab panes -->
+<div class="tab-content">
+	<div class="tab-pane active" id="cours">
+		{% block tabPaneCours %}
+		{% endblock tabPaneCours %}
+	</div>
+	<div class="tab-pane" id="exercices">
+		{% block tabPaneExercices %}
+		{% endblock tabPaneExercices %}
+	</div>
+</div>
+{% endblock mainContainer %}

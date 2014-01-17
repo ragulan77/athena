@@ -1,40 +1,52 @@
 {% extends "::base.html.twig" %}
 
+{% block javascripts %}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock javascripts %}
+
 {% block title %}Détail classe{% endblock title%}
 
-{% block content %}
+{% block breadcrumb %}
+<ol class="breadcrumb">
+	<li><a href="/">Home</a></li>
+	<li>Classes</li>
+</ol>
+{% endblock breadcrumb %}
+
+{% block mainContainer %}
 <h1>Classe {{ classe }}</h1>
 <!-- Modal ajout d'étudiant -->
 <div class="row">
 	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutEtudiant">
-		<form action="{{ path('student_registration') }}" method="post" {{ form_enctype(formStudent) }} id="formEtudiant">
-    		<div class="modal-header">
-    			<button type="button" class="close" data-dismiss="modal">×</button>
-    			<h3>Ajout d'étudiant</h3>
-    		</div>
-    		<div class="modal-body">
-{#     			{{ form_row(formStudent.classe, { 'attr':{'disabled':'disabled'} }) }}#}
-    			{{ form_widget(formStudent) }}
-    			{{ form_rest(formStudent) }}
-    		</div>
-    		<div class="modal-footer">
-    			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
-    			<button type="submit" class="btn btn-primary">Ajouter</button>
-    		</div>
-		</form>
+        <form action="{{ path('student_registration') }}" method="post" {{ form_enctype(formStudent) }} id="addStudentForm">
+            <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>Ajout d'étudiant</h3>
+            </div>
+            <div class="modal-body">
+{#              {{ form_row(formStudent.classe, { 'attr':{'disabled':'disabled'} }) }}#}
+                {{ form_widget(formStudent) }}
+                {{ form_rest(formStudent) }}
+            </div>
+            <div class="modal-footer">
+                <button href="#" class="btn" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
 	</div>
 </div>
 
 <!-- Modal ajout de matière -->
 <div class="row">
 	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutMatiere">
-		<form action="{{ path('ath_discipline_add') }}" method="post" {{ form_enctype(formDiscipline) }}>
+		<form action="{{ path('ath_discipline_add') }}" method="post" {{ form_enctype(formDiscipline) }} id="addDisciplineForm">
     		<div class="modal-header">
     			<button type="button" class="close" data-dismiss="modal">×</button>
     			<h3>Ajout de matière</h3>
     		</div>
     		<div class="modal-body">
-    			{{ form_row(formDiscipline.classes, { 'attr':{'disabled':'disabled'} }) }}
+{#     			{{ form_row(formDiscipline.classes, { 'attr':{'disabled':'disabled'} }) }}#}
     			{{ form_widget(formDiscipline) }}
     			{{ form_rest(formDiscipline) }}
     		</div>
@@ -48,14 +60,15 @@
 <!-- Modal ajout de professeur -->
 <div class="row">
 	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutProfesseur">
-		<form action="{{ path('professor_registration') }}" method="post" {{ form_enctype(formProfessor) }}>
+		<form action="{{ path('professor_registration') }}" method="post" {{ form_enctype(formProfessor) }} id="addProfessorForm">
     		<div class="modal-header">
     			<button type="button" class="close" data-dismiss="modal">×</button>
     			<h3>Ajout de professeur</h3>
     		</div>
     		<div class="modal-body">
-    			{{ form_row(formProfessor.classes, { 'attr':{'disabled':'disabled'} }) }}
+{#     			{{ form_row(formProfessor.classes, { 'attr':{'disabled':'disabled'} }) }}#}
     			{{ form_widget(formProfessor) }}
+    			{{ form_rest(formProfessor) }}
     		</div>
     		<div class="modal-footer">
     			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
@@ -72,12 +85,12 @@
     			<form action="{{ path('ath_student_del') }}" method="post">
     				<select id="listEtudiant" name="listEtudiant" class="form-control" multiple="multiple" rows=2>
     					{% for etudiant in listeEtudiants %}
-        					<option value={{ etudiant.id }} 
+        					<option value={{ etudiant.id }}
         					{% if loop.first %}
         						selected="selected"
         					{% endif %}
         					>{{ etudiant}}</option>
-						{% endfor %}    
+						{% endfor %}
     				</select>
     				<br/>
      				<div class="btn-group">
@@ -96,23 +109,23 @@
 		<div class="well">
     		<h3>Matières</h3>
     		<form action="{{ path('ath_discipline_del') }}" method="post">
-    			<select id="listMatiere" class="form-control" multiple="multiple" rows=2> 
+    			<select id="listMatiere" name="listMatiere" class="form-control" multiple="multiple" rows=2>
     				{% for matiere in listeMatieres %}
-        				<option value={{ matiere.id }} 
+        				<option value={{ matiere.id }}
         				{% if loop.first %}
         					selected="selected"
         				{% endif %}
         				>{{ matiere }}</option>
-					{% endfor %}       
+					{% endfor %}
     			</select>
     			<br/>
     			<div class="btn-group">
 					<button type="button" class="btn btn-default" data-toggle="modal" href="#modalAjoutMatiere">+</button>
-					<button type="button" class="btn btn-default">-</button>
+					<button type="submit" class="btn btn-default">-</button>
 				</div>
 			</form>
 		</div>
-		{% for flashMessage in app.session.flashbag.get('notice') %}
+		{% for flashMessage in app.session.flashbag.get('noticeDiscipline') %}
     				<div class="flash-notice">
         				{{ flashMessage }}
     				</div>
@@ -122,10 +135,14 @@
 		<div class="well">
     		<h3>Professeurs</h3>
     		<form action="{{ path('ath_professor_del') }}" method="post">
-    			<select id="listMatiere" class="form-control" multiple="multiple" rows=2> 
+    			<select id="listProfesseur" name="listProfesseur" class="form-control" multiple="multiple" rows=2>
     				{% for professeur in listeProfesseurs %}
-        				<option value={{ professeur.id }} selected="selected">{{ professeur }}</option>
-					{% endfor %}       
+        				<option value={{ professeur.id }} 
+        				{% if loop.first %}
+        					selected="selected"
+        				{% endif %}
+        				>{{ professeur }}</option>
+					{% endfor %}
     			</select>
     			<br/>
     			<div class="btn-group">
@@ -134,36 +151,80 @@
 				</div>
 			</form>
 		</div>
-		{% for flashMessage in app.session.flashbag.get('notice') %}
+		{% for flashMessage in app.session.flashbag.get('noticeProfessor') %}
     				<div class="flash-notice">
         				{{ flashMessage }}
     				</div>
 		{% endfor %}
 	</div>
 </div><!-- row -->
-
+{% block styles %}
 <script type="text/javascript">
-$('#formStudent').submit(
-		function(e) {
-	    var url2 = '/athena/web/app_dev.php/register/student';
-	    $.ajax({
-		type: "POST",
-		url: url2,
-		data: $(this).serialize(),
-		cache: false,
-		dataType : 'html',
-		success: function(data){
-			var response=$(data);
-		},
-		beforeSend: function(){
-	},
-	complete: function(){
-		$('#modalAjoutEtudiant').hide();
-	}
-});
-return false;
-});
+    $('#addStudentForm').submit(function(e) {
+        var generatedUrl = Routing.generate('student_registration');
+        $.ajax({
+            type: "POST",
+            url: generatedUrl,
+            data: $(this).serialize(),
+            cache: false,
+            dataType : 'html',
+            success: function(data){
+                var response=$(data);
+                $('#addStudentForm .modal-footer > button.btn').trigger('click');
+            },
+            beforeSend: function(){
+                $('#modalAjoutEtudiant').hide();
+            },
+            complete: function(){
+                location.reload();
+            }
+        });
+        return false;
+    });
+    $('#addProfessorForm').submit(function(e) {
+        var generatedUrl = Routing.generate('professor_registration');
+        $.ajax({
+            type: "POST",
+            url: generatedUrl,
+            data: $(this).serialize(),
+            cache: false,
+            dataType : 'html',
+            success: function(data){
+                var response=$(data);
+                $('#addProfessorForm .modal-footer > button.btn').trigger('click');
+            },
+            beforeSend: function(){
+                $('#modalAjoutProfesseur').hide();
+            },
+            complete: function(){
+                location.reload();
+            }
+        });
+        return false;
+    });
+    $('#addDisciplineForm').submit(function(e) {
+        var generatedUrl = Routing.generate('ath_discipline_add');
+        $.ajax({
+            type: "POST",
+            url: generatedUrl,
+            data: $(this).serialize(),
+            cache: false,
+            dataType : 'html',
+            success: function(data){
+                var response=$(data);
+                $('#addDisciplineForm .modal-footer > button.btn').trigger('click');
+            },
+            beforeSend: function(){
+                $('#modalAjoutMatiere').hide();
+            },
+            complete: function(){
+                location.reload();
+            }
+        });
+        return false;
+    });
 </script>
-{% endblock content %}
+{% endblock styles %}
+{% endblock mainContainer %}
 
 

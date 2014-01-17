@@ -1,0 +1,33 @@
+<table class="table">
+{# si listeClasses est iterable, l user connecté est n'est pas un STUDENT#}
+{% if listeClasses is iterable %}
+	{% for classe in listeClasses %}
+		<tr>
+			<th>
+				{{ classe.name }}
+			</th>
+		</tr>
+		{% for discipline in listeMatieresParClasse[classe.name] %}
+			<tr>
+				<td>
+					<a href="{{ path('ath_cours_show',{id: discipline.id}) }}">{{ discipline }}</a>
+				</td>
+			</tr>
+		{% endfor %}
+	{% endfor %}
+{% else %}
+{#l'user connecté est est un STUDENT listeClasses contient qu'une seule classe#}
+		<tr>
+			<th>
+				{{ listeClasses }}
+			</th>
+		</tr>
+		{% for discipline in listeMatieresParClasse[listeClasses.name] %}
+			<tr>
+				<td>
+					<a href="{{ path('ath_cours_show',{id: discipline.id}) }}">{{ discipline }}</a>
+				</td>
+			</tr>
+		{% endfor %}
+{% endif %}
+</table>
