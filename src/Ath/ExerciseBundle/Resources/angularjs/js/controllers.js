@@ -53,7 +53,7 @@ var myAppCtrls = angular.module('myApp.controllers', []);
     // on récupère l'url du prochain exo
     $scope.nextExerciseUrl = '#/exercise/'+sharedProperties.getNextExerciseId();
     // on maj le compteur pour la fois suivante
-    sharedProperties.setCurrentExercise($scope.nextExercise+1);
+    sharedProperties.setCurrentExercise(sharedProperties.getCurrentExercise()+1);
 
     $scope.oneAnswer = function(answer){
       $scope.answers = [answer];
