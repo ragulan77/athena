@@ -85,37 +85,4 @@ class Professor extends MyBaseUser
     {
     	return $this->getFirstname().' '.$this->getLastname();
     }
-
-    /**
-     * Add matieres
-     *
-     * @param \Ath\CoursBundle\Entity\Discipline $matieres
-     * @return Professor
-     */
-    public function addMatiere(\Ath\CoursBundle\Entity\Discipline $matieres)
-    {
-        $this->matieres[] = $matieres;
-    
-        return $this;
-    }
-
-    /**
-     * Remove matieres
-     *
-     * @param \Ath\CoursBundle\Entity\Discipline $matieres
-     */
-    public function removeMatiere(\Ath\CoursBundle\Entity\Discipline $matieres)
-    {
-        $this->matieres->removeElement($matieres);
-    }
-
-    /**
-     * Get matieres
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMatieres()
-    {
-        return $this->matieres;
-    }
 }

@@ -4,6 +4,8 @@ namespace Ath\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Ath\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 
 class RegistrationStudentFormType extends BaseType
 {
@@ -15,6 +17,7 @@ class RegistrationStudentFormType extends BaseType
         $builder->add('classe');
     }
 
+    
     public function getName()
     {
         return 'fos_student_registration_form';

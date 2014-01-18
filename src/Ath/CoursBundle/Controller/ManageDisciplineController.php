@@ -14,29 +14,19 @@ class ManageDisciplineController extends Controller
 	public function addAction(Request $request)
 	{
 		$discipline = new Discipline();
-		$form = $this->createForm(new DisciplineFormType('Ath\UserBundle\Entity\Discipline'),$discipline);
+		$form = $this->createForm(new DisciplineFormType('Ath\CoursBundle\Entity\Discipline'),$discipline);
 		$form->handleRequest($request);
 		
 		if($form->isValid($request)){
-			//$em = $this->getDoctrine()->getManager();
-			//$em->persist($discipline);
-			//$em->flush();
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($discipline);
+			$em->flush();
 			
 			$this->get('session')->getFlashBag()->add(
-					'notice',
-					'Ajout réalisé '.$discipline->getName().' avec succès !'
+					'noticeDiscipline',
+					'Ajout réalisé avec succès !'
 			);
 			
-			//return new RedirectResponse($request->headers->get('referer'));
-			$n = $discipline->getClasses();
-			
-			return
-			$this->render(
-					'AthUserBundle:Registration:test.edit.html.twig',
-					array(
-							'liste' =>$n
-					)
-			);
 		}
 		
 		return new RedirectResponse($request->headers->get('referer'));
@@ -49,13 +39,13 @@ class ManageDisciplineController extends Controller
     	foreach ($listeIdDiscipline as $id){
     		$em = $this->getDoctrine()->getManager();
     		//get all discipline by classe
-    		$discipline = $em->getRepository('AthUserBundle:Discipline')->findOneById($id);
+    		$discipline = $em->getRepository('AthCoursBundle:Discipline')->findOneById($id);
     		$em->remove($discipline);
     		$em->flush();
     	}
     	
     	$this->get('session')->getFlashBag()->add(
-    			'notice',
+    			'noticeDiscipline',
     			'Suppression réalisé avec succès !'
     	);
     	
