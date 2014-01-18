@@ -1,6 +1,6 @@
 ath_cours:
     resource: "@AthCoursBundle/Resources/config/routing.yml"
-    prefix:   /cours
+    prefix:   /
 
 ath_page:
     resource: "@AthPageBundle/Resources/config/routing.yml"
@@ -9,3 +9,6 @@ ath_page:
 ath_user:
     resource: "@AthUserBundle/Resources/config/routing.yml"
     prefix:   /
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

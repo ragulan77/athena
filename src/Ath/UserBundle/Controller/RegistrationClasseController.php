@@ -6,7 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Ath\UserBundle\Entity\Classe;
 use Symfony\Component\HttpFoundation\Request;
 use Ath\UserBundle\Form\Type\RegistrationStudentFormType;
+use Ath\UserBundle\Form\Type\RegistrationProfessorFormType;
+use Ath\UserBundle\Form\Type\DisciplineFormType;
 use Ath\UserBundle\Entity\Student;
+use Ath\CoursBundle\Entity\Discipline;
+use Ath\UserBundle\Entity\Professor;
 
 class RegistrationClasseController extends Controller
 {
@@ -70,10 +74,21 @@ class RegistrationClasseController extends Controller
     	//get all discipline by classe
     	$listeMatieres = $em->getRepository('AthCoursBundle:Discipline')->getDisciplinesByClasseId($classe->getId());
 	
-    	$listeProfesseurs = $em->getRepository('AthUserBundle:Profesor')->getProfessorsByClasseId($classe->getId());
+    	$listeProfesseurs = $em->getRepository('AthUserBundle:Professor')->getProfessorsByClasseId($classe->getId());
     	
     	$student = new Student();
-    	$form = $this->createForm(new RegistrationStudentFormType('Ath\UserBundle\Entity\Student'), $student);
+    	$student->setClasse($classe);
+    	$formStudent = $this->createForm(new RegistrationStudentFormType('Ath\UserBundle\Entity\Student'), $student);
+    	
+    	$discipline = new Discipline();
+    	$discipline->addClasse($classe);
+    	$formDiscipline = $this->createForm(new DisciplineFormType('Ath\CoursBundle\Entity\Discipline'), $discipline);
+    	
+    	$professor = new Professor();
+    	$professor->addClasse($classe);
+    	$formProfessor = $this->createForm(new RegistrationProfessorFormType('Ath\UserBundle\Entity\Professor'), $professor);
+    	
+    	
     	
     	return 
     	$this->render(
@@ -83,7 +98,9 @@ class RegistrationClasseController extends Controller
     					'classe' => $classe,
     					'listeMatieres' =>$listeMatieres,
     					'listeProfesseurs' =>$listeProfesseurs,
-    					'form' => $form->createView()
+    					'formStudent' => $formStudent->createView(),
+    					'formProfessor' => $formProfessor->createView(),
+    					'formDiscipline' => $formDiscipline->createView()
     			)
     	);
     }

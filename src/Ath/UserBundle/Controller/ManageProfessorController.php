@@ -7,17 +7,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class ManageDisciplineController extends Controller
+class ManageProfessorController extends Controller
 {
     public function deleteAction(Request $request)
     {
-    	$listeIdDiscipline = $request->request->all();
+    	$listeIdProfessor = $request->request->all();
     	
-    	foreach ($listeIdDiscipline as $id){
+    	foreach ($listeIdProfessor as $id){
     		$em = $this->getDoctrine()->getManager();
-    		//get all discipline by classe
-    		$discipline = $em->getRepository('AthUserBundle:Discipline')->findOneById($id);
-    		$em->remove($discipline);
+    		//get all professor by classe
+    		$professor = $em->getRepository('AthUserBundle:Professor')->findOneById($id);
+    		$em->remove($professor);
     		$em->flush();
     	}
     	
