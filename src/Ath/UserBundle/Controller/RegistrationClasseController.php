@@ -11,22 +11,38 @@ use Ath\UserBundle\Form\Type\DisciplineFormType;
 use Ath\UserBundle\Entity\Student;
 use Ath\CoursBundle\Entity\Discipline;
 use Ath\UserBundle\Entity\Professor;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Ath\UserBundle\Form\Type\ClasseFormType;
 
 class RegistrationClasseController extends Controller
 {
+	public function afficherAction(Request $request)
+	{
+		$newClasse = new Classe();
+		 
+		$form = $this->createForm(new ClasseFormType('Ath\UserBundle\Entity\Classe'),$newClasse);
+		
+		$em = $this->getDoctrine()->getManager();
+		
+		//get all course by discipline pour downloader
+		$listeClasse = $em->getRepository('AthUserBundle:Classe')->findAll();
+		
+		return $this->render(
+				'AthUserBundle:Registration:classe.form.html.twig',
+				array(
+						'listeClasse' =>$listeClasse, 
+						'form' => $form->createView()
+				)
+		);
+	}
+	
     public function registerAction(Request $request)
     {
     	$newClasse = new Classe();
-    	
-    	$form = $this->createFormBuilder($newClasse)
-    	->add('name')
-    	->getForm();
+    	$form = $this->createForm(new ClasseFormType('Ath\UserBundle\Entity\Classe'),$newClasse);
     	 
     	$form->handleRequest($request);
-    	$em = $this->getDoctrine()->getManager();
-    	 
-    	//get all course by discipline pour downloader
-    	$listeClasse = $em->getRepository('AthUserBundle:Classe')->findAll();
+     	$em = $this->getDoctrine()->getManager();
     	 
     	//si formulaire d'ajout de cours validé
     	if ($form->isValid()) {
@@ -38,10 +54,8 @@ class RegistrationClasseController extends Controller
     				'Création de la classe réalisée avec succès !'
     		);
     		 
-    		return $this->redirect($this->generateUrl('ath_classe_add',array('listeClasse' =>$listeClasse, 'form' => $form->createView())));
     	}
-    	 
-    	return $this->render('AthUserBundle:Registration:classe.form.html.twig',array('listeClasse' =>$listeClasse, 'form' => $form->createView()));
+    	return new RedirectResponse($request->headers->get('referer'));
     }
     
     public function deleteAction($id)
@@ -87,8 +101,6 @@ class RegistrationClasseController extends Controller
     	$professor = new Professor();
     	$professor->addClasse($classe);
     	$formProfessor = $this->createForm(new RegistrationProfessorFormType('Ath\UserBundle\Entity\Professor'), $professor);
-    	
-    	
     	
     	return 
     	$this->render(

@@ -1,9 +1,13 @@
-{% extends "::base.html.twig" %}
+{% extends "AthCoursBundle::layout.html.twig" %}
 
-
-	{% block content %}
-		<div class="row">
-			<div class="col-lg-3">
+{% block breadcrumb %}
+<ol class="breadcrumb">
+	<li><a href="/">Home</a></li>
+	<li>Cours</li>
+</ol>
+{% endblock breadcrumb %}
+{% block tabPaneCours %}
+			<div class="col-sm-4">
 				<div class="well">
 					<form action="{{ path('ath_cours_add') }}" method="post" {{ form_enctype(form) }}>
 						{# Les erreurs générales du formulaire. #}
@@ -29,7 +33,7 @@
     				</div>
 				{% endfor %}
 			</div>
-			<div class="col-lg-6">
+			<div class="col-sm-5">
 				<h1>Cours</h1>
 				<table>
     				{% for cours in listeCours %}
@@ -48,5 +52,7 @@
     				{% endfor %}
 				</table>
 			</div>
-		</div>
-		{% endblock content %}
+{% endblock tabPaneCours %}
+{% block tabPaneExercices %}
+		Exercices a ajouter
+{% endblock tabPaneExercices %}

@@ -1,11 +1,15 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}Création classe{% endblock title%}
+{% block breadcrumb %}
+<ol class="breadcrumb">
+	<li><a href="/">Home</a></li>
+	<li>Classes</li>
+</ol>
+{% endblock breadcrumb %}
 
-{% block content %}
-
-  <div class="row">
-			<div class="span4">
+{% block mainContainer %}
+			<div class="col-sm-4">
 				<div class="well">
 					<form action="{{ path('ath_classe_add') }}" method="post" {{ form_enctype(form) }}>
 						{# Les erreurs générales du formulaire. #}
@@ -26,7 +30,7 @@
     				</div>
 				{% endfor %}
 			</div>
-			<div class="span8">
+			<div class="col-sm-8">
 				<h1>Classes</h1>
 				<ul>
     				{% for classe in listeClasse %}
@@ -39,12 +43,6 @@
     				{% endfor %}
 				</ul>
 			</div>
-</div>
 
-{% endblock content %}
-
-{% block nav_right_links %}
-  <a href="#" class="list-group-item">Link</a>
-  <a href="#" class="list-group-item">Link</a>
-{% endblock nav_right_links %}
+{% endblock mainContainer %}
 

@@ -6,13 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Ath\UserBundle\Entity\Professor;
 
 class ManageProfessorController extends Controller
 {
     public function deleteAction(Request $request)
     {
     	$listeIdProfessor = $request->request->all();
-    	
+    	$professor = new Professor();
     	foreach ($listeIdProfessor as $id){
     		$em = $this->getDoctrine()->getManager();
     		//get all professor by classe
@@ -22,7 +23,7 @@ class ManageProfessorController extends Controller
     	}
     	
     	$this->get('session')->getFlashBag()->add(
-    			'notice',
+    			'noticeProfessor',
     			'Suppression réalisé avec succès !'
     	);
     	
