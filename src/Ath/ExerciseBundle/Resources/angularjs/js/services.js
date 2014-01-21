@@ -40,6 +40,7 @@ myAppServices.service('sharedProperties', function () {
         var exercises = null;
         var nbExercises = null;
         var currentExercise = null; // démarre à 0
+        var score = 0;
         return {
             getExercises: function () {
                 return exercises;
@@ -56,6 +57,10 @@ myAppServices.service('sharedProperties', function () {
               else
                 return exercises[currentExercise].id;
             },
+            getScore: function()
+            {
+              return score;
+            },
             setExercises: function(value) {
                 exercises = value;
             },
@@ -66,6 +71,14 @@ myAppServices.service('sharedProperties', function () {
               if (value < nbExercises){ //si invalide on ne maj pas
                 currentExercise = value;
               }
+            },
+            incrementScore: function(){
+              score++;
+            },
+            isFinish: function(){
+              if(currentExercise == nbExercises-1)
+                return true;
+              return false;
             }
         };
     });

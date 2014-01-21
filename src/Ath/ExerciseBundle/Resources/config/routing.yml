@@ -10,6 +10,10 @@ ath_exercise_init:
     pattern:  /init
     defaults: { _controller: AthExerciseBundle:Exercise:init }
 
+ath_exercise_score:
+    pattern:  /score
+    defaults: { _controller: AthExerciseBundle:Exercise:score }
+
 ath_exercise_get_all:
     pattern:  /exercises
     defaults: { _controller: AthExerciseBundle:Exercise:getExercises }

@@ -25,6 +25,14 @@ class ExerciseController extends Controller
     }
 
     /*
+      affiche la page finale score
+    */
+    public function scoreAction()
+    {
+        return $this->render('AthExerciseBundle:Default:score.html.twig');
+    }
+
+    /*
       affiche la page admin pour gérer les exo
     */
     public function adminAction()

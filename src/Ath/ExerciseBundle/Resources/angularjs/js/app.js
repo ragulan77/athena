@@ -11,6 +11,7 @@ angular.module('myApp', [
 ]).
 config(['$routeProvider', '$interpolateProvider', function($routeProvider, $interpolateProvider) {
   $routeProvider.when('/init', {templateUrl: Routing.generate('ath_exercise_init'), controller: 'InitCtrl'});
+  $routeProvider.when('/score', {templateUrl: Routing.generate('ath_exercise_score'), controller: 'ScoreCtrl'});
   $routeProvider.when('/exercise/:exerciseId', {templateUrl: Routing.generate('ath_exercise_blank_view'), controller: 'ExerciseCtrl'});
   $routeProvider.when('/exercise/create/:typeExo', {templateUrl: Routing.generate('ath_exercise_blank_view'), controller: 'ExerciseCreateCtrl'});
   $routeProvider.when('/admin', {templateUrl: Routing.generate('ath_exercise_blank_view'), controller: 'AdminCtrl'});

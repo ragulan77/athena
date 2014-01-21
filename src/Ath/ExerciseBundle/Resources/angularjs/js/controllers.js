@@ -25,6 +25,13 @@ var myAppCtrls = angular.module('myApp.controllers', []);
 
   }]);
 
+  myAppCtrls.controller('ScoreCtrl', ['$scope', 'sharedProperties', function($scope, sharedProperties) {
+    $scope.nbExercises = sharedProperties.getNbExercises();
+    $scope.nbRightAnswers = sharedProperties.getScore();
+  }]);
+
+
+
   /*
     retourne la bonne vue pour faire des exercises
   */
@@ -48,10 +55,24 @@ var myAppCtrls = angular.module('myApp.controllers', []);
   }]);
 
 
+  /*
+    le controlleur pour gérer le Qcm
+  */
   myAppCtrls.controller('QcmCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
     $scope.answers = [];
-    // on récupère l'url du prochain exo
-    $scope.nextExerciseUrl = '#/exercise/'+sharedProperties.getNextExerciseId();
+    // vérifie qu'on corrige la première fois le qcm.
+    $scope.checkFirstTime = true;
+
+    if(sharedProperties.isFinish())
+    {
+      $scope.nextExerciseUrl = '#/score';
+    }
+    else
+    {
+      // on récupère l'url du prochain exo
+      $scope.nextExerciseUrl = '#/exercise/'+sharedProperties.getNextExerciseId();
+    }
+
     // on maj le compteur pour la fois suivante
     sharedProperties.setCurrentExercise(sharedProperties.getCurrentExercise()+1);
 
@@ -71,13 +92,18 @@ var myAppCtrls = angular.module('myApp.controllers', []);
       $http.post(route, data, config).success(function(resp){
         if(resp == "true"){
           $scope.isRightAnswer = true;
+          if($scope.checkFirstTime)
+          {
+            $scope.checkFirstTime = false;
+            sharedProperties.incrementScore();
+          }
         }
         else{
           $scope.isRightAnswer = false;
+          $scope.checkFirstTime = false;
         }
       });
     };
-
   }]);
 
   myAppCtrls.controller('QcmCreateCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', 'Level', 'Chapter', 'Discipline', function($scope, $http, $route, $routeParams, sharedProperties, Level, Chapter, Discipline) {
