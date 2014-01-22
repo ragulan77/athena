@@ -11,6 +11,8 @@
     <title>Athena - {% block title %}{% endblock title %}</title>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     {% block javascripts %} {% endblock javascripts %}
+    {% block styles %}
+
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -410,6 +412,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/offcanvas.js') }}"></script>
+
     <!-- Javascript gif de chargement -->
     <script type="text/javascript">
 		$(document).on('ajaxSend', function(){
@@ -418,5 +421,8 @@
 	    	$("#spinner").hide();
 		});
 	</script>
+
+  {% block footer_js %}{% endblock footer_js %}
+
   </body>
 </html>
