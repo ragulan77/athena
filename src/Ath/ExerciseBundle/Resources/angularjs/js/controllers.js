@@ -149,6 +149,7 @@ var myAppCtrls = angular.module('myApp.controllers', []);
 
   myAppCtrls.controller('HangmanCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
     $scope.answers = [];
+    $scope.MAX_WRONG_ANSWERS = 3;
     // vérifie qu'on corrige la première fois le qcm.
     $scope.nbWrongAnswers = 0;
 
@@ -176,9 +177,11 @@ var myAppCtrls = angular.module('myApp.controllers', []);
       var answerFound = false;
       $scope.hidden_subject = ""; // on reconstruit le hidden subject
       var nbLetters = $scope.exerciseData.subject.length;
+      var gameFinished = true;
       for(var cpt=0; cpt < nbLetters; cpt++)
       {
         var letter =  $scope.exerciseData.subject[cpt];
+
         if(letter.letter == user_answer)
         {
           answerFound = true;
@@ -195,10 +198,18 @@ var myAppCtrls = angular.module('myApp.controllers', []);
             $scope.hidden_subject += ('_ ');
           }
         }
+
+        if(!letter.discovered)
+          gameFinished = false;
       }
 
       if(!answerFound)
         $scope.nbWrongAnswers++;
+
+      $scope.isRightAnswer = gameFinished;
+
+      if($scope.isRightAnswer && $scope.nbWrongAnswers < $scope.MAX_WRONG_ANSWERS)
+        sharedProperties.incrementScore();
     };
 
   }]);
