@@ -17,7 +17,7 @@ class AthHangman implements ExerciseInterface
     $subject_array = array();
     foreach($subject as $char)
     {
-      array_push($subject_array, array('char' => $char, 'discovered' => false));
+      array_push($subject_array, array('letter' => $char, 'discovered' => false));
     }
     return $subject_array;
   }

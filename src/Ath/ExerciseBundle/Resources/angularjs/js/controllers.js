@@ -150,7 +150,7 @@ var myAppCtrls = angular.module('myApp.controllers', []);
   myAppCtrls.controller('HangmanCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
     $scope.answers = [];
     // vérifie qu'on corrige la première fois le qcm.
-    $scope.checkFirstTime = true;
+    $scope.nbWrongAnswers = 0;
 
     if(sharedProperties.isFinish())
     {
@@ -167,11 +167,38 @@ var myAppCtrls = angular.module('myApp.controllers', []);
 
     // on initialise le mot caché
     $scope.hidden_subject = "";
-    //$scope.exerciseData.subject
+    var nbHiddenLetters = $scope.exerciseData.subject.length;
+    for(var cpt=0; cpt < nbHiddenLetters; cpt++)
+      $scope.hidden_subject += "_ "
 
     // vérifier la réponse de l'utilisateur
-    $scope.checkAnswers = function(user_answers){
+    $scope.checkAnswers = function(user_answer){
+      var answerFound = false;
+      $scope.hidden_subject = ""; // on reconstruit le hidden subject
+      var nbLetters = $scope.exerciseData.subject.length;
+      for(var cpt=0; cpt < nbLetters; cpt++)
+      {
+        var letter =  $scope.exerciseData.subject[cpt];
+        if(letter.letter == user_answer)
+        {
+          answerFound = true;
+          letter.discovered = true;
+          $scope.hidden_subject += (letter.letter + ' ');
+        }
+        else
+        {
+          if(letter.discovered){
+            $scope.hidden_subject += (letter.letter + ' ');
+          }
+          else
+          {
+            $scope.hidden_subject += ('_ ');
+          }
+        }
+      }
 
+      if(!answerFound)
+        $scope.nbWrongAnswers++;
     };
 
   }]);
