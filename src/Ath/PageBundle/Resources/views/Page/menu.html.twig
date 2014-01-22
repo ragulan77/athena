@@ -19,15 +19,19 @@
 {#l'user connecté est est un STUDENT listeClasses contient qu'une seule classe#}
 		<tr>
 			<th>
-				{{ listeClasses }}
+				{% if listeClasses is not null %}
+					{{ listeClasses }}
+				{% endif %}
 			</th>
 		</tr>
-		{% for discipline in listeMatieresParClasse[listeClasses.name] %}
-			<tr>
-				<td>
-					<a href="{{ path('ath_cours_show',{id: discipline.id}) }}">{{ discipline }}</a>
-				</td>
-			</tr>
-		{% endfor %}
+		{% if listeClasses is not null  and listeMatieresParClasse is not null %}
+			{% for discipline in listeMatieresParClasse[listeClasses.name] %}
+				<tr>
+					<td>
+						<a href="{{ path('ath_cours_show',{id: discipline.id}) }}">{{ discipline }}</a>
+					</td>
+				</tr>
+			{% endfor %}
+		{% endif %}
 {% endif %}
 </table>
