@@ -1,0 +1,21 @@
+parameters:
+    exercise_services_list:
+        qcm:
+            service_name: ath_exercise.qcm
+            subject_template: AthExerciseBundle:qcm:subject.html.twig
+            create_template: AthExerciseBundle:qcm:create.html.twig
+        hangman:
+            service_name: ath_exercise.hangman
+            subject_template: AthExerciseBundle:hangman:subject.html.twig
+            create_template: AthExerciseBundle:hangman:create.html.twig
+
+services:
+    ath_exercise.qcm:
+        class: Ath\ExerciseBundle\Exercises\AthQcm
+
+    ath_exercise.manager:
+        class: Ath\ExerciseBundle\Exercises\AthExerciseManager
+        arguments: ["@service_container"]
+
+    ath_exercise.hangman:
+        class: Ath\ExerciseBundle\Exercises\AthHangman

@@ -10,22 +10,23 @@ class PageController extends Controller
     {
         return $this->render('AthPageBundle:Page:index.html.twig');
     }
-    
+
     //verifier s il existe des restrictions pour verifier si l user est bien logger avant de l appeler
     public function menuAction()
     {
     	//récupérer l user connecté
     	$user = $this->getUser();
-    	
+
     	$securityContext = $this->container->get('security.context');
     	$em= $this->getDoctrine()->getManager();
+        $listeClasses = null;
+        $listeMatieresParClasse=null;
 
-    	
     	//récupérer ses classes et ses matières
     	if( $securityContext->isGranted('ROLE_STUDENT') ){
     		$listeClasses = $user->getClasse(); //classe unique
     		$disciplines = $em->getRepository('AthCoursBundle:Discipline')->getDisciplinesByClasseId($listeClasses->getId());
-    		$listeMatieresParClasse = array( 
+    		$listeMatieresParClasse = array(
     			$listeClasses->getName() => $disciplines
     		);
     	}elseif( $securityContext->isGranted('ROLE_PROFESSOR') ) {
@@ -43,7 +44,7 @@ class PageController extends Controller
     			$listeMatieresParClasse[$classe->getName()] = $disciplines;
     		}
     	}
-    	
+
     	return $this->render(
     			'AthPageBundle:Page:menu.html.twig',
     			array(
