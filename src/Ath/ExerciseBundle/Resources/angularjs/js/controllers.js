@@ -25,6 +25,13 @@ var myAppCtrls = angular.module('myApp.controllers', []);
 
   }]);
 
+  myAppCtrls.controller('ScoreCtrl', ['$scope', 'sharedProperties', function($scope, sharedProperties) {
+    $scope.nbExercises = sharedProperties.getNbExercises();
+    $scope.nbRightAnswers = sharedProperties.getScore();
+  }]);
+
+
+
   /*
     retourne la bonne vue pour faire des exercises
   */
@@ -48,10 +55,24 @@ var myAppCtrls = angular.module('myApp.controllers', []);
   }]);
 
 
+  /*
+    le controlleur pour gérer le Qcm
+  */
   myAppCtrls.controller('QcmCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
     $scope.answers = [];
-    // on récupère l'url du prochain exo
-    $scope.nextExerciseUrl = '#/exercise/'+sharedProperties.getNextExerciseId();
+    // vérifie qu'on corrige la première fois le qcm.
+    $scope.checkFirstTime = true;
+
+    if(sharedProperties.isFinish())
+    {
+      $scope.nextExerciseUrl = '#/score';
+    }
+    else
+    {
+      // on récupère l'url du prochain exo
+      $scope.nextExerciseUrl = '#/exercise/'+sharedProperties.getNextExerciseId();
+    }
+
     // on maj le compteur pour la fois suivante
     sharedProperties.setCurrentExercise(sharedProperties.getCurrentExercise()+1);
 
@@ -71,13 +92,18 @@ var myAppCtrls = angular.module('myApp.controllers', []);
       $http.post(route, data, config).success(function(resp){
         if(resp == "true"){
           $scope.isRightAnswer = true;
+          if($scope.checkFirstTime)
+          {
+            $scope.checkFirstTime = false;
+            sharedProperties.incrementScore();
+          }
         }
         else{
           $scope.isRightAnswer = false;
+          $scope.checkFirstTime = false;
         }
       });
     };
-
   }]);
 
   myAppCtrls.controller('QcmCreateCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', 'Level', 'Chapter', 'Discipline', function($scope, $http, $route, $routeParams, sharedProperties, Level, Chapter, Discipline) {
@@ -118,4 +144,61 @@ var myAppCtrls = angular.module('myApp.controllers', []);
   myAppCtrls.controller('AdminCtrl', ['$scope', '$http', '$route', '$routeParams', function($scope, $http, $route, $routeParams, sharedProperties) {
 
       $scope.templateUrl = Routing.generate('ath_exercise_admin');
+  }]);
+
+
+  myAppCtrls.controller('HangmanCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
+    $scope.answers = [];
+    // vérifie qu'on corrige la première fois le qcm.
+    $scope.nbWrongAnswers = 0;
+
+    if(sharedProperties.isFinish())
+    {
+      $scope.nextExerciseUrl = '#/score';
+    }
+    else
+    {
+      // on récupère l'url du prochain exo
+      $scope.nextExerciseUrl = '#/exercise/'+sharedProperties.getNextExerciseId();
+    }
+
+    // on maj le compteur pour la fois suivante
+    sharedProperties.setCurrentExercise(sharedProperties.getCurrentExercise()+1);
+
+    // on initialise le mot caché
+    $scope.hidden_subject = "";
+    var nbHiddenLetters = $scope.exerciseData.subject.length;
+    for(var cpt=0; cpt < nbHiddenLetters; cpt++)
+      $scope.hidden_subject += "_ "
+
+    // vérifier la réponse de l'utilisateur
+    $scope.checkAnswers = function(user_answer){
+      var answerFound = false;
+      $scope.hidden_subject = ""; // on reconstruit le hidden subject
+      var nbLetters = $scope.exerciseData.subject.length;
+      for(var cpt=0; cpt < nbLetters; cpt++)
+      {
+        var letter =  $scope.exerciseData.subject[cpt];
+        if(letter.letter == user_answer)
+        {
+          answerFound = true;
+          letter.discovered = true;
+          $scope.hidden_subject += (letter.letter + ' ');
+        }
+        else
+        {
+          if(letter.discovered){
+            $scope.hidden_subject += (letter.letter + ' ');
+          }
+          else
+          {
+            $scope.hidden_subject += ('_ ');
+          }
+        }
+      }
+
+      if(!answerFound)
+        $scope.nbWrongAnswers++;
+    };
+
   }]);
