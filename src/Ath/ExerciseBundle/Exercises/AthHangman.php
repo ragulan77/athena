@@ -51,22 +51,11 @@ class AthHangman implements ExerciseInterface
     if($request->getMethod() == "POST")
     {
       $name = $request->request->get('name');
-      $question = $request->request->get('question');
-      $answers = $request->request->get('answers');
-
-      $nbAnswers = count($answers);
-      $rightAnswer = $request->request->get('rightAnswer');
-
-      $answersIntoString = "";
-      foreach($answers as $answer)
-        $answersIntoString .= $answer . "\n";
+      $hidden_word = $request->request->get('hidden_word');
 
       $exerciseFile->setName($name);
       $exerciseFile->setType("hangman");
-      $exerciseFile->setContent($question . "\n" .
-                                $nbAnswers . "\n" .
-                                $answersIntoString .
-                                $rightAnswer);
+      $exerciseFile->setContent($hidden_word . "\n");
     }
   }
 
