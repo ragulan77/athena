@@ -145,3 +145,33 @@ var myAppCtrls = angular.module('myApp.controllers', []);
 
       $scope.templateUrl = Routing.generate('ath_exercise_admin');
   }]);
+
+
+  myAppCtrls.controller('HangmanCtrl', ['$scope', '$http', '$route', '$routeParams', 'sharedProperties', function($scope, $http, $route, $routeParams, sharedProperties) {
+    $scope.answers = [];
+    // vérifie qu'on corrige la première fois le qcm.
+    $scope.checkFirstTime = true;
+
+    if(sharedProperties.isFinish())
+    {
+      $scope.nextExerciseUrl = '#/score';
+    }
+    else
+    {
+      // on récupère l'url du prochain exo
+      $scope.nextExerciseUrl = '#/exercise/'+sharedProperties.getNextExerciseId();
+    }
+
+    // on maj le compteur pour la fois suivante
+    sharedProperties.setCurrentExercise(sharedProperties.getCurrentExercise()+1);
+
+    // on initialise le mot caché
+    $scope.hidden_subject = "";
+    //$scope.exerciseData.subject
+
+    // vérifier la réponse de l'utilisateur
+    $scope.checkAnswers = function(user_answers){
+
+    };
+
+  }]);
