@@ -12,7 +12,17 @@ class CourseFormType extends BaseType
         parent::buildForm($builder, $options);
         // add your custom field
         $builder->add('name');
-        $builder->add('discipline');//a cacher
+       // $builder->add('discipline');//a cacher
+        $builder->add(
+        		'discipline',
+        		null,
+        		array( 
+        				'attr'=>array(
+        						'style'=>'display:none;'
+        				),
+        				'label' => false
+        		) 
+        );
         $builder->add('file');
     }
 

@@ -4,10 +4,31 @@
 <ol class="breadcrumb">
 	<li><a href="/">Home</a></li>
 	<li>Cours</li>
+	<li>{{ discipline }}</li>
 </ol>
 {% endblock breadcrumb %}
 {% block tabPaneCours %}
-			<div class="col-sm-4">
+			<div class="col-sm-5">
+				<h1>Cours</h1>
+				<table>
+    				{% for cours in listeCours %}
+        			<tr>
+        				<td>
+        					<a href="{{ asset(cours.path) }}">{{ cours.name }}</a>
+        				</td>
+        				{% if is_granted("ROLE_PROFESSOR") %}
+							<td>
+        				 		<a href="{{ path('ath_cours_del',{id: cours.id}) }}">
+        							<span class="glyphicon glyphicon-trash"/>
+        						</a>
+        					</td>
+        				{% endif %}
+        			</tr>
+    				{% endfor %}
+				</table>
+			</div>
+			{% if is_granted("ROLE_PROFESSOR") %}
+			<div class="col-sm-5">
 				<div class="well">
 					<form action="{{ path('ath_cours_add') }}" method="post" {{ form_enctype(form) }}>
 						{# Les erreurs générales du formulaire. #}
@@ -33,25 +54,7 @@
     				</div>
 				{% endfor %}
 			</div>
-			<div class="col-sm-5">
-				<h1>Cours</h1>
-				<table>
-    				{% for cours in listeCours %}
-        			<tr>
-        				<td>
-        					<a href="{{ asset(cours.path) }}">{{ cours.name }}</a>
-        				</td>
-        				{% if is_granted("ROLE_PROFESSOR") %}
-							<td>
-        				 		<a href="{{ path('ath_cours_del',{id: cours.id}) }}">
-        							<i class="icon icon-trash"></i>
-        						</a>
-        					</td>
-        				{% endif %}
-        			</tr>
-    				{% endfor %}
-				</table>
-			</div>
+			{% endif %}
 {% endblock tabPaneCours %}
 {% block tabPaneExercices %}
 		<p>Pour se rendre aux exercices, cliquez <a href="{{path('ath_exercise_index')}}">ici</a>.</p>

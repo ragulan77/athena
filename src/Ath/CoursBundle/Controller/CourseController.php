@@ -28,6 +28,7 @@ class CourseController extends Controller
 		return $this->render(
 				'AthCoursBundle:Cours:upload.html.twig',
 				array(
+						'discipline' => $discipline,
 						'listeCours' =>$listeCours,
 						'form' => $form->createView()
 				)
