@@ -37,7 +37,13 @@ class Classe
    * )
    */
   private $name;
-  
+
+  /**
+   * @ORM\ManyToOne(targetEntity="Ath\CoursBundle\Entity\Level")
+   * @ORM\JoinColumn(nullable=false)
+   */
+  private $level;
+
   /**
    * Get id
    *
@@ -57,14 +63,14 @@ class Classe
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -72,5 +78,28 @@ class Classe
     }
     public function __toString(){
     	return $this->getName();
+    }
+
+    /**
+     * Set level
+     *
+     * @param \Ath\CoursBundle\Entity\Level $level
+     * @return Classe
+     */
+    public function setLevel(\Ath\CoursBundle\Entity\Level $level)
+    {
+        $this->level = $level;
+    
+        return $this;
+    }
+
+    /**
+     * Get level
+     *
+     * @return \Ath\CoursBundle\Entity\Level 
+     */
+    public function getLevel()
+    {
+        return $this->level;
     }
 }
