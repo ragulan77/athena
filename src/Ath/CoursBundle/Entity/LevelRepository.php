@@ -1,6 +1,6 @@
 <?php
 
-namespace Ath\ExerciseBundle\Entity;
+namespace Ath\CoursBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
