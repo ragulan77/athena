@@ -30,7 +30,7 @@ class Classe
    * @ORM\Column(name="name", type="string", length=255)
    * @Assert\NotBlank(message="Veuillez entrer un nom")
    * @Assert\Length(
-   * 		min = "4",
+   * 		min = "1",
    *      max = "255",
    *      minMessage = "Le nom doit faire au moins {{ limit }} caractères",
    *      maxMessage = "Le nom doit faire moins de {{ limit }} caractères"
@@ -76,9 +76,6 @@ class Classe
     {
         return $this->name;
     }
-    public function __toString(){
-    	return $this->getName();
-    }
 
     /**
      * Set level
@@ -89,17 +86,21 @@ class Classe
     public function setLevel(\Ath\CoursBundle\Entity\Level $level)
     {
         $this->level = $level;
-    
+
         return $this;
     }
 
     /**
      * Get level
      *
-     * @return \Ath\CoursBundle\Entity\Level 
+     * @return \Ath\CoursBundle\Entity\Level
      */
     public function getLevel()
     {
         return $this->level;
+    }
+
+    public function __toString(){
+      return (string) ($this->level->getName() . ' ' . $this->name);
     }
 }

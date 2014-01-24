@@ -26,4 +26,18 @@ ath_cours_disciplines:
     pattern: /disciplines
     defaults: { _controller: AthCoursBundle:Discipline:getDisciplines }
 
+ath_level_add:
+    pattern: /admin/niveaux
+    defaults: { _controller: AthCoursBundle:Level:levels}
 
+ath_level_edit:
+    pattern: /admin/niveau/editer/{id}
+    defaults: { _controller: AthCoursBundle:Level:edit}
+    requirements:
+       id: \d+
+
+ath_level_del:
+    pattern: /admin/niveau/supprimer/{id}
+    defaults: { _controller: AthCoursBundle:Level:delete}
+    requirements:
+       id: \d+
