@@ -5,8 +5,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Ath\CoursBundle\Form\Type\LevelFormType;
+use Ath\CoursBundle\Form\Type\DisciplineFormType;
 
 use Ath\CoursBundle\Entity\Level;
+use Ath\CoursBundle\Entity\Discipline;
 
 class LevelController extends Controller
 {
@@ -16,11 +18,17 @@ class LevelController extends Controller
       $em = $this->getDoctrine()->getManager();
 
       $level = new Level();
-      $form = $this->createForm(new LevelFormType(), $level);
+      $formLevel = $this->createForm(new LevelFormType(), $level);
+
+      $discipline = new Discipline();
+
+      $formDiscipline = $this->createForm(new DisciplineFormType(), $discipline);
+
+      $disciplines = $em->getRepository('AthCoursBundle:Discipline')->findAll();
 
       if ($request->getMethod() == 'POST') {
-        $form->bind($request);
-        if ($form->isValid()) {
+        $formLevel->bind($request);
+        if ($formLevel->isValid()) {
           $em->persist($level);
           $em->flush();
 
@@ -32,7 +40,11 @@ class LevelController extends Controller
       }
 
       $levels = $em->getRepository('AthCoursBundle:Level')->findAll();
-      return $this->render('AthCoursBundle:Level:level.html.twig', array('levels' => $levels, 'form' => $form->createView()));
+      return $this->render('AthCoursBundle:Level:level.html.twig', array('levels' => $levels,
+                                                                          'disciplines' => $disciplines,
+                                                                         'formLevel' => $formLevel->createView(),
+                                                                         'formDiscipline' => $formDiscipline->createView()
+                                                                         ));
   }
 
   public function deleteAction(Level $level)
@@ -73,6 +85,9 @@ class LevelController extends Controller
         }
       }
 
-      return $this->render('AthCoursBundle:Level:edit.html.twig', array('level' => $level, 'form' => $form->createView()));
+      return $this->render('AthCoursBundle:Level:edit.html.twig', array('level' => $level,
+                                                                        'form' => $form->createView(),
+                                                                        )
+      );
   }
 }

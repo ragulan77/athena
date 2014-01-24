@@ -9,40 +9,79 @@
 {% endblock breadcrumb %}
 
 {% block mainContainer %}
-      <div class="col-sm-4">
-        <div class="well">
-          <form action="{{ path('ath_level_add') }}" method="post" {{ form_enctype(form) }}>
-            {# Les erreurs générales du formulaire. #}
-            {{ form_errors(form) }}
-            <div>
-              {{ form_label(form.name, "Nom du niveau") }}
-              {{ form_errors(form.name) }}
-              {{ form_widget(form.name) }}
-            </div>
-            {{ form_rest(form) }}
-              <input type="submit" class="btn btn-primary" />
-            </form>
-        </div>
-
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash-notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-      </div>
-      <div class="col-sm-8">
-        <h1>Niveau</h1>
-        <ul>
-            {% for level in levels %}
-              <li>
-                <a href="{{ path('ath_level_edit',{id: level.id}) }}">{{ level.name }}</a>
-                <a href="{{ path('ath_level_del',{id: level.id}) }}">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </a>
-              </li>
-            {% endfor %}
-        </ul>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="well">
+        <form action="{{ path('ath_level_add') }}" method="post" {{ form_enctype(formLevel) }}>
+          {# Les erreurs générales du formulaire. #}
+          {{ form_errors(formLevel) }}
+          <div>
+            {{ form_label(formLevel.name, "Nom du niveau") }}
+            {{ form_errors(formLevel.name) }}
+            {{ form_widget(formLevel.name) }}
+          </div>
+          {{ form_rest(formLevel) }}
+            <input type="submit" class="btn btn-primary" />
+        </form>
       </div>
 
+      {% for flashMessage in app.session.flashbag.get('notice') %}
+          <div class="flash-notice">
+              {{ flashMessage }}
+          </div>
+      {% endfor %}
+    </div>
+    <div class="col-sm-8">
+      <h1>Niveaux</h1>
+      <ul>
+          {% for level in levels %}
+            <li>
+              <a href="{{ path('ath_level_edit',{id: level.id}) }}">{{ level.name }}</a>
+              <a href="{{ path('ath_level_del',{id: level.id}) }}">
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+            </li>
+          {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="well">
+        <form action="{{ path('ath_discipline_add') }}" method="post" {{ form_enctype(formDiscipline) }}>
+          {# Les erreurs générales du formulaire. #}
+          {{ form_errors(formDiscipline) }}
+          <div>
+            {{ form_label(formDiscipline.name, "Nom de la matière") }}
+            {{ form_errors(formDiscipline.name) }}
+            {{ form_widget(formDiscipline.name) }}
+          </div>
+          {{ form_rest(formDiscipline) }}
+          <br/>
+            <input type="submit" class="btn btn-primary" />
+          </form>
+      </div>
+
+      {% for flashMessage in app.session.flashbag.get('noticeDiscipline') %}
+          <div class="flash-notice">
+              {{ flashMessage }}
+          </div>
+      {% endfor %}
+    </div>
+    <div class="col-sm-8">
+      <h1>Matières</h1>
+      <ul>
+          {% for discipline in disciplines %}
+            <li>
+              {{ discipline.name }}
+              <a href="{{ path('ath_discipline_del_by_id',{id: discipline.id}) }}">
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+            </li>
+          {% endfor %}
+      </ul>
+    </div>
+  </div>
 {% endblock mainContainer %}
 

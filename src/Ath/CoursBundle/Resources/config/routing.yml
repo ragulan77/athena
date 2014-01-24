@@ -22,6 +22,12 @@ ath_discipline_del:
     pattern: /admin/supprimer/discipline
     defaults: { _controller: AthCoursBundle:ManageDiscipline:delete }
 
+ath_discipline_del_by_id:
+    pattern: /admin/supprimer/discipline/{id}
+    defaults: { _controller: AthCoursBundle:ManageDiscipline:deleteById }
+    requirements:
+        id: \d+
+
 ath_cours_disciplines:
     pattern: /disciplines
     defaults: { _controller: AthCoursBundle:Discipline:getDisciplines }
