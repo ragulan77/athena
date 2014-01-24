@@ -4,6 +4,7 @@ namespace Ath\CoursBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Ath\CoursBundle\Form\Type\LevelFormType;
 
 use Ath\CoursBundle\Entity\Level;
 
@@ -15,9 +16,7 @@ class LevelController extends Controller
       $em = $this->getDoctrine()->getManager();
 
       $level = new Level();
-      $form = $this->createFormBuilder($level)
-                    ->add('name', 'text')
-                    ->getForm();
+      $form = $this->createForm(new LevelFormType(), $level);
 
       if ($request->getMethod() == 'POST') {
         $form->bind($request);
@@ -58,9 +57,7 @@ class LevelController extends Controller
   public function editAction(Level $level)
   {
       $em = $this->getDoctrine()->getManager();
-      $form = $this->createFormBuilder($level)
-                    ->add('name', 'text')
-                    ->getForm();
+      $form = $this->createForm(new LevelFormType(), $level);
 
       $request = $this->get('request');
       if ($request->getMethod() == 'POST') {

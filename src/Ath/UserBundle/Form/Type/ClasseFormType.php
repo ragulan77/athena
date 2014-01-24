@@ -13,8 +13,9 @@ class ClasseFormType extends BaseType
         // add your custom field
         $builder->add('name');
         $builder->add('level', 'entity', array(
-                      'class' => 'AthCoursBundle:Level',
-                      'property' => 'name'));
+                      'class' => 'AthCoursBundle:Level'
+                      )
+        );
     }
 
     public function getName()
