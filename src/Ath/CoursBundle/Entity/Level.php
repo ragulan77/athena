@@ -28,6 +28,11 @@ class Level
      */
     private $name;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Ath\CoursBundle\Entity\Discipline", cascade={"persist"})
+     */
+    private $disciplines;
+
 
     /**
      * Get id
@@ -60,5 +65,38 @@ class Level
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add disciplines
+     *
+     * @param \Ath\CoursBundle\Entity\Discipline $disciplines
+     * @return Discipline
+     */
+    public function addDiscipline(\Ath\CoursBundle\Entity\Discipline $disciplines)
+    {
+        $this->disciplines[] = $disciplines;
+
+        return $this;
+    }
+
+    /**
+     * Remove disciplines
+     *
+     * @param \Ath\CoursBundle\Entity\Discipline $disciplines
+     */
+    public function removeDiscipline(\Ath\CoursBundle\Entity\Discipline $disciplines)
+    {
+        $this->disciplines->removeElement($disciplines);
+    }
+
+    /**
+     * Get disciplines
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDisciplines()
+    {
+        return $this->disciplines;
     }
 }
