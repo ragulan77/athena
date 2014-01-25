@@ -31,7 +31,7 @@ class Discipline
     private $name;
 
     public function __construct(){
-    	$this->classes = new \Doctrine\Common\Collections\ArrayCollection();
+
     }
 
     /**
