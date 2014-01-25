@@ -99,4 +99,9 @@ class Level
     {
         return $this->disciplines;
     }
+
+    public function __toString()
+    {
+        return (string) $this->name;
+    }
 }
