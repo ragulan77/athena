@@ -75,44 +75,37 @@ class RegistrationClasseController extends Controller
     	return $this->redirect($this->generateUrl('ath_classe_add'));
     }
 
-    public function editAction($id)
+    public function editAction(Classe $classe)
     {
     	$em = $this->getDoctrine()->getManager();
 
-    	//get classe by id pour rechercher les matieres et les eleves
-    	$classe = $em->getRepository('AthUserBundle:Classe')->findOneById($id);
+    	//get all student without class
+    	$listeStudentsWithoutClass= $em->getRepository('AthUserBundle:Student')->findBy(array( "classe" => null));
 
-    	//get all student by classe
-    	$listeEtudiants = $em->getRepository('AthUserBundle:Student')->findBy(array( "classe" => $classe));
+        $listStudentsWithCLass = $em->getRepository('AthUserBundle:Student')->findBy(array( "classe" => $classe));
 
     	//get all discipline by level
     	$listeMatieres = $classe->getLevel()->getDisciplines();
 
-    	$listeProfesseurs = $em->getRepository('AthUserBundle:Professor')->getProfessorsByClasseId($classe->getId());
+    	$listOfTeaching = $em->getRepository('AthCoursBundle:Teaching')->findBy(array("classe" => $classe));
 
-    	$student = new Student();
-    	$student->setClasse($classe);
-    	$formStudent = $this->createForm(new RegistrationStudentFormType('Ath\UserBundle\Entity\Student'), $student);
+        $professorsWithoutClass = $em->getRepository('AthUserBundle:Professor')->getProfessorsWithoutClass($classe);
 
     	$discipline = new Discipline();
 
     	$formDiscipline = $this->createForm(new DisciplineFormType('Ath\CoursBundle\Entity\Discipline'), $discipline);
 
-    	$professor = new Professor();
-    	$professor->addClasse($classe);
-    	$formProfessor = $this->createForm(new RegistrationProfessorFormType('Ath\UserBundle\Entity\Professor'), $professor);
 
     	return
     	$this->render(
     			'AthUserBundle:Registration:classe.edit.html.twig',
     			array(
-    					'listeEtudiants' =>$listeEtudiants,
+                        'listeStudentsWithoutClass' =>$listeStudentsWithoutClass,
+    					'listStudentsWithCLass' =>$listStudentsWithCLass,
     					'classe' => $classe,
     					'listeMatieres' =>$listeMatieres,
-    					'listeProfesseurs' =>$listeProfesseurs,
-    					'formStudent' => $formStudent->createView(),
-    					'formProfessor' => $formProfessor->createView(),
-    					'formDiscipline' => $formDiscipline->createView()
+    					'listOfTeaching' =>$listOfTeaching,
+                        'professorsWithoutClass' => $professorsWithoutClass
     			)
     	);
     }

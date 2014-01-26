@@ -28,7 +28,7 @@ class Professor extends MyBaseUser
    * @ORM\ManyToMany(targetEntity="Ath\CoursBundle\Entity\Discipline", cascade={"persist"})
    */
   private $matieres;
-  
+
   /**
    * @ORM\ManyToMany(targetEntity="Ath\UserBundle\Entity\Classe", cascade={"persist"})
    */
@@ -74,13 +74,13 @@ class Professor extends MyBaseUser
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-    
+
     public function __toString()
     {
     	return $this->getFirstname().' '.$this->getLastname();
@@ -95,7 +95,7 @@ class Professor extends MyBaseUser
     public function addMatiere(\Ath\CoursBundle\Entity\Discipline $matieres)
     {
         $this->matieres[] = $matieres;
-    
+
         return $this;
     }
 
@@ -112,10 +112,22 @@ class Professor extends MyBaseUser
     /**
      * Get matieres
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMatieres()
     {
         return $this->matieres;
+    }
+
+    public function toArray()
+    {
+      $disciplineArray = array();
+      foreach($this->matieres as $discipline)
+        array_push($disciplineArray, $discipline->getName());
+
+      $userArray = array('id' => $this->id,
+                         'disciplines' => $disciplineArray
+                         );
+      return $userArray;
     }
 }
