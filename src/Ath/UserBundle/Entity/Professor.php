@@ -119,6 +119,21 @@ class Professor extends MyBaseUser
         return $this->matieres;
     }
 
+    /**
+     *
+     * @param \Ath\CoursBundle\Entity\Discipline $matiere
+     * @return boolean
+     */
+    public function hasMatiere(\Ath\CoursBundle\Entity\Discipline $matiere)
+    {
+      foreach ($this->matieres as $discipline) {
+        if($discipline->getId() == $matiere->getId())
+          return true;
+      }
+
+      return false;
+    }
+
     public function toArray()
     {
       $disciplineArray = array();
@@ -126,6 +141,8 @@ class Professor extends MyBaseUser
         array_push($disciplineArray, $discipline->getName());
 
       $userArray = array('id' => $this->id,
+                          'firstname' => $this->getFirstname(),
+                          'lastname' => $this->getLastname(),
                          'disciplines' => $disciplineArray
                          );
       return $userArray;

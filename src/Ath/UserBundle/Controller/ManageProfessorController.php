@@ -21,12 +21,25 @@ class ManageProfessorController extends Controller
     		$em->remove($professor);
     		$em->flush();
     	}
-    	
+
     	$this->get('session')->getFlashBag()->add(
     			'noticeProfessor',
     			'Suppression réalisé avec succès !'
     	);
-    	
+
     	return new RedirectResponse($request->headers->get('referer'));
+    }
+
+    public function addProfessorToClass(Classe $classe, Professor $professor, $discipline)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $discipline = $em->getRepository('AthCoursBundle:Discipline')->findOneByName($discipline);
+
+        $teaching = new Teaching();
+        $teaching->setClasse($classe);
+        $teaching->setProfessor($professor);
+        $teaching->setDiscipline($discipline);
+
+        return new RedirectResponse($request->headers->get('referer'));
     }
 }

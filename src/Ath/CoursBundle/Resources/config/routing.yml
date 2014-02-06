@@ -47,3 +47,9 @@ ath_level_del:
     defaults: { _controller: AthCoursBundle:Level:delete}
     requirements:
        id: \d+
+
+ath_teaching_add:
+    pattern: /admin/teaching/add
+    defaults: { _controller: AthCoursBundle:Teaching:add }
+    requirements:
+        _method: POST

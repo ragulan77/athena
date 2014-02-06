@@ -84,12 +84,15 @@ class RegistrationClasseController extends Controller
 
         $listStudentsWithCLass = $em->getRepository('AthUserBundle:Student')->findBy(array( "classe" => $classe));
 
-    	//get all discipline by level
+    	//get disciplines by class
     	$listeMatieres = $classe->getLevel()->getDisciplines();
+        $disciplinesWithoutTeacher = $em->getRepository('AthCoursBundle:Discipline')->getDisciplinesWithoutTeacher($classe);
 
     	$listOfTeaching = $em->getRepository('AthCoursBundle:Teaching')->findBy(array("classe" => $classe));
 
         $professorsWithoutClass = $em->getRepository('AthUserBundle:Professor')->getProfessorsWithoutClass($classe);
+
+
 
     	$discipline = new Discipline();
 
@@ -100,11 +103,12 @@ class RegistrationClasseController extends Controller
     	$this->render(
     			'AthUserBundle:Registration:classe.edit.html.twig',
     			array(
-                        'listeStudentsWithoutClass' =>$listeStudentsWithoutClass,
-    					'listStudentsWithCLass' =>$listStudentsWithCLass,
+                        'listeStudentsWithoutClass' => $listeStudentsWithoutClass,
+    					'listStudentsWithCLass' => $listStudentsWithCLass,
     					'classe' => $classe,
-    					'listeMatieres' =>$listeMatieres,
-    					'listOfTeaching' =>$listOfTeaching,
+    					'listeMatieres' => $listeMatieres,
+                        'disciplinesWithoutTeacher' => $disciplinesWithoutTeacher,
+    					'listOfTeaching' => $listOfTeaching,
                         'professorsWithoutClass' => $professorsWithoutClass
     			)
     	);

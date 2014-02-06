@@ -12,13 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class DisciplineRepository extends EntityRepository
 {
-	/*public function getDisciplinesByClasseId($id)
-	{
-		$qb = $this->createQueryBuilder('d')
-		->join('d.classes', 'c','WITH','c.id = :id')
-		->setParameter('id',$id);
 
-		return $qb->getQuery()
-		->getResult();
-	}*/
+  // retourne les matières qui n'ont pas de prof, pour une classe donnée
+	public function getDisciplinesWithoutTeacher(\Ath\UserBundle\Entity\Classe $classe){
+    $query = $this->_em->createQuery("SELECT d FROM Ath\CoursBundle\Entity\Discipline d WHERE d NOT IN (
+                              SELECT discipline FROM Ath\CoursBundle\Entity\Teaching teaching JOIN teaching.discipline discipline WHERE teaching.classe = ?1
+                              )");
+    $query->setParameter(1, $classe);
+    return $query->getResult();
+  }
 }

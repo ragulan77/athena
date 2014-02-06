@@ -83,14 +83,16 @@
     			<h3>Ajout de professeur</h3>
     		</div>
     		<div class="modal-body">
-       			<form>
-                    <select name="professor" onchange="setDiscipline(this);">
-                    {% for professor in professorsWithoutClass %}
-                        <option value="{{professor.id}}">{{professor}}</option>
+       			<form action="{{ path('ath_teaching_add') }}" method="post">
+                    <select name="discipline"  id="discipline" onchange="setProfessors();">
+                    {% for discipline in disciplinesWithoutTeacher %}
+                        <option value="{{discipline.id}}">{{discipline.name}}</option>
                     {% endfor %}
                     </select>
 
-                    <select name="discipline" id="discipline"></select>
+                    <select name="professor" id="professor"></select>
+                    <input type="hidden" name="classe" value="{{classe.id}}" />
+                    <input type="submit" value="valider"/>
                 </form>
     		</div>
     		<div class="modal-footer">
@@ -256,21 +258,23 @@
         return false;
     });
 
-    function setDiscipline() {
+    function setProfessors() {
        var cpt = null;
-       var selectedProfessorId = $('select[name="professor"]').val();
+       var selectedDisciplineId = $('select[name="discipline"]').val();
        var professors = new Array();
 
        {% for professor in professorsWithoutClass %}
-        professors.push({{ professor.toArray|json_encode()|raw }});
-        if(professors[{{loop.index0}}].id == selectedProfessorId)
-            cpt = {{loop.index0}};
+            {% for discipline in professor.matieres %}
+                if( {{discipline.id}} == selectedDisciplineId )
+                    professors.push({{ professor.toArray|json_encode()|raw }});
+            {% endfor %}
        {% endfor %}
 
-        var nbDiscipline = professors[cpt].disciplines.length;
-        $("#discipline option").remove();
-        for(var i=0; i < nbDiscipline; i++)
-            $('<option value="'+ professors[cpt].disciplines[i] +'">'+ professors[cpt].disciplines[i] +'</option>').appendTo("#discipline");
+        var nbProfessors = professors.length;
+        $("#professor option").remove();
+        console.log(professors);
+        for(var i=0; i < nbProfessors; i++)
+            $('<option value="'+ professors[i].id +'">'+ professors[i].firstname +'</option>').appendTo("#professor");
 
 
     }
