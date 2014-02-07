@@ -17,8 +17,9 @@ class DisciplineRepository extends EntityRepository
 	public function getDisciplinesWithoutTeacher(\Ath\UserBundle\Entity\Classe $classe){
     $query = $this->_em->createQuery("SELECT d FROM Ath\CoursBundle\Entity\Discipline d WHERE d NOT IN (
                               SELECT discipline FROM Ath\CoursBundle\Entity\Teaching teaching JOIN teaching.discipline discipline WHERE teaching.classe = ?1
-                              )");
+                              ) AND d IN (SELECT disciplines FROM Ath\CoursBundle\Entity\Level level JOIN level.disciplines disciplines WHERE level = ?2)");
     $query->setParameter(1, $classe);
+    $query->setParameter(2, $classe->getLevel());
     return $query->getResult();
   }
 }

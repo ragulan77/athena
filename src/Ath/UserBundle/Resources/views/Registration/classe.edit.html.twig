@@ -84,13 +84,16 @@
     		</div>
     		<div class="modal-body">
        			<form action="{{ path('ath_teaching_add') }}" method="post">
-                    <select name="discipline"  id="discipline" onchange="setProfessors();">
+                    <select name="discipline"  id="discipline" onchange="setProfessors();" required>
                     {% for discipline in disciplinesWithoutTeacher %}
+                        {% if loop.first %}
+                        <option value=""></option>
+                        {% endif %}
                         <option value="{{discipline.id}}">{{discipline.name}}</option>
                     {% endfor %}
                     </select>
 
-                    <select name="professor" id="professor"></select>
+                    <select name="professor" id="professor" required></select>
                     <input type="hidden" name="classe" value="{{classe.id}}" />
                     <input type="submit" value="valider"/>
                 </form>
@@ -168,15 +171,16 @@
 	<div class="tab-pane" id="professors">
 		<h3>Professeurs</h3>
 		<form action="{{ path('ath_professor_del') }}" method="post">
-			<select id="listProfesseur" name="listProfesseur" class="form-control" multiple="multiple" rows=2>
+			<select id="listProfesseur" name="listProfesseur[]" class="form-control" multiple="multiple" rows=2>
 				{% for teaching in listOfTeaching %}
-    				<option value={{ teaching.id }}
+    				<option value={{ teaching.professor.id }}
     				{% if loop.first %}
     					selected="selected"
     				{% endif %}
-    				>{{ teaching.professor }} {{teaching.discipline}}</option>
+    				>{{ teaching.professor }} - {{teaching.discipline}}</option>
 				{% endfor %}
 			</select>
+            <input type="hidden" name="classe" value="{{classe.id}}" />
 			<br/>
 			<div class="btn-group">
 		  		<button type="button" class="btn btn-default" data-toggle="modal" href="#modalAjoutProfesseur">+</button>

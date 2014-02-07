@@ -12,13 +12,15 @@ class ManageProfessorController extends Controller
 {
     public function deleteAction(Request $request)
     {
-    	$listeIdProfessor = $request->request->all();
-    	$professor = new Professor();
-    	foreach ($listeIdProfessor as $id){
-    		$em = $this->getDoctrine()->getManager();
-    		//get all professor by classe
-    		$professor = $em->getRepository('AthUserBundle:Professor')->findOneById($id);
-    		$em->remove($professor);
+        $em = $this->getDoctrine()->getManager();
+    	$listIdProfessor = $request->request->get('listProfesseur');
+
+        $classe = $em->getRepository('AthUserBundle:Classe')->findOneById($request->request->get('classe'));
+    	foreach ($listIdProfessor as $id){
+            $professor = $em->getRepository('AthUserBundle:Professor')->findOneById($id);
+    		//get all teaching
+    		$teaching = $em->getRepository('AthCoursBundle:Teaching')->findOneBy(array('professor' => $professor, 'classe' => $classe));
+    		$em->remove($teaching);
     		$em->flush();
     	}
 
