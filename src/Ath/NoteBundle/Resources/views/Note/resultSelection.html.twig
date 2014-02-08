@@ -180,7 +180,7 @@
 	    			</tbody>
 	    </table>
 		
-	   	{% for flashMessage in app.session.flashbag.get('noticeNote') %}
+	   	{% for flashMessage in app.session.flashbag.get('noticeNote1') %}
     		<div class="flash-notice">
     			<div class="alert alert-success">
         			{{ flashMessage }}
@@ -230,7 +230,7 @@
 	    			</tbody>
 	    </table>
 		
-	    {% for flashMessage in app.session.flashbag.get('noticeNote') %}
+	    {% for flashMessage in app.session.flashbag.get('noticeNote2') %}
     		<div class="flash-notice">
     			<div class="alert alert-success">
         			{{ flashMessage }}
@@ -279,7 +279,7 @@
 	    				</tr>
 	    			</tbody>
 	    </table>
-	    {% for flashMessage in app.session.flashbag.get('noticeNote') %}
+	    {% for flashMessage in app.session.flashbag.get('noticeNote3') %}
     		<div class="flash-notice">
     			<div class="alert alert-success">
         			{{ flashMessage }}

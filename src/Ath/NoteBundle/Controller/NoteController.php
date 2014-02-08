@@ -192,9 +192,9 @@ class NoteController extends Controller
 		if ($form->isValid()) {
 			$em->persist($newNote);
 			$em->flush();
-
+			
 			$this->get('session')->getFlashBag()->add(
-					'noticeNote',
+					'noticeNote'.$newNote->getTrimestre(),
 					'Ajout de la note réalisé avec succès !'
 			);
 
