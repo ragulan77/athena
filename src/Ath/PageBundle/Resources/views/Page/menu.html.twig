@@ -1,7 +1,7 @@
 <table class="table">
 {# si listeClasses est iterable, l user connecté est n'est pas un STUDENT#}
 {% if is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_PROFESSOR') %}
-	{% if listeClasses is not null %}
+	{% if listeClasses is not empty %}
 		{% for classe in listeClasses %}
 			<tr>
 				<th>
