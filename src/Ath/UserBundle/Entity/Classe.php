@@ -11,7 +11,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table
  * @ORM\Entity(repositoryClass="Ath\UserBundle\Entity\ClasseRepository")
- * @UniqueEntity(fields="name", message="Cette classe existe déjà...")
  */
 class Classe
 {

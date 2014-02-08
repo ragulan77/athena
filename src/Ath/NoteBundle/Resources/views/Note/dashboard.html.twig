@@ -179,10 +179,10 @@ $('#classeOptions').on('change',function() {
 $('#editNoteStudentForm').submit(function(e) {
 	var idMatiere = $('#disciplineOptions').find(":selected").val();
 	var idEtudiant= $('input[name=studentChoice]:checked', '#editNoteStudentForm').val()
-
-	var generatedUrl = Routing.generate('ath_note_student_show',{idMatiere: idMatiere,idEtudiant: idEtudiant});
-	$('#editNoteStudentForm').attr('action',generatedUrl);
-
+	if (idMatiere != "-------"){
+		var generatedUrl = Routing.generate('ath_note_student_show',{idMatiere: idMatiere,idEtudiant: idEtudiant});
+		$('#editNoteStudentForm').attr('action',generatedUrl);
+	}
 });
 </script>
 {% endblock footer_js %}
