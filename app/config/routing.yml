@@ -1,3 +1,7 @@
+ath_note:
+    resource: "@AthNoteBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ath_cours:
     resource: "@AthCoursBundle/Resources/config/routing.yml"
     prefix:   /

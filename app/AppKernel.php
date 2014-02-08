@@ -23,7 +23,8 @@ class AppKernel extends Kernel
             new Ath\PageBundle\AthPageBundle(),
         	new Ath\CoursBundle\AthCoursBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle()
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Ath\NoteBundle\AthNoteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

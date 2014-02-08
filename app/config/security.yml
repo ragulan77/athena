@@ -41,3 +41,5 @@ security:
 
     access_control:
         #- { path: ^/admin, roles: ROLE_ADMINISTRATOR }
+        #- { path: /note/professor^, roles: ROLE_PROFESSOR, ROLE_ADMINISTRATOR }
+        #- { path: /note/student^, roles: ROLE_STUDENT }
