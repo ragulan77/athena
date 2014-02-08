@@ -42,11 +42,6 @@ class ExerciseFile
      */
     private $name;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Ath\CoursBundle\Entity\Level")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $level;
 
     /**
      * @ORM\ManyToOne(targetEntity="Ath\CoursBundle\Entity\Chapter")
@@ -132,29 +127,6 @@ class ExerciseFile
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set level
-     *
-     * @param \Ath\CoursBundle\Entity\Level $level
-     * @return ExerciseFile
-     */
-    public function setLevel(\Ath\CoursBundle\Entity\Level $level)
-    {
-        $this->level = $level;
-
-        return $this;
-    }
-
-    /**
-     * Get level
-     *
-     * @return \Ath\CoursBundle\Entity\Level
-     */
-    public function getLevel()
-    {
-        return $this->level;
     }
 
     /**
