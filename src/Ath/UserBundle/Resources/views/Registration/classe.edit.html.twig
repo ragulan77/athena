@@ -14,157 +14,183 @@
 <!-- Modal ajout d'étudiant -->
 <div class="row">
 	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutEtudiant">
-        <form action="{{ path('student_registration') }}" method="post" {{ form_enctype(formStudent) }} id="addStudentForm">
-            <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>Ajout d'étudiant</h3>
-            </div>
-            <div class="modal-body">
-                {{ form_widget(formStudent) }}
-                {{ form_rest(formStudent) }}
-            </div>
-            <div class="modal-footer">
-                <button href="#" class="btn" data-dismiss="modal">Fermer</button>
+
+        <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Ajout d'étudiant</h3>
+        </div>
+        <div class="modal-body">
+            {% if listeStudentsWithoutClass is not empty %}
+            <form action="{{ path('ath_students_add_class', {id: classe.id}) }}" method="post" id="addStudentsForm">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Séléctionner</th>
+                    </tr>
+                    {% for student in listeStudentsWithoutClass %}
+                    <tr>
+                        <td>{{student.lastname}}</td>
+                        <td>{{student.firstname}}</td>
+                        <td>
+                            <input type="checkbox" name="students_ids[]" value="{{student.id}}">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
                 <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+            {% else %}
+            <div class="alert alert-danger">
+                <p>Tous les étudiants ont une classe. Si vous souhaitez changer la classe d'un étudiant, retirez le d'abord de sa classe d'origine, avant d'essayer
+                    de le mettre dans une autre classe.
+                </p>
             </div>
-        </form>
+            {% endif %}
+        </div>
+        <div class="modal-footer">
+            <button href="#" class="btn" data-dismiss="modal">Fermer</button>
+        </div>
 	</div>
 </div>
 
 <!-- Modal ajout de matière -->
 <div class="row">
 	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutMatiere">
-		<form action="{{ path('ath_discipline_add') }}" method="post" {{ form_enctype(formDiscipline) }} id="addDisciplineForm">
     		<div class="modal-header">
     			<button type="button" class="close" data-dismiss="modal">×</button>
     			<h3>Ajout de matière</h3>
     		</div>
     		<div class="modal-body">
-    			{{ form_widget(formDiscipline) }}
-    			{{ form_rest(formDiscipline) }}
+
     		</div>
     		<div class="modal-footer">
     			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
     			<button type="submit" class="btn btn-primary">Ajouter</button>
     		</div>
-    	</form>
 	</div>
 </div>
+
 <!-- Modal ajout de professeur -->
 <div class="row">
 	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutProfesseur">
-		<form action="{{ path('professor_registration') }}" method="post" {{ form_enctype(formProfessor) }} id="addProfessorForm">
     		<div class="modal-header">
     			<button type="button" class="close" data-dismiss="modal">×</button>
     			<h3>Ajout de professeur</h3>
     		</div>
     		<div class="modal-body">
-    			{{ form_widget(formProfessor) }}
-    			{{ form_rest(formProfessor) }}
+       			<form action="{{ path('ath_teaching_add') }}" method="post">
+                    <select name="discipline"  id="discipline" onchange="setProfessors();" required>
+                    {% for discipline in disciplinesWithoutTeacher %}
+                        {% if loop.first %}
+                        <option value=""></option>
+                        {% endif %}
+                        <option value="{{discipline.id}}">{{discipline.name}}</option>
+                    {% endfor %}
+                    </select>
+
+                    <select name="professor" id="professor" required></select>
+                    <input type="hidden" name="classe" value="{{classe.id}}" />
+                    <input type="submit" value="valider"/>
+                </form>
     		</div>
     		<div class="modal-footer">
     			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
     			<button type="submit" class="btn btn-primary">Ajouter</button>
     		</div>
-    	</form>
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-lg-3">
-			<div class="well">
-    			<h3>Etudiants</h3>
-    			<form action="{{ path('ath_student_del') }}" method="post">
-    				<select id="listEtudiant" name="listEtudiant" class="form-control" multiple="multiple" rows=2>
-    					{% for etudiant in listeEtudiants %}
-        					<option value={{ etudiant.id }}
-        					{% if loop.first %}
-        						selected="selected"
-        					{% endif %}
-        					>{{ etudiant}}</option>
-						{% endfor %}
-    				</select>
-    				<br/>
-     				<div class="btn-group">
-				  		<button type="button" class="btn btn-default" data-toggle="modal" href="#modalAjoutEtudiant">+</button>
-				  		<button type="submit" class="btn btn-default">-</button>
-					</div>
-				</form>
+
+<!-- debut tab content -->
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+    <li><a href="#students" data-toggle="tab">Etudiants</a></li>
+    <li><a href="#disciplines" data-toggle="tab">Matières</a></li>
+    <li><a href="#professors" data-toggle="tab">Professeurs</a></li>
+</ul>
+
+<div class="tab-content">
+	<div class="tab-pane active" id="students">
+		<h3>Etudiants</h3>
+		<form action="{{ path('ath_student_del') }}" method="post">
+			<select id="listEtudiant" name="listEtudiant" class="form-control" multiple="multiple" rows=2>
+				{% for etudiant in listStudentsWithCLass %}
+					<option value={{ etudiant.id }}
+					{% if loop.first %}
+						selected="selected"
+					{% endif %}
+					>{{ etudiant}}</option>
+				{% endfor %}
+			</select>
+			<br/>
+				<div class="btn-group">
+		  		<button type="button" class="btn btn-default" data-toggle="modal" href="#modalAjoutEtudiant">+</button>
+		  		<button type="submit" class="btn btn-default">-</button>
 			</div>
-			{% for flashMessage in app.session.flashbag.get('notice') %}
-    				<div class="flash-notice">
-    					<div class="alert alert-success">
-        					{{ flashMessage }}
-        				</div>
-    				</div>
-			{% endfor %}
-	</div>
-	<div class="col-lg-3">
-		<div class="well">
-    		<h3>Matières</h3>
-    		<form action="{{ path('ath_discipline_del') }}" method="post">
-    			<select id="listMatiere" name="listMatiere" class="form-control" multiple="multiple" rows=2>
-    				{% for matiere in listeMatieres %}
-        				<option value={{ matiere.id }}
-        				{% if loop.first %}
-        					selected="selected"
-        				{% endif %}
-        				>{{ matiere }}</option>
-					{% endfor %}
-    			</select>
-    			<br/>
-    			<div class="btn-group">
-					<button type="button" class="btn btn-default" data-toggle="modal" href="#modalAjoutMatiere">+</button>
-					<button type="submit" class="btn btn-default">-</button>
-				</div>
-			</form>
-		</div>
-		{% for flashMessage in app.session.flashbag.get('noticeDiscipline') %}
-    				<div class="flash-notice">
-    					<div class="alert alert-success">
-        					{{ flashMessage }}
-        				</div>
-    				</div>
-		{% endfor %}
-	</div>
-	<div class="col-lg-3">
-		<div class="well">
-    		<h3>Professeurs</h3>
-    		<form action="{{ path('ath_professor_del') }}" method="post">
-    			<select id="listProfesseur" name="listProfesseur" class="form-control" multiple="multiple" rows=2>
-    				{% for professeur in listeProfesseurs %}
-        				<option value={{ professeur.id }} 
-        				{% if loop.first %}
-        					selected="selected"
-        				{% endif %}
-        				>{{ professeur }}</option>
-					{% endfor %}
-    			</select>
-    			<br/>
-    			<div class="btn-group">
-			  		<button type="button" class="btn btn-default" data-toggle="modal" href="#modalAjoutProfesseur">+</button>
-			  		<button type="submit" class="btn btn-default">-</button>
-				</div>
-			</form>
-		</div>
-		{% for flashMessage in app.session.flashbag.get('noticeProfessor') %}
-    				<div class="flash-notice">
-    					<div class="alert alert-success">
-        					{{ flashMessage }}
-        				</div>
-    				</div>
-		{% endfor %}
-	</div>
-</div><!-- row -->
-{% endblock mainContainer %}
 
-{% block javascripts %}
-<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+		</form>
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="flash-notice">
+                	<div class="alert alert-success">
+                    	{{ flashMessage }}
+                    </div>
+                </div>
+        {% endfor %}
+	</div>
 
+
+	<div class="tab-pane" id="disciplines">
+		<h3>Matières</h3>
+
+				{% for matiere in listeMatieres %}
+
+                    {% if matiere in disciplinesWithoutTeacher %}
+                    {{ matiere }} <sup><span class="label label-danger">Sans professeur</span></sup><br/>
+                    {% else %}
+                    {{ matiere }} <sup><span class="label label-success">Possède professeur</span></sup><br/>
+                    {% endif %}
+				{% endfor %}
+
+			<br/>
+	</div>
+
+
+
+	<div class="tab-pane" id="professors">
+		<h3>Professeurs</h3>
+		<form action="{{ path('ath_professor_del') }}" method="post">
+			<select id="listProfesseur" name="listProfesseur[]" class="form-control" multiple="multiple" rows=2>
+				{% for teaching in listOfTeaching %}
+    				<option value={{ teaching.professor.id }}
+    				{% if loop.first %}
+    					selected="selected"
+    				{% endif %}
+    				>{{ teaching.professor }} - {{teaching.discipline}}</option>
+				{% endfor %}
+			</select>
+            <input type="hidden" name="classe" value="{{classe.id}}" />
+			<br/>
+			<div class="btn-group">
+		  		<button type="button" class="btn btn-default" data-toggle="modal" href="#modalAjoutProfesseur">+</button>
+		  		<button type="submit" class="btn btn-default">-</button>
+			</div>
+		</form>
+        {% for flashMessage in app.session.flashbag.get('noticeProfessor') %}
+            <div class="flash-notice">
+            	<div class="alert alert-success">
+                	{{ flashMessage }}
+                </div>
+            </div>
+        {% endfor %}
+	</div>
+
+</div> <!-- fin tab content -->
+
+{% block styles %}
 <script type="text/javascript">
-    $('#addStudentForm').submit(function(e) {
-        var generatedUrl = Routing.generate('student_registration');
+    $('#addStudentsForm').submit(function(e) {
+        var generatedUrl = Routing.generate('ath_students_add_class');
         $.ajax({
             type: "POST",
             url: generatedUrl,
@@ -226,5 +252,27 @@
         });
         return false;
     });
+
+    function setProfessors() {
+       var cpt = null;
+       var selectedDisciplineId = $('select[name="discipline"]').val();
+       var professors = new Array();
+
+       {% for professor in professorsWithoutClass %}
+            {% for discipline in professor.matieres %}
+                if( {{discipline.id}} == selectedDisciplineId )
+                    professors.push({{ professor.toArray|json_encode()|raw }});
+            {% endfor %}
+       {% endfor %}
+
+        var nbProfessors = professors.length;
+        $("#professor option").remove();
+        console.log(professors);
+        for(var i=0; i < nbProfessors; i++)
+            $('<option value="'+ professors[i].id +'">'+ professors[i].firstname +'</option>').appendTo("#professor");
+
+
+    }
 </script>
-{% endblock javascripts %}
+{% endblock styles %}
+{% endblock mainContainer %}

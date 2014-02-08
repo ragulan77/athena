@@ -3,7 +3,7 @@
 namespace Ath\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-
+use Ath\UserBundle\Entity\Classe;
 /**
  * ProfessorRepository
  *
@@ -17,8 +17,16 @@ class ProfessorRepository extends EntityRepository
 		$qb = $this->createQueryBuilder('p')
 		->join('p.classes', 'c','WITH','c.id = :id')
 		->setParameter('id',$id);
-	
+
 		return $qb->getQuery()
 		->getResult();
 	}
+
+  public function getProfessorsWithoutClass(Classe $classe){
+    $query = $this->_em->createQuery("SELECT p FROM Ath\UserBundle\Entity\Professor p WHERE p NOT IN (
+                              SELECT prof FROM Ath\CoursBundle\Entity\Teaching teaching JOIN teaching.professor prof WHERE teaching.classe = ?1
+                              )");
+    $query->setParameter(1, $classe);
+    return $query->getResult();
+  }
 }

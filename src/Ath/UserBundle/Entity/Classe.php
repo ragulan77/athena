@@ -30,14 +30,20 @@ class Classe
    * @ORM\Column(name="name", type="string", length=255)
    * @Assert\NotBlank(message="Veuillez entrer un nom")
    * @Assert\Length(
-   * 		min = "4",
+   * 		min = "1",
    *      max = "255",
    *      minMessage = "Le nom doit faire au moins {{ limit }} caractères",
    *      maxMessage = "Le nom doit faire moins de {{ limit }} caractères"
    * )
    */
   private $name;
-  
+
+  /**
+   * @ORM\ManyToOne(targetEntity="Ath\CoursBundle\Entity\Level")
+   * @ORM\JoinColumn(nullable=false)
+   */
+  private $level;
+
   /**
    * Get id
    *
@@ -57,20 +63,44 @@ class Classe
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
+
+    /**
+     * Set level
+     *
+     * @param \Ath\CoursBundle\Entity\Level $level
+     * @return Classe
+     */
+    public function setLevel(\Ath\CoursBundle\Entity\Level $level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * Get level
+     *
+     * @return \Ath\CoursBundle\Entity\Level
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
     public function __toString(){
-    	return $this->getName();
+      return (string) ($this->level->getName() . ' ' . $this->name);
     }
 }

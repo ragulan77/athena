@@ -1,0 +1,26 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Exercices{% endblock title%}
+
+{% block javascripts %}
+  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+  <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock javascripts %}
+
+{% block mainContainer %}
+  <div ng-app="myApp">
+    <div id="views" ng-view>
+    </div>
+  </div>
+{% endblock mainContainer %}
+
+{% block footer_js %}
+  {% javascripts
+    '@AthExerciseBundle/Resources/angularjs/lib/angular/angular.js'
+    '@AthExerciseBundle/Resources/angularjs/lib/angular/angular-route.js'
+    '@AthExerciseBundle/Resources/angularjs/lib/angular/angular-resource.js'
+    '@AthExerciseBundle/Resources/angularjs/js/*' %}
+    <script src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock footer_js %}
+

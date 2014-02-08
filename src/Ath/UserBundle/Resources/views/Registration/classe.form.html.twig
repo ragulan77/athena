@@ -23,7 +23,7 @@
 		    			<input type="submit" class="btn btn-primary" />
 		  			</form>
 				</div>
-				
+
 				{% for flashMessage in app.session.flashbag.get('notice') %}
     				<div class="flash-notice">
         				{{ flashMessage }}
@@ -35,7 +35,7 @@
 				<ul>
     				{% for classe in listeClasse %}
         			<li>
-        				<a href="{{ path('ath_classe_edit',{id: classe.id}) }}">{{ classe.name }}</a> 
+        				<a href="{{ path('ath_classe_edit',{id: classe.id}) }}">{{ classe }}</a>
         				<a href="{{ path('ath_classe_del',{id: classe.id}) }}">
         					<span class="glyphicon glyphicon-trash"></span>
         				</a>

@@ -10,6 +10,9 @@
 
     <title>Athena - {% block title %}{% endblock title %}</title>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+    {% block javascripts %} {% endblock javascripts %}
+
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -30,7 +33,7 @@
 	}
 	</style>
 	{% block styles %}{% endblock styles %}
-	
+
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,7 +41,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-    
+
 
 
   </head>
@@ -124,7 +127,7 @@
 			                            </table>
 			                        </div>
 			                    </div>
-			                </div>	                
+			                </div>
 			                <div class="panel panel-default">
 			                    <div class="panel-heading">
 			                        <h4 class="panel-title">
@@ -278,11 +281,21 @@
 			                                		<span class="glyphicon glyphicon-plus"></span><a href="{{ path('administrator_registration') }}">Créer administrateur</a>
 			                                	</td>
 			                                </tr>
+                                      <tr>
+                                        <td>
+                                          <span class="glyphicon glyphicon-cog"></span><a href="{{ path('ath_level_add') }}">Gérer les niveaux/matières</a>
+                                        </td>
+                                      </tr>
 			                                <tr>
 			                                	<td>
 			                                		<span class="glyphicon glyphicon-cog"></span><a href="{{ path('ath_classe_show') }}">Gérer les classes</a>
 			                                	</td>
 			                                </tr>
+                                      <tr>
+                                        <td>
+                                          <span class="glyphicon glyphicon-cog"></span><a href="{{ path('ath_administration_users') }}">Gérer les utilisateurs</a>
+                                        </td>
+                                      </tr>
 			                            </table>
 			                        </div>
 			                    </div>
@@ -290,8 +303,8 @@
 			            </div>
 			        </div>
 					<!-- Fin du Menu deroulant -->
-					
-					
+
+
                     <div class="col-xs-12 col-sm-9">
                     	<!-- Breadcrumb -->
                     	<div class="row">
@@ -302,7 +315,7 @@
 							{% endblock breadcrumb %}
                     	</div>
                     	<!-- Fin du breadcrumb -->
-                    	
+
                     	<div class="row">
                     	<div id="mainContainer">
                     		{% block mainContainer %}
@@ -320,7 +333,7 @@
 							            <img src="http://placehold.it/260x180" alt="">
 							        </a>
 							      </div>
-							      <div class="col-sm-6">      
+							      <div class="col-sm-6">
 							        <p>
 							          Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari conclusionemque, ad nobis propriae quaerendum sea.
 							        </p>
@@ -331,13 +344,13 @@
 							      <div class="col-sm-8">
 							        <p></p>
 							        <p>
-							          <i class="glyphicon glyphicon-user"></i> by <a href="#">John</a> 
+							          <i class="glyphicon glyphicon-user"></i> by <a href="#">John</a>
 							          | <i class="glyphicon glyphicon-calendar"></i> Sept 16th, 2012
 							          | <i class="glyphicon glyphicon-comment"></i> <a href="#">3 Comments</a>
 							          | <i class="glyphicon glyphicon-share"></i> <a href="#">39 Shares</a>
-							          | <i class="glyphicon glyphicon-tags"></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a> 
-							          <a href="#"><span class="label label-info">Bootstrap</span></a> 
-							          <a href="#"><span class="label label-info">UI</span></a> 
+							          | <i class="glyphicon glyphicon-tags"></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a>
+							          <a href="#"><span class="label label-info">Bootstrap</span></a>
+							          <a href="#"><span class="label label-info">UI</span></a>
 							          <a href="#"><span class="label label-info">growth</span></a>
 							        </p>
 							      </div>
@@ -356,7 +369,7 @@
 							            <img src="http://placehold.it/260x180" alt="">
 							        </a>
 							      </div>
-							      <div class="col-sm-6">      
+							      <div class="col-sm-6">
 							        <p>
 							          Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari conclusionemque, ad nobis propriae quaerendum sea.
 							        </p>
@@ -367,13 +380,13 @@
 							      <div class="col-sm-8">
 							        <p></p>
 							        <p>
-							          <i class="glyphicon glyphicon-user"></i> by <a href="#">John</a> 
+							          <i class="glyphicon glyphicon-user"></i> by <a href="#">John</a>
 							          | <i class="glyphicon glyphicon-calendar"></i> Sept 16th, 2012
 							          | <i class="glyphicon glyphicon-comment"></i> <a href="#">3 Comments</a>
 							          | <i class="glyphicon glyphicon-share"></i> <a href="#">39 Shares</a>
-							          | <i class="glyphicon glyphicon-tags"></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a> 
-							          <a href="#"><span class="label label-info">Bootstrap</span></a> 
-							          <a href="#"><span class="label label-info">UI</span></a> 
+							          | <i class="glyphicon glyphicon-tags"></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a>
+							          <a href="#"><span class="label label-info">Bootstrap</span></a>
+							          <a href="#"><span class="label label-info">UI</span></a>
 							          <a href="#"><span class="label label-info">growth</span></a>
 							        </p>
 							      </div>
@@ -385,7 +398,7 @@
                     </div>
                 </div>
                 {% endblock container %}
-      
+
 
     </div><!--/.container-->
 <hr>
@@ -398,6 +411,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/offcanvas.js') }}"></script>
+
     <!-- Javascript gif de chargement -->
     <script type="text/javascript">
 		$(document).on('ajaxSend', function(){
@@ -406,6 +420,9 @@
 	    	$("#spinner").hide();
 		});
 	</script>
-	{% block javascripts %} {% endblock javascripts %}
+
+
+  {% block footer_js %}{% endblock footer_js %}
+
   </body>
 </html>

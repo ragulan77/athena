@@ -47,7 +47,7 @@
 		    			<input type="submit" class="btn btn-primary" />
 		  			</form>
 				</div>
-				
+
 				{% for flashMessage in app.session.flashbag.get('notice') %}
     				<div class="flash-notice">
         				{{ flashMessage }}
@@ -57,5 +57,5 @@
 			{% endif %}
 {% endblock tabPaneCours %}
 {% block tabPaneExercices %}
-		Exercices a ajouter
+		<p>Pour se rendre aux exercices, cliquez <a href="{{path('ath_exercise_index')}}">ici</a>.</p>
 {% endblock tabPaneExercices %}

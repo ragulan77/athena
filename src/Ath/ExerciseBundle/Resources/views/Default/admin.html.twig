@@ -1,0 +1,13 @@
+<h1>Administration des exercices</h1>
+<p>Choisir le type de question :</p>
+<select ng-model="exerciseType">
+{% for service in services %}
+  <option value="{{service}}">
+    {{service}}
+  </option>
+{% endfor %}
+</select>
+
+<p>
+  <a href="#/exercise/create/{[{exerciseType}]}">Créer un exercice</a>
+</p>

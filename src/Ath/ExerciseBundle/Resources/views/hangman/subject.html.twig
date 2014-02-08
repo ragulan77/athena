@@ -1,0 +1,17 @@
+<div ng-controller="HangmanCtrl">
+  nombre d'essaies : {[{nbWrongAnswers}]}/3
+
+  <div>
+    <h1>Jeu de pendu</h1>
+    <h3>{[{hidden_subject}]}</h3>
+  </div>
+  <div>
+    <form>
+      <input type="text" ng-model="answer" />
+    </form>
+    <p>{[{answerValue}]}</p>
+    <button ng-disabled="isRightAnswer || nbWrongAnswers >= MAX_WRONG_ANSWERS" ng-click="checkAnswers(answer)" class="btn btn-default">vérifier</button>
+
+    <a href="{[{nextExerciseUrl}]}"><button ng-disabled="!isRightAnswer && nbWrongAnswers < MAX_WRONG_ANSWERS" class="btn btn-default">Suivant</button></a>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div ng-controller="QcmCreateCtrl">
+  <form action="{[{formActionUrl}]}" method="POST">
+    Niveau :
+    <select name="level" ng-model="level" ng-init="level = -1" required>
+      <option ng-repeat="level in levels" value="{[{level.id}]}">{[{level.name}]}</option>
+    </select>
+    Matière :
+    <select name="discipline" ng-model="discipline" nb-init="discipline = -1" required>
+      <option ng-repeat="discipline in disciplines" value="{[{discipline.id}]}">{[{discipline.name}]}</option>
+    </select>
+    Chapitre :
+    <select name="chapter" required>
+      <option ng-repeat="chapter in chapters |filter:{discipline.id: discipline, level.id: level}:strict" value="{[{chapter.id}]}">{[{chapter.name}]}</option>
+    </select>
+    <br/>
+    Nom : <input required ng-model="exercise.name" name="name" class="form-control"/><br/>
+    Question : <input required ng-model="exercise.question" name="question" class="form-control"/><br/>
+    Réponses :<br/>
+    <div class="row">
+      <div class="col-lg-6">
+          <div class="input-group" ng-repeat="answer in exercise.answers">
+            <span class="input-group-addon">
+                <input required type="radio" name="selectAnswer" ng-click="rightAnswer($index)"/>
+            </span>
+            <span class="input-group-addon">[ <a href="" ng-click="removeAnswer(answer)">X</a> ]</span>
+            <input required type="text" name="answers[]" value="{[{answer.value}]}" class="form-control"/>
+          </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      [ <a href="" ng-click="addAnswer()">add</a> ]
+      <input type="hidden" value="{[{exercise.rightAnswer}]}" name="rightAnswer"/>
+      <input type="submit" class="btn btn-primary"/>
+    </div>
+  </form>
+</div>
