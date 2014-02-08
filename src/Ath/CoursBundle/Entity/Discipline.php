@@ -30,6 +30,17 @@ class Discipline
      */
     private $name;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Ath\UserBundle\Entity\Classe", cascade={"persist"})
+     */
+    private $classes;
+
+    /**
+   	 * @ORM\OneToMany(targetEntity="Ath\NoteBundle\Entity\Note", mappedBy="matiere", cascade={"persist", "remove", "merge"})
+   	 * @ORM\JoinColumn(nullable=true)
+     */
+    private $notes;
+
     public function __construct(){
 
     }
@@ -73,4 +84,38 @@ class Discipline
     {
     	return $this->getName();
     }
+
+    /**
+     * Add notes
+     *
+     * @param \Ath\NoteBundle\Entity\Note $notes
+     * @return Discipline
+     */
+    public function addNote(\Ath\NoteBundle\Entity\Note $notes)
+    {
+        $this->notes[] = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Remove notes
+     *
+     * @param \Ath\NoteBundle\Entity\Note $notes
+     */
+    public function removeNote(\Ath\NoteBundle\Entity\Note $notes)
+    {
+        $this->notes->removeElement($notes);
+    }
+
+    /**
+     * Get notes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
 }
+

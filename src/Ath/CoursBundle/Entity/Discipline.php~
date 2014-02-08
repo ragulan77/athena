@@ -35,6 +35,12 @@ class Discipline
      */
     private $classes;
     
+    /**
+   	 * @ORM\OneToMany(targetEntity="Ath\NoteBundle\Entity\Note", mappedBy="matiere", cascade={"persist", "remove", "merge"})
+   	 * @ORM\JoinColumn(nullable=true)
+     */
+    private $notes;
+    
     public function __construct(){
     	$this->classes = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -109,5 +115,38 @@ class Discipline
     public function __toString()
     {
     	return $this->getName();
+    }
+
+    /**
+     * Add notes
+     *
+     * @param \Ath\NoteBundle\Entity\Note $notes
+     * @return Discipline
+     */
+    public function addNote(\Ath\NoteBundle\Entity\Note $notes)
+    {
+        $this->notes[] = $notes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove notes
+     *
+     * @param \Ath\NoteBundle\Entity\Note $notes
+     */
+    public function removeNote(\Ath\NoteBundle\Entity\Note $notes)
+    {
+        $this->notes->removeElement($notes);
+    }
+
+    /**
+     * Get notes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }

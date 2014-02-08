@@ -11,8 +11,7 @@ class PageController extends Controller
         return $this->render('AthPageBundle:Page:index.html.twig');
     }
 
-    //verifier s il existe des restrictions pour verifier si l user est bien logger avant de l appeler
-    public function menuAction()
+    public function menuCoursAction()
     {
     	//récupérer l user connecté
     	$user = $this->getUser();
@@ -32,7 +31,7 @@ class PageController extends Controller
     	}
 
     	return $this->render(
-    			'AthPageBundle:Page:menu.html.twig',
+    			'AthPageBundle:Menu:menuCours.html.twig',
     			array(
     					"listeMatieresParClasse" => $listeMatieresParClasse,
     					"listeClasses" => $listeClasses
