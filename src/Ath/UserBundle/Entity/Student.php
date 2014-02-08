@@ -19,7 +19,7 @@ class Student extends MyBaseUser
 
   /**
    * @ORM\Id
-   * @ORM\Column(type="integer")
+   * @ORM\Column(name="id", type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected  $id;
@@ -31,6 +31,12 @@ class Student extends MyBaseUser
    */
   private $classe;
 
+  /**
+   * @ORM\OneToMany(targetEntity="Ath\NoteBundle\Entity\Note", mappedBy="student", cascade={"persist", "remove", "merge"})
+   * @ORM\JoinColumn(nullable=true)
+   */
+  private $notes;
+  
   public function __construct()
   {
     parent::__construct();
@@ -70,5 +76,38 @@ class Student extends MyBaseUser
     public function __toString()
     {
     	return $this->getFirstname().' '.$this->getLastname();
+    }
+
+    /**
+     * Add notes
+     *
+     * @param \Ath\NoteBundle\Entity\Note $notes
+     * @return Student
+     */
+    public function addNote(\Ath\NoteBundle\Entity\Note $notes)
+    {
+        $this->notes[] = $notes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove notes
+     *
+     * @param \Ath\NoteBundle\Entity\Note $notes
+     */
+    public function removeNote(\Ath\NoteBundle\Entity\Note $notes)
+    {
+        $this->notes->removeElement($notes);
+    }
+
+    /**
+     * Get notes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }
