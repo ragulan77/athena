@@ -143,27 +143,17 @@
 
 	<div class="tab-pane" id="disciplines">
 		<h3>Matières</h3>
-		<form action="{{ path('ath_discipline_del') }}" method="post">
-			<select id="listMatiere" name="listMatiere" class="form-control" multiple="multiple" rows=2>
+
 				{% for matiere in listeMatieres %}
-    				<option value={{ matiere.id }}
-    				{% if loop.first %}
-    					selected="selected"
-    				{% endif %}
-    				>{{ matiere }}</option>
+
+                    {% if matiere in disciplinesWithoutTeacher %}
+                    {{ matiere }} <sup><span class="label label-danger">Sans professeur</span></sup><br/>
+                    {% else %}
+                    {{ matiere }} <sup><span class="label label-success">Possède professeur</span></sup><br/>
+                    {% endif %}
 				{% endfor %}
-			</select>
+
 			<br/>
-			<div class="btn-group">
-				<button type="button" class="btn btn-default" data-toggle="modal" href="#modalAjoutMatiere">+</button>
-				<button type="submit" class="btn btn-default">-</button>
-			</div>
-		</form>
-        {% for flashMessage in app.session.flashbag.get('noticeDiscipline') %}
-        <div class="flash-notice">
-            {{ flashMessage }}
-        </div>
-        {% endfor %}
 	</div>
 
 
