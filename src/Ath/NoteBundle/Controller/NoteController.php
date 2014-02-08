@@ -92,21 +92,6 @@ class NoteController extends Controller
     			)
     	);
     }
-	
-    //fonction appelé en AJAX pour retourner un JSON de matieres en fonction d un id de classe
-//     public function getMatiereByClasseIdAction($classeId){
-//     	$em= $this->getDoctrine()->getManager();
-//     	$disciplines = $em->getRepository('AthCoursBundle:Discipline')->getDisciplinesByClasseId($classeId);
-    	
-// 		for($i=0; $i < count($disciplines) ; $i++){
-// 			$data[$i] = array(
-// 				'id' => $disciplines[$i]->getId(),
-// 				'name' => $disciplines[$i]->getName()
-// 			);
-// 		}
-
-//     	return new JsonResponse($data);
-//     }
     
     public function getMatiereByClasseIdAction($classeId){
     	$em= $this->getDoctrine()->getManager();
@@ -145,6 +130,7 @@ class NoteController extends Controller
 		$listeNotesPremierTrimestre = $em->getRepository('AthNoteBundle:Note')->findBy(
 				array(
 						'student' => $student,
+						'matiere' => $discipline,
 						'trimestre' => '1'
 				)
 		);
