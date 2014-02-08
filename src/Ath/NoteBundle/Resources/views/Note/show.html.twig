@@ -1,0 +1,170 @@
+{% extends "::base.html.twig" %}
+
+{% block breadcrumb %}
+ <ol class="breadcrumb">
+ <li class="active"><a href="#">Home</a></li>
+  <li>Notes</li>
+</ol>
+{% endblock breadcrumb %}
+
+
+{% block mainContainer %}
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+	<li><a href="#first" data-toggle="tab">1er trimestre</a></li>
+	<li><a href="#second" data-toggle="tab">2 eme trimestre</a></li>
+	<li><a href="#third" data-toggle="tab">3 eme trimestre</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+	<div class="tab-pane active" id="first">
+		<h3>Notes</h3>
+		<table class="table table-condensed table-hover">
+	    			<thead>
+	    				<tr>
+	    					<th>Matière</th>
+	    					<th>Note</th>
+	    					<th>Coeff</th>
+	    					<th>Moyenne</th>
+	    				</tr>
+	    			</thead>
+	    			<tbody>
+	    				{% if disciplines is defined %}
+	    					{% for discipline in disciplines %}
+	    						<tr>
+		    						<td>{{ discipline }}</td>
+		    						<td></td>
+		    						<td></td>
+		    						<td></td>
+	    						</tr>
+	    						{% if listeNotesPremierTrimestreParMatiere is defined %}
+		    						{% for note in listeNotesPremierTrimestreParMatiere[discipline.name] %}
+		    							<tr>
+				    					<td>{{ note.intitule }}</td>
+				    					<td>{{ note }}</td>
+				    					<td>{{ note.coefficient }}</td>
+				    					<td></td>
+				    				</tr>
+		    						{% endfor %}
+		    					{% else %}
+		    						<tr>
+			    						<td></td>
+			    						<td></td>
+			    						<td></td>
+			    						<td></td>
+			    					</tr>
+		    					{% endif %}
+	    					{% endfor %}
+	    				{% else %}
+	    					<tr>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    					</tr>
+	    				{% endif %}
+	    			</tbody>
+	    </table>
+	</div>
+	<div class="tab-pane" id="second">
+		<h3>Notes</h3>
+		<table class="table table-condensed table-hover">
+	    			<thead>
+	    				<tr>
+	    					<th>Matière</th>
+	    					<th>Note</th>
+	    					<th>Coeff</th>
+	    					<th>Moyenne</th>
+	    				</tr>
+	    			</thead>
+	    			<tbody>
+	    				{% if disciplines is defined %}
+	    					{% for discipline in disciplines %}
+	    						<tr>
+		    						<td>{{ discipline }}</td>
+		    						<td></td>
+		    						<td></td>
+		    						<td></td>
+	    						</tr>
+	    						{% if listeNotesDeuxiemeTrimestreParMatiere is defined %}
+		    						{% for note in listeNotesDeuxiemeTrimestreParMatiere[discipline.name] %}
+		    							<tr>
+				    					<td>{{ note.intitule }}</td>
+				    					<td>{{ note }}</td>
+				    					<td>{{ note.coefficient }}</td>
+				    					<td></td>
+				    				</tr>
+		    						{% endfor %}
+		    					{% else %}
+		    						<tr>
+			    						<td></td>
+			    						<td></td>
+			    						<td></td>
+			    						<td></td>
+			    					</tr>
+		    					{% endif %}
+	    					{% endfor %}
+	    				{% else %}
+	    					<tr>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    					</tr>
+	    				{% endif %}
+	    			</tbody>
+	    </table>
+	</div>
+	<div class="tab-pane" id="third">
+		<h3>Notes</h3>
+		<table class="table table-condensed table-hover">
+	    			<thead>
+	    				<tr>
+	    					<th>Matière</th>
+	    					<th>Note</th>
+	    					<th>Coeff</th>
+	    					<th>Moyenne</th>
+	    				</tr>
+	    			</thead>
+	    			<tbody>
+	    				{% if disciplines is defined %}
+	    					{% for discipline in disciplines %}
+	    						<tr>
+		    						<td>{{ discipline }}</td>
+		    						<td></td>
+		    						<td></td>
+		    						<td></td>
+	    						</tr>
+	    						{% if listeNotesTroisiemeTrimestreParMatiere is defined %}
+		    						{% for note in listeNotesTroisiemeTrimestreParMatiere[discipline.name] %}
+		    							<tr>
+				    					<td>{{ note.intitule }}</td>
+				    					<td>{{ note }}</td>
+				    					<td>{{ note.coefficient }}</td>
+				    					<td></td>
+				    				</tr>
+		    						{% endfor %}
+		    					{% else %}
+		    						<tr>
+			    						<td></td>
+			    						<td></td>
+			    						<td></td>
+			    						<td></td>
+			    					</tr>
+		    					{% endif %}
+	    					{% endfor %}
+	    				{% else %}
+	    					<tr>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    					</tr>
+	    				{% endif %}
+	    			</tbody>
+	    </table>
+	</div>
+</div>
+{% endblock mainContainer %}

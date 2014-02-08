@@ -1,0 +1,37 @@
+ath_note_dashboard:
+    pattern:  /note/professor/dashboard/
+    defaults: { _controller: AthNoteBundle:Note:dashboard }
+
+ath_note_student_show:
+    pattern: /note/professor/{idMatiere}/{idEtudiant}
+    defaults: { _controller: AthNoteBundle:Note:dashboardStudent }
+    requirements:
+      idMatiere: \d+
+      idEtudiant: \d+
+    options:
+        expose: true
+      
+ath_note_show:
+    pattern:  /note/student/dashboard/
+    defaults: { _controller: AthNoteBundle:Note:afficher }
+
+ath_note_ajouter:
+    pattern: /note/ajouter
+    defaults: { _controller: AthNoteBundle:Note:ajouter }
+    
+ath_note_getMatieres:
+    pattern:  /note/{classeId}/getMatieres
+    defaults: { _controller: AthNoteBundle:Note:getMatiereByClasseId }
+    requirements:
+      classeId: \d+
+    options:
+        expose: true
+
+ath_note_del:
+    pattern: /note/delete/{id}
+    defaults: { _controller: AthNoteBundle:Note:supprimer }
+    requirements:
+      id: \d+
+
+
+

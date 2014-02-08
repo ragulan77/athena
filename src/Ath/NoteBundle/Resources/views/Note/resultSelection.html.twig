@@ -1,0 +1,364 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Note{% endblock title%}
+
+{% block breadcrumb %}
+ <ol class="breadcrumb">
+ <li class="active"><a href="#">Home</a></li>
+  <li>Note</li>
+  <li>{{ student }}</li>
+</ol>
+{% endblock breadcrumb %}
+
+
+{% block mainContainer %}
+
+<!-- Modal ajout de note -->
+<div class="row">
+	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutNote1">
+		<form action="{{ path('ath_note_ajouter') }}" method="post" {{ form_enctype(formNotePremierTrimestre) }} id="addNoteForm1">
+    		<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal">×</button>
+    			<h3>Ajout de note</h3>
+    		</div>
+    		<div class="modal-body">
+    			{# Les erreurs générales du formulaire. #}
+				{{ form_errors(formNotePremierTrimestre) }}
+				<div>
+					{{ form_label(formNotePremierTrimestre.intitule, "Entrez un intitulé") }}
+					{{ form_errors(formNotePremierTrimestre.intitule) }}
+	    			{{ form_widget(formNotePremierTrimestre.intitule) }}
+    			</div>
+				<div>
+					{{ form_label(formNotePremierTrimestre.note, "Entrez une note (sur 20)") }}
+					{{ form_errors(formNotePremierTrimestre.note) }}
+	    			{{ form_widget(formNotePremierTrimestre.note) }}
+    			</div>
+    			<div>
+    				{{ form_errors(formNotePremierTrimestre.coefficient) }}
+	    			{{ form_label(formNotePremierTrimestre.coefficient, "Entrez un coefficient (<1)") }}
+	    			{{ form_widget(formNotePremierTrimestre.coefficient) }}
+    			</div>
+    			{{ form_rest(formNotePremierTrimestre) }}
+    		</div>
+    		<div class="modal-footer">
+    			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
+    			<button type="submit" class="btn btn-primary">Ajouter</button>
+    		</div>
+    	</form>
+	</div>
+</div>
+
+<!-- Modal ajout de note -->
+<div class="row">
+	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutNote2">
+		<form action="{{ path('ath_note_ajouter') }}" method="post" {{ form_enctype(formNoteDeuxiemeTrimestre) }} id="addNoteForm2">
+    		<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal">×</button>
+    			<h3>Ajout de note</h3>
+    		</div>
+    		<div class="modal-body">
+    			{# Les erreurs générales du formulaire. #}
+				{{ form_errors(formNoteDeuxiemeTrimestre) }}
+				<div>
+					{{ form_label(formNoteDeuxiemeTrimestre.intitule, "Entrez un intitulé") }}
+					{{ form_errors(formNoteDeuxiemeTrimestre.intitule) }}
+	    			{{ form_widget(formNoteDeuxiemeTrimestre.intitule) }}
+    			</div>
+				<div>
+					{{ form_label(formNoteDeuxiemeTrimestre.note, "Entrez une note (sur 20)") }}
+					{{ form_errors(formNoteDeuxiemeTrimestre.note) }}
+	    			{{ form_widget(formNoteDeuxiemeTrimestre.note) }}
+    			</div>
+    			<div>
+    				{{ form_errors(formNoteDeuxiemeTrimestre.coefficient) }}
+	    			{{ form_label(formNoteDeuxiemeTrimestre.coefficient, "Entrez un coefficient (<1)") }}
+	    			{{ form_widget(formNoteDeuxiemeTrimestre.coefficient) }}
+    			</div>
+    			{{ form_rest(formNoteDeuxiemeTrimestre) }}
+    		</div>
+    		<div class="modal-footer">
+    			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
+    			<button type="submit" class="btn btn-primary">Ajouter</button>
+    		</div>
+    	</form>
+	</div>
+</div>
+
+<!-- Modal ajout de note -->
+<div class="row">
+	<div class="modal well fade col-lg-4 col-lg-offset-4" id="modalAjoutNote3">
+		<form action="{{ path('ath_note_ajouter') }}" method="post" {{ form_enctype(formNoteTroisiemeTrimestre) }} id="addNoteForm3">
+    		<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal">×</button>
+    			<h3>Ajout de note</h3>
+    		</div>
+    		<div class="modal-body">
+    			{# Les erreurs générales du formulaire. #}
+				{{ form_errors(formNoteTroisiemeTrimestre) }}
+				<div>
+					{{ form_label(formNoteTroisiemeTrimestre.intitule, "Entrez un intitulé") }}
+					{{ form_errors(formNoteTroisiemeTrimestre.intitule) }}
+	    			{{ form_widget(formNoteTroisiemeTrimestre.intitule) }}
+    			</div>
+				<div>
+					{{ form_label(formNoteTroisiemeTrimestre.note, "Entrez une note (sur 20)") }}
+					{{ form_errors(formNoteTroisiemeTrimestre.note) }}
+	    			{{ form_widget(formNoteTroisiemeTrimestre.note) }}
+    			</div>
+    			<div>
+    				{{ form_errors(formNoteTroisiemeTrimestre.coefficient) }}
+	    			{{ form_label(formNoteTroisiemeTrimestre.coefficient, "Entrez un coefficient (<1)") }}
+	    			{{ form_widget(formNoteTroisiemeTrimestre.coefficient) }}
+    			</div>
+    			{{ form_rest(formNoteTroisiemeTrimestre) }}
+    		</div>
+    		<div class="modal-footer">
+    			<a href="#" class="btn" data-dismiss="modal">Fermer</a>
+    			<button type="submit" class="btn btn-primary">Ajouter</button>
+    		</div>
+    	</form>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+	<li><a href="#first" data-toggle="tab">1er trimestre</a></li>
+	<li><a href="#second" data-toggle="tab">2 eme trimestre</a></li>
+	<li><a href="#third" data-toggle="tab">3 eme trimestre</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+	<div class="tab-pane active" id="first">
+		<h3>{{ discipline }}</h3>
+		<table class="table table-condensed table-hover">
+	    			<thead>
+	    				<tr>
+	    					<th>Intitulé</th>
+	    					<th>Note</th>
+	    					<th>Coeff</th>
+	    					<th>Suppression</th>
+	    				</tr>
+	    			</thead>
+	    			<tbody>
+	    				{% if listeNotesPremierTrimestre is defined  %}
+		    				{%  for note in listeNotesPremierTrimestre %}
+			    				<tr>
+			    					<td>{{ note.intitule }}</td>
+			    					<td>{{ note }}</td>
+			    					<td>{{ note.coefficient }}</td>
+			    					<td>
+			    						<a href="{{ path('ath_note_del',{id: note.id}) }}">
+			    							<span class="glyphicon glyphicon-trash"/>
+			    						</a>
+			    					</td>
+			    				</tr>
+		    				{% endfor %}
+	    				{% else %}
+	    					<tr>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    					</tr>
+	    				{% endif %}
+						<tr>
+	    					<td><a class="btn btn-success" data-toggle="modal" href="#modalAjoutNote1"><i class="glyphicon glyphicon-plus icon-white"></i> Ajouter »</a></td>
+	    					<td></td>
+	    					<td></td>
+	    					<td></td>
+	    				</tr>
+	    			</tbody>
+	    </table>
+		
+	   	{% for flashMessage in app.session.flashbag.get('noticeNote') %}
+    		<div class="flash-notice">
+    			<div class="alert alert-success">
+        			{{ flashMessage }}
+        		</div>
+    		</div>
+		{% endfor %}
+	</div>
+	<div class="tab-pane" id="second">
+		<h3>{{ discipline }}</h3>
+		<table class="table table-condensed table-hover">
+	    			<thead>
+	    				<tr>
+	    					<th>Numero</th>
+	    					<th>Note</th>
+	    					<th>Coeff</th>
+	    					<th>Suppression</th>
+	    				</tr>
+	    			</thead>
+	    			<tbody>
+	    				{% if listeNotesDeuxiemeTrimestre is defined  %}
+		    				{%  for note in listeNotesDeuxiemeTrimestre %}
+			    				<tr>
+			    					<td>{{ note.intitule }}</td>
+			    					<td>{{ note }}</td>
+			    					<td>{{ note.coefficient }}</td>
+			    					<td>
+			    						<a href="{{ path('ath_note_del',{id: note.id}) }}">
+			    							<span class="glyphicon glyphicon-trash"/>
+			    						</a>
+			    					</td>
+			    				</tr>
+		    				{% endfor %}
+	    				{% else %}
+	    					<tr>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    					</tr>
+	    				{% endif %}
+						<tr>
+	    					<td><a class="btn btn-success" data-toggle="modal" href="#modalAjoutNote2"><i class="glyphicon glyphicon-plus icon-white"></i> Ajouter »</a></td>
+	    					<td></td>
+	    					<td></td>
+	    					<td></td>
+	    				</tr>
+	    			</tbody>
+	    </table>
+		
+	    {% for flashMessage in app.session.flashbag.get('noticeNote') %}
+    		<div class="flash-notice">
+    			<div class="alert alert-success">
+        			{{ flashMessage }}
+        		</div>
+    		</div>
+		{% endfor %}
+	</div>
+	<div class="tab-pane" id="third">
+		<h3>{{ discipline }}</h3>
+		<table class="table table-condensed table-hover">
+	    			<thead>
+	    				<tr>
+	    					<th>Numero</th>
+	    					<th>Note</th>
+	    					<th>Coeff</th>
+	    					<th>Suppression</th>
+	    				</tr>
+	    			</thead>
+	    			<tbody>
+	    				{% if listeNotesTroisiemeTrimestre is defined  %}
+		    				{%  for note in listeNotesTroisiemeTrimestre %}
+			    				<tr>
+			    					<td>{{ note.intitule }}</td>
+			    					<td>{{ note }}</td>
+			    					<td>{{ note.coefficient }}</td>
+			    					<td>
+			    						<a href="{{ path('ath_note_del',{id: note.id}) }}">
+			    							<span class="glyphicon glyphicon-trash"/>
+			    						</a>
+			    					</td>
+			    				</tr>
+		    				{% endfor %}
+	    				{% else %}
+	    					<tr>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    						<td></td>
+	    					</tr>
+	    				{% endif %}
+						<tr>
+	    					<td><a class="btn btn-success" data-toggle="modal" href="#modalAjoutNote3"><i class="glyphicon glyphicon-plus icon-white"></i> Ajouter »</a></td>
+	    					<td></td>
+	    					<td></td>
+	    					<td></td>
+	    				</tr>
+	    			</tbody>
+	    </table>
+	    {% for flashMessage in app.session.flashbag.get('noticeNote') %}
+    		<div class="flash-notice">
+    			<div class="alert alert-success">
+        			{{ flashMessage }}
+        		</div>
+    		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock mainContainer %}
+
+
+
+{% block javascripts %}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+<script type="text/javascript">
+    $('#addNoteForm1').submit(function(e) {
+        var generatedUrl = Routing.generate('ath_note_ajouter');
+        $.ajax({
+            type: "POST",
+            url: generatedUrl,
+            data: $(this).serialize(),
+            cache: false,
+            dataType : 'html',
+            success: function(data){
+                var response=$(data);
+                $('#addNoteForm1 .modal-footer > button.btn').trigger('click');
+            },
+            beforeSend: function(){
+                $('#modalAjoutNote1').hide();
+            },
+            complete: function(){
+                location.reload();
+            }
+        });
+        return false;
+    });
+    $('#addNoteForm2').submit(function(e) {
+        var generatedUrl = Routing.generate('ath_note_ajouter');
+        $.ajax({
+            type: "POST",
+            url: generatedUrl,
+            data: $(this).serialize(),
+            cache: false,
+            dataType : 'html',
+            success: function(data){
+                var response=$(data);
+                $('#addNoteForm2 .modal-footer > button.btn').trigger('click');
+            },
+            beforeSend: function(){
+                $('#modalAjoutNote2').hide();
+            },
+            complete: function(){
+                location.reload();
+            }
+        });
+        return false;
+    });
+    $('#addNoteForm3').submit(function(e) {
+        var generatedUrl = Routing.generate('ath_note_ajouter');
+        $.ajax({
+            type: "POST",
+            url: generatedUrl,
+            data: $(this).serialize(),
+            cache: false,
+            dataType : 'html',
+            success: function(data){
+                var response=$(data);
+                $('#addNoteForm3 .modal-footer > button.btn').trigger('click');
+            },
+            beforeSend: function(){
+                $('#modalAjoutNote3').hide();
+            },
+            complete: function(){
+                location.reload();
+            }
+        });
+        return false;
+    });
+</script>
+{% endblock javascripts %}
