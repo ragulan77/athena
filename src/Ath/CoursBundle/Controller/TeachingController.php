@@ -26,10 +26,13 @@ class TeachingController extends Controller
           $discipline = $em->getRepository('AthCoursBundle:Discipline')->findOneById($disc_id);
           $prof = $em->getRepository('AthUserBundle:Professor')->findOneById($prof_id);
 
+          $prof->addClasse($classe);
+
           $teaching->setclasse($classe);
           $teaching->setDiscipline($discipline);
           $teaching->setProfessor($prof);
           $em->persist($teaching);
+          $em->persist($prof);
           $em->flush();
 
           return new RedirectResponse($request->headers->get('referer'));

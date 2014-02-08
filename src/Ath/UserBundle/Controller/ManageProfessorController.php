@@ -16,18 +16,25 @@ class ManageProfessorController extends Controller
     	$listIdProfessor = $request->request->get('listProfesseur');
 
         $classe = $em->getRepository('AthUserBundle:Classe')->findOneById($request->request->get('classe'));
-    	foreach ($listIdProfessor as $id){
-            $professor = $em->getRepository('AthUserBundle:Professor')->findOneById($id);
-    		//get all teaching
-    		$teaching = $em->getRepository('AthCoursBundle:Teaching')->findOneBy(array('professor' => $professor, 'classe' => $classe));
-    		$em->remove($teaching);
-    		$em->flush();
-    	}
 
-    	$this->get('session')->getFlashBag()->add(
-    			'noticeProfessor',
-    			'Suppression réalisé avec succès !'
-    	);
+        if($listIdProfessor != null)
+        {
+            foreach ($listIdProfessor as $id){
+                $professor = $em->getRepository('AthUserBundle:Professor')->findOneById($id);
+        		//get all teaching
+        		$teaching = $em->getRepository('AthCoursBundle:Teaching')->findOneBy(array('professor' => $professor, 'classe' => $classe));
+                $professor->removeClasse($classe);
+
+        		$em->remove($teaching);
+                $em->persist($professor);
+        		$em->flush();
+        	}
+
+        	$this->get('session')->getFlashBag()->add(
+        			'noticeProfessor',
+        			'Suppression réalisé avec succès !'
+        	);
+        }
 
     	return new RedirectResponse($request->headers->get('referer'));
     }

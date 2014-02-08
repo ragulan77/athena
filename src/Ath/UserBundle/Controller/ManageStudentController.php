@@ -20,13 +20,15 @@ class ManageStudentController extends Controller
     		$etudiant = $em->getRepository('AthUserBundle:Student')->findOneById($id);
             $etudiant->setClasse(null);
     		$em->persist($etudiant);
+            $em->flush();
     	}
-        $em->flush();
 
-    	$this->get('session')->getFlashBag()->add(
-    			'notice',
-    			'Etudiants enlevés de la classe avec succès !'
-    	);
+        if($listeIdEtudiants != null){
+        	$this->get('session')->getFlashBag()->add(
+        			'notice',
+        			'Etudiants enlevés de la classe avec succès !'
+        	);
+        }
 
     	return new RedirectResponse($request->headers->get('referer'));
     }
