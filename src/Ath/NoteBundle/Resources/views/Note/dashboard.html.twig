@@ -116,7 +116,6 @@ vertical-align: middle;
 $('#classeOptions').on('change',function() {
 		var id = this.value
 		var generatedUrl = Routing.generate('ath_note_getMatieres',{ classeId: id });
-    alert(generatedUrl);
         $.ajax({
             type: "POST",
             url: generatedUrl,
@@ -124,7 +123,7 @@ $('#classeOptions').on('change',function() {
             cache: false,
             dataType : 'JSON',
             success: function(data){
-                console.log(data);
+
                 var disciplineOptions = $("#disciplineOptions");
 
                 for (var i = 0; i < data["disciplines"].length; i++) {

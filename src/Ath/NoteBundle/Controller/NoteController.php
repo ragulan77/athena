@@ -116,6 +116,7 @@ class NoteController extends Controller
         $disciplines = $level->getDisciplines();
     	$students = $em->getRepository('AthUserBundle:Student')->findBy(array( "classe" => $classe));
 
+        $data = array('disciplines' => array(), 'students' => array());
     	for($i=0; $i < count($disciplines) ; $i++){
     		$data["disciplines"][$i] = array(
     				'id' => $disciplines[$i]->getId(),
