@@ -36,6 +36,12 @@ class Chapter
 
 
     /**
+     * @ORM\ManyToOne(targetEntity="Ath\CoursBundle\Entity\Level")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $level;
+
+    /**
      * Get id
      *
      * @return integer
@@ -89,5 +95,28 @@ class Chapter
     public function getDiscipline()
     {
         return $this->discipline;
+    }
+
+    /**
+     * Set level
+     *
+     * @param \Ath\CoursBundle\Entity\Level $level
+     * @return Chapter
+     */
+    public function setLevel(\Ath\CoursBundle\Entity\Level $level)
+    {
+        $this->level = $level;
+    
+        return $this;
+    }
+
+    /**
+     * Get level
+     *
+     * @return \Ath\CoursBundle\Entity\Level 
+     */
+    public function getLevel()
+    {
+        return $this->level;
     }
 }

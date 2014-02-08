@@ -141,11 +141,10 @@ class ExerciseController extends Controller
       $exerciseService->setContent($exercise, $req);
 
       $em = $this->getDoctrine()->getManager();
-      $chapter = $em->getRepository('AthExerciseBundle:Chapter')->find($req->request->get('chapter'));
-      $level = $em->getRepository('AthExerciseBundle:Level')->find($req->request->get('level'));
+      $chapter = $em->getRepository('AthCoursBundle:Chapter')->find($req->request->get('chapter'));
+      $level = $em->getRepository('AthCoursBundle:Level')->find($req->request->get('level'));
 
       $exercise->setChapter($chapter);
-      $exercise->setLevel($level);
 
       $em->persist($exercise);
       $em->flush();
