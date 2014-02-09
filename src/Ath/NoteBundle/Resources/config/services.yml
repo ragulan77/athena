@@ -1,0 +1,7 @@
+parameters:
+#    ath_note.example.class: Ath\NoteBundle\Example
+
+services:
+#    ath_note.example:
+#        class: %ath_note.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,34 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Editer un niveau{% endblock title%}
+{% block breadcrumb %}
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li>Editer un niveaux</li>
+</ol>
+{% endblock breadcrumb %}
+
+{% block mainContainer %}
+  <div class="col-sm-4">
+    <div class="well">
+      <form action="{{ path('ath_level_edit', {id: level.id}) }}" method="post" {{ form_enctype(form) }}>
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+        <div>
+          {{ form_label(form.name, "Nom du niveau") }}
+          {{ form_errors(form.name) }}
+          {{ form_widget(form.name) }}
+        </div>
+        {{ form_rest(form) }}
+          <input type="submit" class="btn btn-primary" />
+        </form>
+    </div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+  </div>
+{% endblock mainContainer %}
+

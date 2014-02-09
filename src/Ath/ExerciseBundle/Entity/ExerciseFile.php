@@ -42,14 +42,9 @@ class ExerciseFile
      */
     private $name;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Ath\ExerciseBundle\Entity\Level")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $level;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ath\ExerciseBundle\Entity\Chapter")
+     * @ORM\ManyToOne(targetEntity="Ath\CoursBundle\Entity\Chapter")
      * @ORM\JoinColumn(nullable=false)
      */
     private $chapter;
@@ -135,45 +130,22 @@ class ExerciseFile
     }
 
     /**
-     * Set level
-     *
-     * @param \Ath\ExerciseBundle\Entity\Level $level
-     * @return ExerciseFile
-     */
-    public function setLevel(\Ath\ExerciseBundle\Entity\Level $level)
-    {
-        $this->level = $level;
-
-        return $this;
-    }
-
-    /**
-     * Get level
-     *
-     * @return \Ath\ExerciseBundle\Entity\Level
-     */
-    public function getLevel()
-    {
-        return $this->level;
-    }
-
-    /**
      * Set chapter
      *
-     * @param \Ath\ExerciseBundle\Entity\Chapter $chapter
+     * @param \Ath\CoursBundle\Entity\Chapter $chapter
      * @return ExerciseFile
      */
-    public function setChapter(\Ath\ExerciseBundle\Entity\Chapter $chapter)
+    public function setChapter(\Ath\CoursBundle\Entity\Chapter $chapter)
     {
         $this->chapter = $chapter;
-    
+
         return $this;
     }
 
     /**
      * Get chapter
      *
-     * @return \Ath\ExerciseBundle\Entity\Chapter 
+     * @return \Ath\CoursBundle\Entity\Chapter
      */
     public function getChapter()
     {

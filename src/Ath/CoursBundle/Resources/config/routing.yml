@@ -22,8 +22,34 @@ ath_discipline_del:
     pattern: /admin/supprimer/discipline
     defaults: { _controller: AthCoursBundle:ManageDiscipline:delete }
 
+ath_discipline_del_by_id:
+    pattern: /admin/supprimer/discipline/{id}
+    defaults: { _controller: AthCoursBundle:ManageDiscipline:deleteById }
+    requirements:
+        id: \d+
+
 ath_cours_disciplines:
     pattern: /disciplines
     defaults: { _controller: AthCoursBundle:Discipline:getDisciplines }
 
+ath_level_add:
+    pattern: /admin/niveaux
+    defaults: { _controller: AthCoursBundle:Level:levels}
 
+ath_level_edit:
+    pattern: /admin/niveau/editer/{id}
+    defaults: { _controller: AthCoursBundle:Level:edit}
+    requirements:
+       id: \d+
+
+ath_level_del:
+    pattern: /admin/niveau/supprimer/{id}
+    defaults: { _controller: AthCoursBundle:Level:delete}
+    requirements:
+       id: \d+
+
+ath_teaching_add:
+    pattern: /admin/teaching/add
+    defaults: { _controller: AthCoursBundle:Teaching:add }
+    requirements:
+        _method: POST

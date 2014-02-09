@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Ath\ExerciseBundle\AthExerciseBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new Ath\NoteBundle\AthNoteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

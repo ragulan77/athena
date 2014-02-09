@@ -10,6 +10,7 @@
 
     <title>Athena - {% block title %}{% endblock title %}</title>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
     {% block javascripts %} {% endblock javascripts %}
 
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -32,6 +33,7 @@
 	}
 	</style>
 	{% block styles %}{% endblock styles %}
+
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -135,7 +137,7 @@
 			                    </div>
 			                    <div id="collapseTwo" class="panel-collapse collapse">
 			                        <div class="panel-body">
-			                        	{{render(controller('AthPageBundle:Page:menu')) }}
+			                        	{{render(controller('AthPageBundle:Page:menuCours')) }}
 			                        </div>
 			                    </div>
 			                </div>
@@ -176,29 +178,22 @@
 			                            </span>Notes</a>
 			                        </h4>
 			                    </div>
-			                    <div id="collapseThree" class="panel-collapse collapse">
+			                    <div id="collapseFour" class="panel-collapse collapse">
 			                        <div class="panel-body">
 			                            <table class="table">
-			                                <tr>
+			                            {% if is_granted("ROLE_STUDENT") %}
+			                            	<tr>
 			                                    <td>
-			                                        <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+			                                        <span class="glyphicon glyphicon-stats"></span><a href="{{ path('ath_note_show') }}">Consulter notes</a>
 			                                    </td>
 			                                </tr>
-			                                <tr>
+			                            {% else %}
+			                            	<tr>
 			                                    <td>
-			                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+			                                        <span class="glyphicon glyphicon-plus"></span><a href="{{ path('ath_note_dashboard') }}">Ajouter une note</a>
 			                                    </td>
 			                                </tr>
-			                                <tr>
-			                                    <td>
-			                                        <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
-			                                    </td>
-			                                </tr>
-			                                <tr>
-			                                    <td>
-			                                        <span class="glyphicon glyphicon-shopping-cart"></span><a href="http://www.jquery2dotnet.com">Shopping Cart</a>
-			                                    </td>
-			                                </tr>
+			                            {% endif %}
 			                            </table>
 			                        </div>
 			                    </div>
@@ -206,11 +201,11 @@
 			                <div class="panel panel-default">
 			                	<div class="panel-heading">
 			                        <h4 class="panel-title">
-			                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-calendar">
+			                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-calendar">
 			                            </span>Vie scolaire</a>
 			                        </h4>
 			                    </div>
-			                    <div id="collapseFour" class="panel-collapse collapse">
+			                    <div id="collapseFive" class="panel-collapse collapse">
 			                        <div class="panel-body">
 			                            <table class="table">
 			                                <tr>
@@ -240,11 +235,11 @@
 			                <div class="panel panel-default">
 			                	<div class="panel-heading">
 			                        <h4 class="panel-title">
-			                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-user">
+			                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix"><span class="glyphicon glyphicon-user">
 			                            </span>Parent</a>
 			                        </h4>
 			                    </div>
-			                    <div id="collapseFive" class="panel-collapse collapse">
+			                    <div id="collapseSix" class="panel-collapse collapse">
 			                        <div class="panel-body">
 			                            <table class="table">
 			                                <tr>
@@ -264,11 +259,11 @@
 			                <div class="panel panel-default">
 			                	<div class="panel-heading">
 			                        <h4 class="panel-title">
-			                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix"><span class="glyphicon glyphicon-wrench">
+			                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven"><span class="glyphicon glyphicon-wrench">
 			                            </span>Administration</a>
 			                        </h4>
 			                    </div>
-			                    <div id="collapseSix" class="panel-collapse collapse">
+			                    <div id="collapseSeven" class="panel-collapse collapse">
 			                        <div class="panel-body">
 			                            <table class="table">
 			                                <tr>
@@ -286,6 +281,11 @@
 			                                		<span class="glyphicon glyphicon-plus"></span><a href="{{ path('administrator_registration') }}">Créer administrateur</a>
 			                                	</td>
 			                                </tr>
+                                      <tr>
+                                        <td>
+                                          <span class="glyphicon glyphicon-cog"></span><a href="{{ path('ath_level_add') }}">Gérer les niveaux/matières</a>
+                                        </td>
+                                      </tr>
 			                                <tr>
 			                                	<td>
 			                                		<span class="glyphicon glyphicon-cog"></span><a href="{{ path('ath_classe_show') }}">Gérer les classes</a>
@@ -310,7 +310,7 @@
                     	<div class="row">
                     		{% block breadcrumb %}
                     		<ol class="breadcrumb">
-  								<li class="active"><a href="#">Home</a></li>
+  								<li class="active"><a href="/">Home</a></li>
 							</ol>
 							{% endblock breadcrumb %}
                     	</div>
@@ -420,6 +420,7 @@
 	    	$("#spinner").hide();
 		});
 	</script>
+
 
   {% block footer_js %}{% endblock footer_js %}
 
