@@ -132,7 +132,9 @@
 		</form>
         {% for flashMessage in app.session.flashbag.get('notice') %}
                 <div class="flash-notice">
-                    {{ flashMessage }}
+                	<div class="alert alert-success">
+                    	{{ flashMessage }}
+                    </div>
                 </div>
         {% endfor %}
 	</div>
@@ -176,7 +178,9 @@
 		</form>
         {% for flashMessage in app.session.flashbag.get('noticeProfessor') %}
             <div class="flash-notice">
-                {{ flashMessage }}
+            	<div class="alert alert-success">
+                	{{ flashMessage }}
+                </div>
             </div>
         {% endfor %}
 	</div>

@@ -19,21 +19,33 @@ class NoteFormType extends BaseType
         														'1' => 'premier',
         														'2' => 'deuxieme',
         														'3' => 'troisieme'
-        													)
+        													),
+        										'attr' => array(
+    														'style' => 'display:none'
+        													),
+        										'label' => false
         									)
         );
-        $builder->add('student');
-        $builder->add('matiere');
-//         $builder->add(
-//         		'matiere',
-//         		null,
-//         		array(
-//         				'attr'=>array(
-//         						'style'=>'display:none;'
-//         				),
-//         				'label' => false
-//         		)
-//         );
+        $builder->add(
+        		'student',
+        		null,
+        		array(
+        				'attr'=>array(
+        						'style'=>'display:none;'
+        				),
+        				'label' => false
+        		)
+        );
+        $builder->add(
+        		'matiere',
+        		null,
+        		array(
+        				'attr'=>array(
+        						'style'=>'display:none;'
+        				),
+        				'label' => false
+        		)
+        );
     }
 
     public function getName()
