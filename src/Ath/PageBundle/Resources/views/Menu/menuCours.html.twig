@@ -34,7 +34,7 @@
 		{% for discipline in listeClasses.level.disciplines %}
 			<tr>
 				<td>
-					<a href="{{ path('ath_cours_show',{id: discipline.id}) }}">{{ discipline }}</a>
+					<a href="{{ path('ath_cours_show',{id: discipline.id, id_classe: listeClasses.id}) }}">{{ discipline }}</a>
 				</td>
 			</tr>
 		{% endfor %}
