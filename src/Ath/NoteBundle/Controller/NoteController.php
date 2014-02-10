@@ -92,7 +92,7 @@ class NoteController extends Controller
     			)
     	);
     }
-    
+
 
     public function getMatiereByClasseIdAction($classeId){
     	$em= $this->getDoctrine()->getManager();
@@ -141,6 +141,7 @@ class NoteController extends Controller
 		$listeNotesDeuxiemeTrimestre = $em->getRepository('AthNoteBundle:Note')->findBy(
 				array(
 						'student' => $student,
+                        'matiere' => $discipline,
 						'trimestre' => '2'
 				)
 		);
@@ -148,6 +149,7 @@ class NoteController extends Controller
 		$listeNotesTroisiemeTrimestre = $em->getRepository('AthNoteBundle:Note')->findBy(
 				array(
 						'student' => $student,
+                        'matiere' => $discipline,
 						'trimestre' => '3'
 				)
 		);
@@ -192,7 +194,7 @@ class NoteController extends Controller
 		if ($form->isValid()) {
 			$em->persist($newNote);
 			$em->flush();
-			
+
 			$this->get('session')->getFlashBag()->add(
 					'noticeNote'.$newNote->getTrimestre(),
 					'Ajout de la note réalisé avec succès !'

@@ -14,6 +14,7 @@ class NoteFormType extends BaseType
         $builder->add('intitule');
         $builder->add('note');
         $builder->add('coefficient');
+        $builder->add('matiere');
         $builder->add('trimestre','choice', array(
         										'choices' => array(
         														'1' => 'premier',
