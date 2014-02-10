@@ -288,27 +288,4 @@ class Course
     }
 
 
-
-    /**
-     * Set classe
-     *
-     * @param \Ath\UserBundle\Entity\Classe $classe
-     * @return Course
-     */
-    public function setClasse(\Ath\UserBundle\Entity\Classe $classe)
-    {
-        $this->classe = $classe;
-    
-        return $this;
-    }
-
-    /**
-     * Get classe
-     *
-     * @return \Ath\UserBundle\Entity\Classe 
-     */
-    public function getClasse()
-    {
-        return $this->classe;
-    }
 }

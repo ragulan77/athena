@@ -1,8 +1,9 @@
 ath_cours_show:
-    pattern: /cours/{id}
+    pattern: /cours/{id}/{id_classe}
     defaults: { _controller: AthCoursBundle:Course:afficher }
     requirements:
       id: \d+
+      id_classe: \d+
 
 ath_cours_add:
     pattern: /cours/ajouter
