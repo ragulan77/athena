@@ -256,6 +256,7 @@
 			                        </div>
 			                    </div>
 			                </div>
+                      {% if is_granted('ROLE_ADMINISTRATOR') %}
 			                <div class="panel panel-default">
 			                	<div class="panel-heading">
 			                        <h4 class="panel-title">
@@ -300,6 +301,7 @@
 			                        </div>
 			                    </div>
 			                </div>
+                      {% endif %}
 			            </div>
 			        </div>
 					<!-- Fin du Menu deroulant -->

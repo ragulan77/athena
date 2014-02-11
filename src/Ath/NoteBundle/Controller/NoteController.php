@@ -21,7 +21,13 @@ class NoteController extends Controller
     	$em= $this->getDoctrine()->getManager();
 
     	$classe = $user->getClasse();
-    	$disciplines = $em->getRepository('AthCoursBundle:Discipline')->getDisciplinesByClasseId($classe->getId());
+        $disciplines = array();
+        if($classe)
+    	   $disciplines = $em->getRepository('AthCoursBundle:Discipline')->getDisciplinesByClasseId($classe->getId());
+
+        $listeNotesPremierTrimestreParMatiere = array();
+        $listeNotesDeuxiemeTrimestreParMatiere = array();
+        $listeNotesTroisiemeTrimestreParMatiere = array();
 
     	foreach ($disciplines as $discipline){
     		$listeNotesPremierTrimestreParMatiere[$discipline->getName()] =

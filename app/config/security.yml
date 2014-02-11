@@ -21,7 +21,7 @@ security:
             anonymous: true
         main:
             pattern:        ^/
-            anonymous:      false
+            anonymous:      true
             provider:       main
 
             form_login:
