@@ -23,36 +23,39 @@ class NoteController extends Controller
     	$classe = $user->getClasse();
         $disciplines = array();
         if($classe)
-    	   $disciplines = $em->getRepository('AthCoursBundle:Discipline')->getDisciplinesByClasseId($classe->getId());
+        {
+            $disciplines = $classe->getLevel()->getDisciplines();
+        }
+
 
         $listeNotesPremierTrimestreParMatiere = array();
         $listeNotesDeuxiemeTrimestreParMatiere = array();
         $listeNotesTroisiemeTrimestreParMatiere = array();
 
     	foreach ($disciplines as $discipline){
-    		$listeNotesPremierTrimestreParMatiere[$discipline->getName()] =
+    		$listeNotesPremierTrimestreParMatiere =
     			$em->getRepository('AthNoteBundle:Note')->findBy(
 				array(
     				'student' => $user,
-					'matiere' => $discipline,
+					//'matiere' => $discipline,
 					'trimestre' => '1'
     			)
     		);
 
-    		$listeNotesDeuxiemeTrimestreParMatiere[$discipline->getName()] =
+    		$listeNotesDeuxiemeTrimestreParMatiere =
     		$em->getRepository('AthNoteBundle:Note')->findBy(
     				array(
     						'student' => $user,
-    						'matiere' => $discipline,
+    						//'matiere' => $discipline,
     						'trimestre' => '2'
     				)
     		);
 
-    		$listeNotesTroisiemeTrimestreParMatiere[$discipline->getName()] =
+    		$listeNotesTroisiemeTrimestreParMatiere =
     		$em->getRepository('AthNoteBundle:Note')->findBy(
     				array(
     						'student' => $user,
-    						'matiere' => $discipline,
+    						//'matiere' => $discipline,
     						'trimestre' => '3'
     				)
     		);

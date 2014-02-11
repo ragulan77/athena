@@ -25,46 +25,29 @@
 	    			<thead>
 	    				<tr>
 	    					<th>Matière</th>
+	    					<th>Intitulé</th>
 	    					<th>Note</th>
 	    					<th>Coeff</th>
-	    					<th>Moyenne</th>
 	    				</tr>
 	    			</thead>
 	    			<tbody>
-	    				{% if disciplines is defined %}
-	    					{% for discipline in disciplines %}
+    						{% if listeNotesPremierTrimestreParMatiere is defined %}
+	    						{% for note in listeNotesPremierTrimestreParMatiere %}
+	    							<tr>
+			    					<td>{{ note.matiere }}</td>
+			    					<td>{{ note.intitule }}</td>
+			    					<td>{{ note }}</td>
+			    					<td>{{ note.coefficient }}</td>
+			    				</tr>
+	    						{% endfor %}
+	    					{% else %}
 	    						<tr>
-		    						<td>{{ discipline }}</td>
 		    						<td></td>
 		    						<td></td>
 		    						<td></td>
-	    						</tr>
-	    						{% if listeNotesPremierTrimestreParMatiere is defined %}
-		    						{% for note in listeNotesPremierTrimestreParMatiere[discipline.name] %}
-		    							<tr>
-				    					<td>{{ note.intitule }}</td>
-				    					<td>{{ note }}</td>
-				    					<td>{{ note.coefficient }}</td>
-				    					<td></td>
-				    				</tr>
-		    						{% endfor %}
-		    					{% else %}
-		    						<tr>
-			    						<td></td>
-			    						<td></td>
-			    						<td></td>
-			    						<td></td>
-			    					</tr>
-		    					{% endif %}
-	    					{% endfor %}
-	    				{% else %}
-	    					<tr>
-	    						<td></td>
-	    						<td></td>
-	    						<td></td>
-	    						<td></td>
-	    					</tr>
-	    				{% endif %}
+		    						<td></td>
+		    					</tr>
+	    					{% endif %}
 	    			</tbody>
 	    </table>
 	</div>
@@ -74,46 +57,29 @@
 	    			<thead>
 	    				<tr>
 	    					<th>Matière</th>
+	    					<th>Intitulé</th>
 	    					<th>Note</th>
 	    					<th>Coeff</th>
-	    					<th>Moyenne</th>
 	    				</tr>
 	    			</thead>
 	    			<tbody>
-	    				{% if disciplines is defined %}
-	    					{% for discipline in disciplines %}
+    						{% if listeNotesDeuxiemeTrimestreParMatiere is defined %}
+	    						{% for note in listeNotesDeuxiemeTrimestreParMatiere %}
+	    							<tr>
+			    					<td>{{ note.matiere }}</td>
+			    					<td>{{ note.intitule }}</td>
+			    					<td>{{ note }}</td>
+			    					<td>{{ note.coefficient }}</td>
+			    				</tr>
+	    						{% endfor %}
+	    					{% else %}
 	    						<tr>
-		    						<td>{{ discipline }}</td>
 		    						<td></td>
 		    						<td></td>
 		    						<td></td>
-	    						</tr>
-	    						{% if listeNotesDeuxiemeTrimestreParMatiere is defined %}
-		    						{% for note in listeNotesDeuxiemeTrimestreParMatiere[discipline.name] %}
-		    							<tr>
-				    					<td>{{ note.intitule }}</td>
-				    					<td>{{ note }}</td>
-				    					<td>{{ note.coefficient }}</td>
-				    					<td></td>
-				    				</tr>
-		    						{% endfor %}
-		    					{% else %}
-		    						<tr>
-			    						<td></td>
-			    						<td></td>
-			    						<td></td>
-			    						<td></td>
-			    					</tr>
-		    					{% endif %}
-	    					{% endfor %}
-	    				{% else %}
-	    					<tr>
-	    						<td></td>
-	    						<td></td>
-	    						<td></td>
-	    						<td></td>
-	    					</tr>
-	    				{% endif %}
+		    						<td></td>
+		    					</tr>
+	    					{% endif %}
 	    			</tbody>
 	    </table>
 	</div>
@@ -123,46 +89,29 @@
 	    			<thead>
 	    				<tr>
 	    					<th>Matière</th>
+	    					<th>Intitulé</th>
 	    					<th>Note</th>
 	    					<th>Coeff</th>
-	    					<th>Moyenne</th>
 	    				</tr>
 	    			</thead>
 	    			<tbody>
-	    				{% if disciplines is defined %}
-	    					{% for discipline in disciplines %}
+    						{% if listeNotesTroisiemeTrimestreParMatiere is defined %}
+	    						{% for note in listeNotesTroisiemeTrimestreParMatiere %}
+	    							<tr>
+			    					<td>{{ note.matiere }}</td>
+			    					<td>{{ note.intitule }}</td>
+			    					<td>{{ note }}</td>
+			    					<td>{{ note.coefficient }}</td>
+			    				</tr>
+	    						{% endfor %}
+	    					{% else %}
 	    						<tr>
-		    						<td>{{ discipline }}</td>
 		    						<td></td>
 		    						<td></td>
 		    						<td></td>
-	    						</tr>
-	    						{% if listeNotesTroisiemeTrimestreParMatiere is defined %}
-		    						{% for note in listeNotesTroisiemeTrimestreParMatiere[discipline.name] %}
-		    							<tr>
-				    					<td>{{ note.intitule }}</td>
-				    					<td>{{ note }}</td>
-				    					<td>{{ note.coefficient }}</td>
-				    					<td></td>
-				    				</tr>
-		    						{% endfor %}
-		    					{% else %}
-		    						<tr>
-			    						<td></td>
-			    						<td></td>
-			    						<td></td>
-			    						<td></td>
-			    					</tr>
-		    					{% endif %}
-	    					{% endfor %}
-	    				{% else %}
-	    					<tr>
-	    						<td></td>
-	    						<td></td>
-	    						<td></td>
-	    						<td></td>
-	    					</tr>
-	    				{% endif %}
+		    						<td></td>
+		    					</tr>
+	    					{% endif %}
 	    			</tbody>
 	    </table>
 	</div>
